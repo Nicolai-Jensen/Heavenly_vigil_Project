@@ -56,6 +56,7 @@ namespace Heavenly_vigil_Project
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Player player1 = new Player(new Vector2(0, 50));
             gameObjects.Add(player1);
+            gameObjects.Add(new UserInterface());
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
