@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
-    internal class Weapon : GameObject
+    public abstract class Weapon : GameObject
     {
+
+        public abstract void Attack(GameTime gameTime);
         public override void LoadContent(ContentManager content)
         {
             throw new NotImplementedException();
@@ -19,5 +21,6 @@ namespace Heavenly_vigil_Project
         {
             throw new NotImplementedException();
         }
+
     }
 }
