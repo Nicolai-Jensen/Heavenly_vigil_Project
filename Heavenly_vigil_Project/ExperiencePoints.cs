@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,12 @@ namespace Heavenly_vigil_Project
 {
     public static class ExperiencePoints
     {
-                //-----FIELDS-----
+        //-----FIELDS-----
         private static int experiencePoints;
         private static int maxEXP;
-        private static int playerLevel;
+        private static int playerLevel = 1;
+
+
 
         //-----PROPERTIES-----
 
@@ -39,6 +42,8 @@ namespace Heavenly_vigil_Project
             if (experiencePoints >= maxEXP)
             {
                 playerLevel++;
+                maxEXP += maxEXP / 10;
+                experiencePoints = 0;
                 ChooseUpgrade();
             }
         }
