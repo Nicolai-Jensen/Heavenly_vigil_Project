@@ -10,19 +10,19 @@ namespace Heavenly_vigil_Project
     public static class ExperiencePoints
     {
         //-----FIELDS-----
-        private static int experiencePoints;
+        private static int playerExp;
+        private static int maxEXP = 100;
         private static int expPercentage;
-        private static int maxEXP;
         private static int playerLevel = 1;
 
 
 
         //-----PROPERTIES-----
 
-        public static int Experiencepoints
+        public static int PlayerExp
         {
-            get { return experiencePoints; }
-            set { experiencePoints = value; }
+            get { return playerExp; }
+            set { playerExp = value; }
         }
 
         public static int MaxEXP
@@ -36,17 +36,23 @@ namespace Heavenly_vigil_Project
             get { return playerLevel; }
         }
 
+        public static int ExpPercentage
+        {
+            get { return expPercentage; }
+            set { expPercentage = value; }
+        }
+
         //-----METHODS-----
 
         public static void CheckForLevelUp()
         {
-            if (experiencePoints >= maxEXP)
+            expPercentage = playerExp * 100 / maxEXP;
+
+            if (playerExp >= maxEXP)
             {
                 playerLevel++;
                 maxEXP += maxEXP / 10;
-                experiencePoints = 0;
-
-                expPercentage = (int)(maxEXP / 100 * experiencePoints);
+                playerExp = 0;
 
                 ChooseUpgrade();
             }
@@ -54,7 +60,7 @@ namespace Heavenly_vigil_Project
 
         public static void ChooseUpgrade()
         {
-
+        
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Heavenly_vigil_Project
             position = new Vector2(30, 50);
             greenRectangle = new Rectangle(10, 10, 200, 20);
             blackRectangle = new Rectangle(0, 0, 220, 40);
-            blueRectangle = new Rectangle(0, 0, 1880, 20);
+            blueRectangle = new Rectangle(0, 0, ExperiencePoints.ExpPercentage, 20);
             xpBlackrectangle = new Rectangle(0, 0, 1900, 40);
 
         }
@@ -37,7 +37,11 @@ namespace Heavenly_vigil_Project
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 greenRectangle.Width -= 1;
-                blueRectangle.Width -= 1;
+                //blueRectangle.Width -= 1;
+                ExperiencePoints.PlayerExp++;
+                ExperiencePoints.CheckForLevelUp(); 
+                blueRectangle.Width = (int)(ExperiencePoints.ExpPercentage * 18.75);
+
             }
         }
         public override void Draw(SpriteBatch spriteBatch)
