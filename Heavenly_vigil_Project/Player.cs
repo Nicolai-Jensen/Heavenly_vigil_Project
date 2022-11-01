@@ -35,7 +35,7 @@ namespace Heavenly_vigil_Project
             position = vector2;
             scale = 1f;
             health = 100;
-
+            speed = 400f;
         }
         // -----METHODS-----
         public override void LoadContent(ContentManager content)
