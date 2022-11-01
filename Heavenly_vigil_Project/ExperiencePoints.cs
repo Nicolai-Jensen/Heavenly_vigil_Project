@@ -11,6 +11,7 @@ namespace Heavenly_vigil_Project
     {
         //-----FIELDS-----
         private static int experiencePoints;
+        private static int expPercentage;
         private static int maxEXP;
         private static int playerLevel = 1;
 
@@ -44,6 +45,9 @@ namespace Heavenly_vigil_Project
                 playerLevel++;
                 maxEXP += maxEXP / 10;
                 experiencePoints = 0;
+
+                expPercentage = (int)(maxEXP / 100 * experiencePoints);
+
                 ChooseUpgrade();
             }
         }
