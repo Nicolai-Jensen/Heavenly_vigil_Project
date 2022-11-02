@@ -14,6 +14,7 @@ namespace Heavenly_vigil_Project
         private Rectangle blueRectangle;
         private Rectangle xpBlackrectangle;
         private SpriteFont gameFont;
+        
 
         //Properties
 
@@ -43,6 +44,7 @@ namespace Heavenly_vigil_Project
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            TimeManager.UpdateClock(gameTime);
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 Player.Health--;
@@ -63,7 +65,12 @@ namespace Heavenly_vigil_Project
             spriteBatch.Draw(objectSprites[0], new Vector2(20, 20), greenRectangle, Color.White);
             spriteBatch.Draw(objectSprites[1], new Vector2(10, 1000), xpBlackrectangle, Color.White);
             spriteBatch.Draw(objectSprites[2], new Vector2(20, 1010), blueRectangle, Color.White);
+            spriteBatch.End();
+            spriteBatch.Begin();
             spriteBatch.DrawString(gameFont, $"Lvl. {ExperiencePoints.PlayerLevel}", new Vector2(950, 1009), Color.White);
+            spriteBatch.End();
+            spriteBatch.Begin();
+            spriteBatch.DrawString(gameFont, $"{TimeManager.timerMinutes} : {TimeManager.timerSeconds}", new Vector2(GameWorld.ScreenSize.X / 2, 10), Color.White);
         }
     }
 }
