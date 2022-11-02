@@ -15,12 +15,17 @@ namespace Heavenly_vigil_Project
 
         public override void LoadContent(ContentManager content)
         {
-            objectSprites[0] = content.Load<Texture2D>("");
+            objectSprites = new Texture2D[1];
+            objectSprites[0] = content.Load<Texture2D>("Baggrund");
         }
 
         public override void Update(GameTime gameTime)
         {
             
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(objectSprites[0], Vector2.Zero, Color.White);
         }
     }
 }
