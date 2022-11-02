@@ -13,6 +13,7 @@ namespace Heavenly_vigil_Project
         private Rectangle blackRectangle;
         private Rectangle blueRectangle;
         private Rectangle xpBlackrectangle;
+        private SpriteFont gameFont;
 
         //Properties
 
@@ -29,6 +30,7 @@ namespace Heavenly_vigil_Project
             blackRectangle = new Rectangle(0, 0, 220, 40);
             blueRectangle = new Rectangle(0, 0, ExperiencePoints.ExpPercentage, 20);
             xpBlackrectangle = new Rectangle(0, 0, 1900, 40);
+            gameFont = content.Load<SpriteFont>("GameFont");
 
         }
 
@@ -50,6 +52,7 @@ namespace Heavenly_vigil_Project
             spriteBatch.Draw(objectSprites[0], new Vector2(20, 20), greenRectangle, Color.White);
             spriteBatch.Draw(objectSprites[1], new Vector2(10, 1000), xpBlackrectangle, Color.White);
             spriteBatch.Draw(objectSprites[2], new Vector2(20, 1010), blueRectangle, Color.White);
+            spriteBatch.DrawString(gameFont, $"Lvl. {ExperiencePoints.PlayerLevel}", new Vector2(950, 1009), Color.White);
         }
     }
 }
