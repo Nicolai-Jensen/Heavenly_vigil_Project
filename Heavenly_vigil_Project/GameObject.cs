@@ -113,7 +113,5 @@ namespace Heavenly_vigil_Project
         {
             return (position.Y > GameWorld.ScreenSize.Y || position.X > GameWorld.ScreenSize.X || position.Y < -50 || position.X < -50);
         }
-
-        
     }
 }

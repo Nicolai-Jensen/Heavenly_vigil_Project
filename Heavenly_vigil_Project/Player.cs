@@ -19,11 +19,11 @@ namespace Heavenly_vigil_Project
         private bool cooldown = true;
         private float cooldownTimer;
         private SoundEffect shootingSound;
-        private int health;
+        private static int health;
 
         // -----PROPERTIES-----
 
-        public int Health
+        public static int Health
         {
             get { return health; }
             set { health = value; }
