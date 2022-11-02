@@ -14,6 +14,7 @@ namespace Heavenly_vigil_Project
         private Rectangle blueRectangle;
         private Rectangle xpBlackrectangle;
         private SpriteFont gameFont;
+        private SpriteFont timerFont;
         
 
         //Properties
@@ -36,6 +37,7 @@ namespace Heavenly_vigil_Project
             blueRectangle = new Rectangle(0, 0, ExperiencePoints.ExpPercentage, 20);
             xpBlackrectangle = new Rectangle(0, 0, 1900, 40);
             gameFont = content.Load<SpriteFont>("GameFont");
+            timerFont = content.Load<SpriteFont>("TimerFont");
 
         }
         /// <summary>
@@ -70,7 +72,7 @@ namespace Heavenly_vigil_Project
             spriteBatch.DrawString(gameFont, $"Lvl. {ExperiencePoints.PlayerLevel}", new Vector2(950, 1009), Color.White);
             spriteBatch.End();
             spriteBatch.Begin();
-            spriteBatch.DrawString(gameFont, $"{TimeManager.timerMinutes} : {TimeManager.timerSeconds}", new Vector2(GameWorld.ScreenSize.X / 2, 10), Color.White);
+            spriteBatch.DrawString(timerFont, $"{TimeManager.timerMinutes} : {TimeManager.timerSeconds}", new Vector2(GameWorld.ScreenSize.X / 2, 10), Color.White);
         }
     }
 }
