@@ -49,6 +49,13 @@
 /processorParam:TextureFormat=Color
 /build:BlueEXP.png
 
+#begin GameFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:GameFont.spritefont
+
 #begin GreenHealth.png
 /importer:TextureImporter
 /processor:TextureProcessor
