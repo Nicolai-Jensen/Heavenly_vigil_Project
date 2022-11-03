@@ -49,13 +49,14 @@ namespace Heavenly_vigil_Project
             TimeManager.UpdateClock(gameTime);
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                Player.Health--;
+
                 ExperiencePoints.PlayerExp++;
-                ExperiencePoints.CheckForLevelUp(); 
+                ExperiencePoints.CheckForLevelUp();
                 blueRectangle.Width = (int)(ExperiencePoints.ExpPercentage * 18.75);
+            }
                 greenRectangle.Width = Player.Health * 2;
 
-            }
+            
         }
         /// <summary>
         /// The Method for Drawing out a sprite to the screen, this method is an override for the abstract one in GameObject and is called in GameWorld
