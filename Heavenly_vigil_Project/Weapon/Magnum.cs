@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct3D9;
@@ -12,6 +12,7 @@ namespace Heavenly_vigil_Project
 {
     internal class Magnum : Weapon
     {
+
         // -----FIELDS-----
 
         // -----CONSTRUCTORS-----
@@ -25,6 +26,7 @@ namespace Heavenly_vigil_Project
             velocity += new Vector2(0, -1);
             speed = 1500;
         }
+        
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(objectSprites[0], position, null, Color.White, 0, origin, scale, SpriteEffects.None, 0);
@@ -44,6 +46,7 @@ namespace Heavenly_vigil_Project
         {
             Move(gameTime);
         }
+
         public override void Attack(GameTime gameTime)
         {
             throw new NotImplementedException();
