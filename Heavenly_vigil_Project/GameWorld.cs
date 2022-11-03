@@ -148,6 +148,14 @@ namespace Heavenly_vigil_Project
             }
         }
 
+
+        public static void InstantiateGameObject(GameObject gObject)
+        {
+            gameObjectsToAdd.Add(gObject);
+        }
+
+        private void SpawnEnemy()
+
         private void SpawnEnemy(GameTime gameTime)
         {
             spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -161,6 +169,7 @@ namespace Heavenly_vigil_Project
 
         }
         private void DrawCollisionBox(GameObject go)
+
         {
             Rectangle top = new Rectangle(go.CollisionBox.X, go.CollisionBox.Y, go.CollisionBox.Width, 1);
             Rectangle bottom = new Rectangle(go.CollisionBox.X, go.CollisionBox.Y + go.CollisionBox.Height, go.CollisionBox.Width, 1);

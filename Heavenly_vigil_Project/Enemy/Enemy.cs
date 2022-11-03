@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using SharpDX.Direct3D9;
@@ -52,14 +52,16 @@ namespace Heavenly_vigil_Project
         }
         public override void OnCollision(GameObject other)
         {
-            if (other is Player)
+            if (Player.HitCooldown == false)
             {
-                Player.Health -= damage;
+
+                if (other is Player)
+                {
+                    Player.Health--;
+                    Player.HealthModified = true;
+                }
             }
-            if (other is Weapon)
-            {
-                toBeRemoved = true;
-            }
+
         }
 
         private void ChooseDirection()
@@ -126,6 +128,7 @@ namespace Heavenly_vigil_Project
                 position.Y = rnd.NextFloat(0, GameWorld.ScreenSize.Y);
                 position.X = 1920;
                 return position;
+
             }
         }
     }

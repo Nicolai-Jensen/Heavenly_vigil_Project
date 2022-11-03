@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct3D9;
@@ -14,6 +15,16 @@ namespace Heavenly_vigil_Project
     {
 
         // -----FIELDS-----
+        private float rotation;
+        private Texture2D[] magnumShot;
+
+        // -----PROPERTIES-----
+        public float Rotation
+        {
+            get { return rotation; }
+            set { rotation = value; }
+        }
+
 
         // -----CONSTRUCTORS-----
         public Magnum(Texture2D sprite, Vector2 position)
@@ -21,15 +32,15 @@ namespace Heavenly_vigil_Project
             objectSprites = new Texture2D[1];
             objectSprites[0] = sprite;
             this.position = position;
-            scale = 0.8f;
-
+            scale = 1f;
+            rotation = 0f;
             velocity += new Vector2(0, -1);
-            speed = 1500;
+            speed = 1000;
         }
         
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(objectSprites[0], position, null, Color.White, 0, origin, scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(objectSprites[0], position, null, Color.Blue, rotation, origin, scale, SpriteEffects.None, 0);
         }
 
         public override void LoadContent(ContentManager content)
@@ -45,11 +56,12 @@ namespace Heavenly_vigil_Project
         public override void Update(GameTime gameTime)
         {
             Move(gameTime);
+            Attack(gameTime);
         }
 
         public override void Attack(GameTime gameTime)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
