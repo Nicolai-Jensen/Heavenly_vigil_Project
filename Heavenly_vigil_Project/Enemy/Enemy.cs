@@ -49,9 +49,13 @@ namespace Heavenly_vigil_Project
         }
         public override void OnCollision(GameObject other)
         {
-            if (other is Player)
+            if (Player.HitCooldown == false)
             {
-                Player.Health--;
+                if (other is Player)
+                {
+                    Player.Health--;
+                    Player.HealthModified = true;
+                }
             }
         }
     }

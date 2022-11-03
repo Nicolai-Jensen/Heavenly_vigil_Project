@@ -138,6 +138,11 @@ namespace Heavenly_vigil_Project
             }
         }
 
+        public static void InstantiateGameObject(GameObject gObject)
+        {
+            gameObjectsToAdd.Add(gObject);
+        }
+
         private void SpawnEnemy()
         {
 
