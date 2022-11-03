@@ -20,23 +20,26 @@ namespace Heavenly_vigil_Project
         //Fields
 
         private int health;
-        private int damage;
+        private int damage = 5;
+        protected static Random rnd = new Random();
 
         //Properties
         //Constructors
         public Enemy()
         {
             velocity.Y = 0;
-            speed = 100;
-            position.X = 500;
-            position.Y = 500;
+            velocity.X = 0;
+            speed = 200;
+            position.X = rnd.NextFloat(0, GameWorld.ScreenSize.X);
+            position.Y = rnd.NextFloat(0, GameWorld.ScreenSize.Y);
             scale = 2;
         }
         //Method
         public override void LoadContent(ContentManager content)
         {
+            int i = rnd.Next(1, 4);
             objectSprites = new Texture2D[1];
-            objectSprites[0] = content.Load<Texture2D>($"tile_bat");
+            objectSprites[0] = content.Load<Texture2D>($"enemy_{i}");
         }
 
         public override void Update(GameTime gameTime)
@@ -52,7 +55,11 @@ namespace Heavenly_vigil_Project
         {
             if (other is Player)
             {
-                Player.Health--;
+                Player.Health -= damage;
+            }
+            if(other is Weapon)
+            {
+                toBeRemoved = true;
             }
         }
 
