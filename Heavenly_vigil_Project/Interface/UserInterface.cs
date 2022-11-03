@@ -59,7 +59,7 @@ namespace Heavenly_vigil_Project
             
         }
         /// <summary>
-        /// The Method for Drawing out a sprite to the screen, this method is an override for the abstract one in GameObject and is called in GameWorld
+        /// The Method for drawing out a sprite to the screen, this method is an override for the virtual one in GameObject and is called in GameWorld
         /// </summary>
         /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)

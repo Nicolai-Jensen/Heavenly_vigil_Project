@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using SharpDX.Direct3D9;
@@ -20,42 +20,115 @@ namespace Heavenly_vigil_Project
         //Fields
 
         private int health;
-        private int damage;
+        private int damage = 10;
+        protected static Random rnd = new Random();
 
         //Properties
+
         //Constructors
         public Enemy()
         {
-            velocity.Y = 0;
-            speed = 100;
-            position.X = 500;
-            position.Y = 500;
+            speed = 150;
+            position = SpawnPosition();
             scale = 2;
         }
         //Method
         public override void LoadContent(ContentManager content)
         {
+            int i = rnd.Next(1, 4);
             objectSprites = new Texture2D[1];
-            objectSprites[0] = content.Load<Texture2D>($"tile_bat");
+            objectSprites[0] = content.Load<Texture2D>($"enemy_{i}");
         }
 
         public override void Update(GameTime gameTime)
         {
+            ChooseDirection();
             Move(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
+            Vector2 origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
             spriteBatch.Draw(objectSprites[0], position, null, Color.White, 0, origin, scale, SpriteEffects.None, 1f);
         }
         public override void OnCollision(GameObject other)
         {
             if (Player.HitCooldown == false)
             {
+
                 if (other is Player)
                 {
                     Player.Health--;
                     Player.HealthModified = true;
                 }
+            }
+
+        }
+
+        private void ChooseDirection()
+        {
+            Vector2 playerPosition = ReturnPlayerPosition();
+
+            if (playerPosition.Y > position.Y)
+            {
+                velocity.Y = 1;
+            }
+            if (playerPosition.X > position.X)
+            {
+                velocity.X = 1;
+            }
+            if (playerPosition.Y < position.Y)
+            {
+                velocity.Y = -1;
+            }
+            if (playerPosition.X < position.X)
+            {
+                velocity.X = -1;
+            }
+        }
+
+        private Vector2 ReturnPlayerPosition()
+        {
+            foreach (GameObject go in GameWorld.GameObjects)
+            {
+                if (go is Player)
+                {
+                    return go.Position;
+                }
+            }
+            return new Vector2(0, 0);
+        }
+        /// <summary>
+        /// Uses a random number, to set the enemy´s position outside of the gameworld, and which side the enemy should spawn from. 
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 SpawnPosition()
+        {
+            Random rnd = new Random();
+            int pos = rnd.Next(1, 5);
+            if (pos == 1)
+            {
+                position.Y = -25;
+                position.X = rnd.NextFloat(0, GameWorld.ScreenSize.X);
+                return position;
+            }
+            else if (pos == 2)
+            {
+                position.Y = 1080;
+                position.X = rnd.NextFloat(0, GameWorld.ScreenSize.X);
+                return position;
+            }
+            else if (pos == 3)
+            {
+                position.Y = rnd.NextFloat(0, GameWorld.ScreenSize.Y);
+                position.X = -25;
+                return position;
+            }
+            else
+            {
+                position.Y = rnd.NextFloat(0, GameWorld.ScreenSize.Y);
+                position.X = 1920;
+                return position;
+
             }
         }
     }

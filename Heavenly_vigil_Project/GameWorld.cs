@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Heavenly_vigil_Project
@@ -12,9 +13,11 @@ namespace Heavenly_vigil_Project
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private List<GameObject> gameObjects = new List<GameObject>();
+        private static List<GameObject> gameObjects = new List<GameObject>();
         private static List<GameObject> gameObjectsToAdd = new List<GameObject>();
         private List<GameObject> gameObjectsToRemove = new List<GameObject>();
+        private Texture2D pixel;
+        private float spawnTimer;
 
         private static Vector2 screenSize;
 
@@ -25,6 +28,11 @@ namespace Heavenly_vigil_Project
             {
                 return screenSize;
             }
+        }
+
+        public static List<GameObject> GameObjects
+        {
+            get { return gameObjects; }
         }
 
         //-----CONSTRUCTORS-----
@@ -57,12 +65,12 @@ namespace Heavenly_vigil_Project
             Player player1 = new Player(new Vector2(0, 50));
             gameObjects.Add(new Background());
             gameObjects.Add(player1);
-            gameObjects.Add(new Enemy());
             gameObjects.Add(new UserInterface());
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
             }
+            pixel = Content.Load<Texture2D>("pixel");
 
             // TODO: use this.Content to load your game content here
         }
@@ -72,6 +80,7 @@ namespace Heavenly_vigil_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            SpawnEnemy(gameTime);
             RemoveGameObjects();
 
             foreach (GameObject go in gameObjects)
@@ -111,6 +120,7 @@ namespace Heavenly_vigil_Project
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(_spriteBatch);
+                DrawCollisionBox(go);
             }
 
 
@@ -138,13 +148,38 @@ namespace Heavenly_vigil_Project
             }
         }
 
+
         public static void InstantiateGameObject(GameObject gObject)
         {
             gameObjectsToAdd.Add(gObject);
         }
 
         private void SpawnEnemy()
+
+        private void SpawnEnemy(GameTime gameTime)
         {
+            spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (spawnTimer > 1)
+            {
+                Enemy spawnedEnemy = new Enemy();
+                spawnedEnemy.LoadContent(Content);
+                gameObjects.Add(spawnedEnemy);
+                spawnTimer = 0;
+            }
+
+        }
+        private void DrawCollisionBox(GameObject go)
+
+        {
+            Rectangle top = new Rectangle(go.CollisionBox.X, go.CollisionBox.Y, go.CollisionBox.Width, 1);
+            Rectangle bottom = new Rectangle(go.CollisionBox.X, go.CollisionBox.Y + go.CollisionBox.Height, go.CollisionBox.Width, 1);
+            Rectangle left = new Rectangle(go.CollisionBox.X, go.CollisionBox.Y, 1, go.CollisionBox.Height);
+            Rectangle right = new Rectangle(go.CollisionBox.X + go.CollisionBox.Width, go.CollisionBox.Y, 1, go.CollisionBox.Height);
+
+            _spriteBatch.Draw(pixel, top, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            _spriteBatch.Draw(pixel, bottom, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            _spriteBatch.Draw(pixel, left, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            _spriteBatch.Draw(pixel, right, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
 
         }
     }
