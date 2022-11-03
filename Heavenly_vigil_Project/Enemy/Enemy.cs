@@ -27,11 +27,8 @@ namespace Heavenly_vigil_Project
         //Constructors
         public Enemy()
         {
-            velocity.Y = 0;
-            velocity.X = 0;
             speed = 200;
-            position.X = rnd.NextFloat(0, GameWorld.ScreenSize.X);
-            position.Y = rnd.NextFloat(0, GameWorld.ScreenSize.Y);
+            position = SpawnPosition();
             scale = 2;
         }
         //Method
@@ -57,7 +54,7 @@ namespace Heavenly_vigil_Project
             {
                 Player.Health -= damage;
             }
-            if(other is Weapon)
+            if (other is Weapon)
             {
                 toBeRemoved = true;
             }
@@ -95,6 +92,35 @@ namespace Heavenly_vigil_Project
                 }
             }
             return new Vector2(0, 0);
+        }
+        public Vector2 SpawnPosition()
+        {
+            Random rnd = new Random();
+            int pos = rnd.Next(1, 5);
+            if (pos == 1)
+            {
+                position.Y = -25;
+                position.X = rnd.NextFloat(0, GameWorld.ScreenSize.X);
+                return position;
+            }
+            else if (pos == 2)
+            {
+                position.Y = 1080;
+                position.X = rnd.NextFloat(0, GameWorld.ScreenSize.X);
+                return position;
+            }
+            else if (pos == 3)
+            {
+                position.Y = rnd.NextFloat(0, GameWorld.ScreenSize.Y);
+                position.X = -25;
+                return position;
+            }
+            else
+            {
+                position.Y = rnd.NextFloat(0, GameWorld.ScreenSize.Y);
+                position.X = 1920;
+                return position;
+            }
         }
     }
 }
