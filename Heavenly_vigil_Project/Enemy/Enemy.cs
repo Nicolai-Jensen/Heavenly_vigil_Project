@@ -41,6 +41,7 @@ namespace Heavenly_vigil_Project
 
         public override void Update(GameTime gameTime)
         {
+            ChooseDirection();
             Move(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
@@ -53,6 +54,40 @@ namespace Heavenly_vigil_Project
             {
                 Player.Health--;
             }
+        }
+
+        private void ChooseDirection()
+        {
+            Vector2 playerPosition = ReturnPlayerPosition();
+
+            if (playerPosition.Y > position.Y)
+            {
+                velocity.Y = 1;
+            }
+            if (playerPosition.X > position.X)
+            {
+                velocity.X = 1;
+            }
+            if (playerPosition.Y < position.Y)
+            {
+                velocity.Y = -1;
+            }
+            if (playerPosition.X < position.X)
+            {
+                velocity.X = -1;
+            }
+        }
+
+        private Vector2 ReturnPlayerPosition()
+        {
+            foreach (GameObject go in GameWorld.GameObjects)
+            {
+                if (go is Player)
+                {
+                    return go.Position;
+                }
+            }
+            return new Vector2(0, 0);
         }
     }
 }
