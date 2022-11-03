@@ -68,22 +68,8 @@ namespace Heavenly_vigil_Project
         {
             Vector2 playerPosition = ReturnPlayerPosition();
 
-            if (playerPosition.Y > position.Y)
-            {
-                velocity.Y = 1;
-            }
-            if (playerPosition.X > position.X)
-            {
-                velocity.X = 1;
-            }
-            if (playerPosition.Y < position.Y)
-            {
-                velocity.Y = -1;
-            }
-            if (playerPosition.X < position.X)
-            {
-                velocity.X = -1;
-            }
+            velocity = playerPosition - position;
+            velocity.Normalize();
         }
 
         private Vector2 ReturnPlayerPosition()
