@@ -78,7 +78,7 @@ namespace Heavenly_vigil_Project
                 objectSprites[i] = content.Load<Texture2D>($"tile_arara_azul");
             }
             //This line of code places the objects origin within the middle of the sprite assuming all sprites in the array share the same size
-            origin = new Vector2(objectSprites[0].Width * scale / 2, objectSprites[0].Height * scale / 2);
+            origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
             //Places the Object in the middle of the game screen upon startup
             position.X = GameWorld.ScreenSize.X / 2;
             position.Y = GameWorld.ScreenSize.Y / 2;

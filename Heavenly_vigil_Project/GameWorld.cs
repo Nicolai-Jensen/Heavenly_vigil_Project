@@ -154,8 +154,6 @@ namespace Heavenly_vigil_Project
             gameObjectsToAdd.Add(gObject);
         }
 
-        private void SpawnEnemy()
-
         private void SpawnEnemy(GameTime gameTime)
         {
             spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
