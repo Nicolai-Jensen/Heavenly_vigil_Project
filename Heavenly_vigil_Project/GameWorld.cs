@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Heavenly_vigil_Project
@@ -15,6 +16,7 @@ namespace Heavenly_vigil_Project
         private List<GameObject> gameObjects = new List<GameObject>();
         private static List<GameObject> gameObjectsToAdd = new List<GameObject>();
         private List<GameObject> gameObjectsToRemove = new List<GameObject>();
+        private float spawnTimer;
 
         private static Vector2 screenSize;
 
@@ -57,7 +59,6 @@ namespace Heavenly_vigil_Project
             Player player1 = new Player(new Vector2(0, 50));
             gameObjects.Add(new Background());
             gameObjects.Add(player1);
-            gameObjects.Add(new Enemy());
             gameObjects.Add(new UserInterface());
             foreach (GameObject go in gameObjects)
             {
@@ -72,6 +73,7 @@ namespace Heavenly_vigil_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            SpawnEnemy(gameTime);
             RemoveGameObjects();
 
             foreach (GameObject go in gameObjects)
@@ -138,8 +140,16 @@ namespace Heavenly_vigil_Project
             }
         }
 
-        private void SpawnEnemy()
+        private void SpawnEnemy(GameTime gameTime)
         {
+            spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (spawnTimer > 1)
+            {
+                Enemy spawnedEnemy = new Enemy();
+                spawnedEnemy.LoadContent(Content);
+                gameObjects.Add(spawnedEnemy);
+                spawnTimer = 0;
+            }
 
         }
     }
