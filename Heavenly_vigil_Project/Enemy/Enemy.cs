@@ -20,14 +20,15 @@ namespace Heavenly_vigil_Project
         //Fields
 
         private int health;
-        private int damage = 5;
+        private int damage = 10;
         protected static Random rnd = new Random();
 
         //Properties
+
         //Constructors
         public Enemy()
         {
-            speed = 200;
+            speed = 150;
             position = SpawnPosition();
             scale = 2;
         }
@@ -46,6 +47,7 @@ namespace Heavenly_vigil_Project
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
+            Vector2 origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
             spriteBatch.Draw(objectSprites[0], position, null, Color.White, 0, origin, scale, SpriteEffects.None, 1f);
         }
         public override void OnCollision(GameObject other)
@@ -93,6 +95,10 @@ namespace Heavenly_vigil_Project
             }
             return new Vector2(0, 0);
         }
+        /// <summary>
+        /// Uses a random number, to set the enemy´s position outside of the gameworld, and which side the enemy should spawn from. 
+        /// </summary>
+        /// <returns></returns>
         public Vector2 SpawnPosition()
         {
             Random rnd = new Random();
