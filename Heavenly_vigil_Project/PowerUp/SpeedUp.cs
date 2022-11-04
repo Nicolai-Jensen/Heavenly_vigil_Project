@@ -21,6 +21,7 @@ namespace Heavenly_vigil_Project
             this.speedAmp = speedAmp;
             powerUpDescription = "Increases the players speed.";
             powerUpTitle = "Speed";
+            scale = 0.75f;
         }
 
         //Methods
@@ -37,7 +38,8 @@ namespace Heavenly_vigil_Project
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(objectSprites[0], position, Color.White);
+            origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
+            spriteBatch.Draw(objectSprites[0], position, null, Color.White, 0, origin, scale, SpriteEffects.None, 0f);
         }
         public override void AddValue(GameObject player)
         {
