@@ -82,6 +82,8 @@ namespace Heavenly_vigil_Project
 
             velocity += enemyPosition - position;
             velocity.Normalize();
+            rotation = (float)Math.Atan2(enemyPosition.Y - position.Y, enemyPosition.X - position.X);
+            rotation += 70f;
         }
 
         private Vector2 ReturnEnemyPosition()
