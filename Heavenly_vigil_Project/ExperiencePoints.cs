@@ -56,14 +56,10 @@ namespace Heavenly_vigil_Project
                 maxEXP += maxEXP / 10;
                 playerExp = 0;
 
-                ChooseUpgrade(gameTime);
+                UpgradeInterface.ChooseUpgrade(gameTime);
             }
         }
 
-        public static void ChooseUpgrade(GameTime gameTime)
-        {
-            UpgradeInterface lvlup = new UpgradeInterface();
-            GameWorld.InstantiateGameObject(lvlup);
-        }
+
     }
 }

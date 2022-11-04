@@ -21,12 +21,13 @@ namespace Heavenly_vigil_Project
             this.attackSpdAmp = attackSpdAmp;
             powerUpDescription = "Increases the players attackspeed.";
             powerUpTitle = "Attackspeed";
+            scale = 0.75f;
+            
         }
         //Methods
         public override void LoadContent(ContentManager content)
         {
             objectSprites = new Texture2D[1];
-
             objectSprites[0] = content.Load<Texture2D>("GreenHealth");
 
         }
@@ -36,7 +37,8 @@ namespace Heavenly_vigil_Project
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(objectSprites[0], position, Color.White);
+            origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
+            spriteBatch.Draw(objectSprites[0], position, null, Color.White, 0, origin, scale, SpriteEffects.None, 0f);
         }
         public override void AddValue(GameObject player)
         {
