@@ -53,6 +53,12 @@ namespace Heavenly_vigil_Project
             get { return hitCooldown; }
         }
 
+        public float Speed
+        {
+            get { return speed; }
+            set { speed = value; }
+        }
+
         // -----CONSTRUCTORS-----
         public Player(Vector2 vector2)
         {
@@ -155,7 +161,7 @@ namespace Heavenly_vigil_Project
                 {
                     if (dashed == false)
                     {
-                        speed = 1300f;
+                        speed = 1200f;
                         dashed = true;
                         dashCooldown = false;
                     }              
@@ -167,7 +173,7 @@ namespace Heavenly_vigil_Project
                     dashedTimer = 0;
                 }
                 dashCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (dashCooldownTimer >= 1.5f)
+                if (dashCooldownTimer >= 1.3f)
                 {
                     dashed = false;
                     dashCooldown = true;
@@ -175,15 +181,6 @@ namespace Heavenly_vigil_Project
                 }
             }
 
-            /* if (keyState.IsKeyUp(Keys.LeftShift))
-             {
-                 speed = 400f;
-             }
-
-             if (keyState.IsKeyDown(Keys.LeftShift))
-             {
-                 speed = 200f;
-             } */
             //Code needed so that the objects speed isn't increased when moving diagonally
             if (velocity != Vector2.Zero)
             {
