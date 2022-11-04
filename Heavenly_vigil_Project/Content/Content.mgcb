@@ -104,7 +104,6 @@
 /processorParam:TextureFormat=Color
 /build:GreenHealth.png
 
-
 #begin laser.png
 /importer:TextureImporter
 /processor:TextureProcessor
