@@ -43,7 +43,8 @@ namespace Heavenly_vigil_Project
             scale = 1f;
             rotation = 0f;
             speed = 1500f;
-            ChooseDirection();
+            velocity = DirectionClosestEnemy(ReturnPlayerPosition());
+            //ChooseDirection();
             damage = 5;
         }
         // -----METHODS-----
@@ -76,22 +77,37 @@ namespace Heavenly_vigil_Project
 
         }
 
-        private void ChooseDirection()
-        {
-            Vector2 enemyPosition = ReturnEnemyPosition();
+        //private void ChooseDirection()
+        //{
+        //    Vector2 enemyPosition = ReturnEnemyPosition();
 
-            velocity += enemyPosition - position;
-            velocity.Normalize();
-            rotation = (float)Math.Atan2(enemyPosition.Y - position.Y, enemyPosition.X - position.X);
-            rotation += 70f;
-        }
+        //    velocity += enemyPosition - position;
+        //    velocity.Normalize();
+        //    rotation = (float)Math.Atan2(enemyPosition.Y - position.Y, enemyPosition.X - position.X);
+        //    rotation += 70f;
+        //}
 
-        private Vector2 ReturnEnemyPosition()
+        //private Vector2 ReturnEnemyPosition()
+        //{
+        //    foreach (GameObject go in GameWorld.GameObjects)
+        //    {
+
+        //        if (go is Enemy)
+        //        {
+
+        //            return go.Position;
+        //        }
+        //    }
+
+        //    return new Vector2(position.X, -100);
+        //}
+
+        private Vector2 ReturnPlayerPosition()
         {
             foreach (GameObject go in GameWorld.GameObjects)
             {
 
-                if (go is Enemy)
+                if (go is Player)
                 {
 
                     return go.Position;
@@ -100,6 +116,32 @@ namespace Heavenly_vigil_Project
 
             return new Vector2(position.X, -100);
         }
-        
+        public Vector2 DirectionClosestEnemy(Vector2 playerPosition)
+        {
+            Vector2 direction;
+            Vector2 enemyPosition = new Vector2(0, 0);
+            float distance = 1000f;
+            float shortestDistance = 2000f;
+
+            foreach (GameObject enemy in GameWorld.GameObjects)
+            {
+                if (enemy is Enemy)
+                {
+                    distance = Vector2.Distance(playerPosition, enemy.Position);
+                }
+
+                if (distance < shortestDistance && enemy is Enemy)
+                {
+                    shortestDistance = distance;
+                    enemyPosition = enemy.Position;
+                }
+            }
+
+            direction = enemyPosition - playerPosition;
+            direction.Normalize();
+
+            return direction;
+        }
+
     }
 }
