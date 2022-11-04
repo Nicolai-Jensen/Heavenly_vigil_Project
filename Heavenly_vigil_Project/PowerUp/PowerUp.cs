@@ -18,7 +18,7 @@ namespace Heavenly_vigil_Project
         //Methods
         public override void LoadContent(ContentManager content)
         {
-            
+
         }
 
         public override void Update(GameTime gameTime)
