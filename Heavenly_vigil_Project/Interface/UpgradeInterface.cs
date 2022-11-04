@@ -44,15 +44,19 @@ namespace Heavenly_vigil_Project
 
         public static void ChooseUpgrade(GameTime gameTime)
         {
+
             lvlup = new UpgradeInterface();
             atkSpd = new AttackSpeedUp(new Vector2(960, 925), 2);
             dmgUp = new DamageUp(new Vector2(830, 925), 2);
             spdUp = new SpeedUp(new Vector2(1090, 925), 400f);
 
+
+            //All the instantiated Power-ups and UpgradeInterface, being added to the GameObjectListToAdd.
             GameWorld.InstantiateGameObject(lvlup);
             GameWorld.InstantiateGameObject(atkSpd);
             GameWorld.InstantiateGameObject(dmgUp);
             GameWorld.InstantiateGameObject(spdUp);
+
 
         }
 
