@@ -15,6 +15,11 @@ namespace Heavenly_vigil_Project
         public int damageAmp;
         //Properties
         //Constructors
+        public DamageUp(Vector2 position, int damageAmp)
+        {
+            this.position = position;
+            this.damageAmp = damageAmp;
+        }
         //Methods
         public override void LoadContent(ContentManager content)
         {
@@ -26,7 +31,11 @@ namespace Heavenly_vigil_Project
         {
             
         }
-        public override void AddValue(GameObject player)
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(objectSprites[0], position, Color.White);
+        }
+        public override void AddValue(Player player)
         {
             
         }
