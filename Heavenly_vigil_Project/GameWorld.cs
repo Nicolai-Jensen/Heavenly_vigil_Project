@@ -65,8 +65,8 @@ namespace Heavenly_vigil_Project
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Player player1 = new Player(new Vector2(0, 50));
             gameObjects.Add(new Background());
-            gameObjects.Add(player1);
             gameObjects.Add(new UserInterface());
+            gameObjects.Add(player1);
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
@@ -81,34 +81,34 @@ namespace Heavenly_vigil_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            SpawnEnemy(gameTime);
-            RemoveGameObjects();
+                SpawnEnemy(gameTime);
+                RemoveGameObjects();
 
-            foreach (GameObject go in gameObjects)
-            {
-                go.Update(gameTime);
-
-                foreach (GameObject other in gameObjects)
+                foreach (GameObject go in gameObjects)
                 {
-                    if (go.IsColliding(other))
+                    go.Update(gameTime);
+
+                    foreach (GameObject other in gameObjects)
                     {
-                        go.OnCollision(other);
-                        other.OnCollision(go);
+                        if (go.IsColliding(other))
+                        {
+                            go.OnCollision(other);
+                            other.OnCollision(go);
+                        }
                     }
                 }
-            }
 
-            foreach (GameObject gameObjectsToSpawn in gameObjectsToAdd)
-            {
-                gameObjectsToSpawn.LoadContent(Content);
-                gameObjects.Add(gameObjectsToSpawn);
-            }
+                foreach (GameObject gameObjectsToSpawn in gameObjectsToAdd)
+                {
+                    gameObjectsToSpawn.LoadContent(Content);
+                    gameObjects.Add(gameObjectsToSpawn);
+                }
 
-            gameObjectsToAdd.Clear();
+                gameObjectsToAdd.Clear();
 
-            // TODO: Add your update logic here
+                // TODO: Add your update logic here
 
-            base.Update(gameTime);
+                base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)

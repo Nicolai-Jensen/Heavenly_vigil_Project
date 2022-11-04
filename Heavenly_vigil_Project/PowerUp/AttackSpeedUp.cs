@@ -12,9 +12,16 @@ namespace Heavenly_vigil_Project
     internal class AttackSpeedUp : PowerUp
     {
         //Fields
-        public int attackSpdAmp;
+        public float attackSpdAmp;
         //Properties
         //Constructors
+        public AttackSpeedUp(Vector2 position, float attackSpdAmp)
+        {
+            this.position = position;
+            this.attackSpdAmp = attackSpdAmp;
+            powerUpDescription = "Increases the players attackspeed.";
+            powerUpTitle = "Attackspeed";
+        }
         //Methods
         public override void LoadContent(ContentManager content)
         {
@@ -27,9 +34,13 @@ namespace Heavenly_vigil_Project
         {
             
         }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(objectSprites[0], position, Color.White);
+        }
         public override void AddValue(GameObject player)
         {
-           
+            player.AttackSpeed += attackSpdAmp;
         }
     }
 }

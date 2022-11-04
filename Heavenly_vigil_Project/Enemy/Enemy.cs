@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Color = Microsoft.Xna.Framework.Color;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
+using Microsoft.Xna.Framework.Input;
 
 namespace Heavenly_vigil_Project
 {
@@ -42,7 +43,7 @@ namespace Heavenly_vigil_Project
         }
 
         public override void Update(GameTime gameTime)
-        {
+        {  
             ChooseDirection();
             Move(gameTime);
             Death();

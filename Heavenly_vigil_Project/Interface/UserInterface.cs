@@ -16,6 +16,7 @@ namespace Heavenly_vigil_Project
         private SpriteFont gameFont;
         private SpriteFont timerFont;
         
+        
 
         //Properties
 
@@ -31,7 +32,6 @@ namespace Heavenly_vigil_Project
             objectSprites[0] = content.Load<Texture2D>("GreenHealth");
             objectSprites[1] = content.Load<Texture2D>("BlackHealth");
             objectSprites[2] = content.Load<Texture2D>("BlueEXP");
-            position = new Vector2(30, 50);
             greenRectangle = new Rectangle(10, 10, Player.Health * 2, 20);
             blackRectangle = new Rectangle(0, 0, 220, 40);
             blueRectangle = new Rectangle(0, 0, ExperiencePoints.ExpPercentage, 20);
@@ -46,8 +46,6 @@ namespace Heavenly_vigil_Project
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            TimeManager.UpdateClock(gameTime);
-
                 ExperiencePoints.CheckForLevelUp();
                 blueRectangle.Width = (int)(ExperiencePoints.ExpPercentage * 18.75);
 
@@ -71,6 +69,6 @@ namespace Heavenly_vigil_Project
             spriteBatch.End();
             spriteBatch.Begin();
             spriteBatch.DrawString(timerFont, $"{TimeManager.timerMinutes} : {TimeManager.timerSeconds}", new Vector2(GameWorld.ScreenSize.X / 2, 10), Color.White);
+            }
         }
     }
-}

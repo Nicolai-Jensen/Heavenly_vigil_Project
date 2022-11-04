@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +46,7 @@ namespace Heavenly_vigil_Project
 
         //-----METHODS-----
 
-        public static void CheckForLevelUp()
+        public static void CheckForLevelUp(GameTime gameTime)
         {
             expPercentage = playerExp * 100 / maxEXP;
 
@@ -54,13 +56,14 @@ namespace Heavenly_vigil_Project
                 maxEXP += maxEXP / 10;
                 playerExp = 0;
 
-                ChooseUpgrade();
+                ChooseUpgrade(gameTime);
             }
         }
 
-        public static void ChooseUpgrade()
+        public static void ChooseUpgrade(GameTime gameTime)
         {
-        
+            UpgradeInterface lvlup = new UpgradeInterface();
+            GameWorld.InstantiateGameObject(lvlup);
         }
     }
 }

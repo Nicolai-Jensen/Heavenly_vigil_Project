@@ -25,6 +25,8 @@ namespace Heavenly_vigil_Project
         protected float speed;
         protected bool toBeRemoved;
         protected int layerDepth;
+        protected int damage;
+        protected float attackSpeed;
 
         // -----PROPERTIES-----
         private Texture2D CurrentSprite
@@ -62,6 +64,17 @@ namespace Heavenly_vigil_Project
             }
         }
 
+        public int Damage
+        {
+            get { return damage; }
+            set { damage = value; }
+        }
+
+        public float AttackSpeed
+        {
+            get { return attackSpeed; }
+            set { attackSpeed = value; }
+        }
         public float Speed
         {
             get { return speed; }
@@ -75,9 +88,7 @@ namespace Heavenly_vigil_Project
         // -----METHODS-----
 
         public abstract void LoadContent(ContentManager content);
-
         public abstract void Update(GameTime gameTime);
-
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             Vector2 origin = new Vector2(CurrentSprite.Width / 2, CurrentSprite.Height / 2);
