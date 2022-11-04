@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.Devices;
+﻿using Heavenly_vigil_Project;
+using Microsoft.VisualBasic.Devices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,10 +17,10 @@ namespace Heavenly_vigil_Project
         public override void LoadContent(ContentManager content)
         {
             scale = 1; 
-            textureRectangle = new Rectangle(0, 0, 500, 200);
+            textureRectangle = new Rectangle(0, 0, 500, 100);
             objectSprites = new Texture2D[1];
             pos.X = GameWorld.ScreenSize.X / 2;
-            pos.Y = 875;
+            pos.Y = 975;
             objectSprites[0] = content.Load<Texture2D>("BlackHealth");
         }
 
