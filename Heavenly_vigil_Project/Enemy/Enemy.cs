@@ -21,7 +21,7 @@ namespace Heavenly_vigil_Project
         //Fields
 
         private int health;
-        private int damage = 10;
+        private int damage;
         protected static Random rnd = new Random();
 
         //Properties
@@ -33,6 +33,7 @@ namespace Heavenly_vigil_Project
             position = SpawnPosition();
             scale = 2;
             health = 20;
+            damage = 10;
         }
         //Method
         public override void LoadContent(ContentManager content)
@@ -59,7 +60,7 @@ namespace Heavenly_vigil_Project
             {
                 if (other is Player)
                 {
-                    Player.Health--;
+                    Player.Health -= damage;
                     Player.HealthModified = true;
                 }
             }
