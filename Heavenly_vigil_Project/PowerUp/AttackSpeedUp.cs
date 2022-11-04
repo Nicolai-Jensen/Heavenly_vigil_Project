@@ -19,6 +19,8 @@ namespace Heavenly_vigil_Project
         {
             this.position = position;
             this.attackSpdAmp = attackSpdAmp;
+            powerUpDescription = "Increases the players attackspeed.";
+            powerUpTitle = "Attackspeed";
         }
         //Methods
         public override void LoadContent(ContentManager content)

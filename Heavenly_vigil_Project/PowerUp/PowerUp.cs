@@ -13,6 +13,8 @@ namespace Heavenly_vigil_Project
     {
         //Fields
         protected int valueAmp;
+        protected string powerUpDescription;
+        protected string powerUpTitle;
         //Properties
         //Constructors
         //Methods
