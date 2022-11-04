@@ -130,6 +130,7 @@ namespace Heavenly_vigil_Project
             //Keystate reads which key is being used
             KeyboardState keyState = Keyboard.GetState();
 
+
             //Moves the player up when pressing W by removing Y position value 
             if (keyState.IsKeyDown(Keys.W))
             {

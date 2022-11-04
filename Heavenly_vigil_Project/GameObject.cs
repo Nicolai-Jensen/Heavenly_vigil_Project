@@ -62,6 +62,7 @@ namespace Heavenly_vigil_Project
             {
                 return toBeRemoved;
             }
+            set { toBeRemoved = value; }
         }
 
         public int Damage
