@@ -24,6 +24,8 @@ namespace Heavenly_vigil_Project
         protected float speed;
         protected bool toBeRemoved;
         protected int layerDepth;
+        protected int damage;
+        protected float attackSpeed;
 
         // -----PROPERTIES-----
         private Texture2D CurrentSprite
@@ -59,6 +61,23 @@ namespace Heavenly_vigil_Project
             {
                 return toBeRemoved;
             }
+        }
+
+        public int Damage
+        {
+            get { return damage; }
+            set { damage = value; }
+        }
+
+        public float AttackSpeed
+        {
+            get { return attackSpeed; }
+            set { attackSpeed = value; }
+        }
+        public float Speed
+        {
+            get { return speed; }
+            set { speed = value; }
         }
 
         // -----CONSTRUCTORS-----

@@ -25,6 +25,6 @@ namespace Heavenly_vigil_Project
         {
             
         }
-        public abstract void AddValue(Player player);
+        public abstract void AddValue(GameObject player);
     }
 }

@@ -53,12 +53,6 @@ namespace Heavenly_vigil_Project
             get { return hitCooldown; }
         }
 
-        public float Speed
-        {
-            get { return speed; }
-            set { speed = value; }
-        }
-
         // -----CONSTRUCTORS-----
         public Player(Vector2 vector2)
         {
