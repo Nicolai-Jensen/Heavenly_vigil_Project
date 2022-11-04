@@ -31,6 +31,7 @@ namespace Heavenly_vigil_Project
             speed = 150;
             position = SpawnPosition();
             scale = 2;
+            health = 20;
         }
         //Method
         public override void LoadContent(ContentManager content)
@@ -44,6 +45,7 @@ namespace Heavenly_vigil_Project
         {
             ChooseDirection();
             Move(gameTime);
+            Death();
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -54,12 +56,16 @@ namespace Heavenly_vigil_Project
         {
             if (Player.HitCooldown == false)
             {
-
                 if (other is Player)
                 {
                     Player.Health--;
                     Player.HealthModified = true;
                 }
+            }
+
+            if (other is Magnum)
+            {
+                health -= Magnum.Damage;
             }
 
         }
@@ -115,6 +121,15 @@ namespace Heavenly_vigil_Project
                 position.X = 1920;
                 return position;
 
+            }
+        }
+
+        public void Death()
+        {
+            if (health <= 0)
+            {
+                position.Y = 1000000;
+                ExperiencePoints.PlayerExp++;
             }
         }
     }

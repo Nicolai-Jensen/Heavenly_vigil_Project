@@ -16,6 +16,7 @@ namespace Heavenly_vigil_Project
     {
         // -----FIELDS-----
         private Texture2D[] magnumShot;
+        private Texture2D[] katanaSlash;
         private static int health;
         private bool cooldown = true;
         private float cooldownTimer;
@@ -53,11 +54,6 @@ namespace Heavenly_vigil_Project
             get { return hitCooldown; }
         }
 
-        public float Speed
-        {
-            get { return speed; }
-            set { speed = value; }
-        }
 
         // -----CONSTRUCTORS-----
         public Player(Vector2 vector2)
@@ -89,7 +85,8 @@ namespace Heavenly_vigil_Project
             position.X = GameWorld.ScreenSize.X / 2;
             position.Y = GameWorld.ScreenSize.Y / 2;
 
-
+            katanaSlash = new Texture2D[1];
+            katanaSlash[0] = content.Load<Texture2D>("HeavenlyVigilSwordSlash");
 
 
             magnumShot = new Texture2D[1];
@@ -175,9 +172,9 @@ namespace Heavenly_vigil_Project
                 dashCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (dashCooldownTimer >= 1.3f)
                 {
+                    dashCooldownTimer = 0;
                     dashed = false;
                     dashCooldown = true;
-                    dashCooldownTimer = 0;
                 }
             }
 
@@ -265,22 +262,27 @@ namespace Heavenly_vigil_Project
         public void Attack(GameTime gameTime)
         {
             hasMagnum = true;
-            if (hasMagnum == true)
+            if (cooldown == true)
             {
-                if (cooldown == true)
+                if (hasMagnum == true)
                 {
-                    Magnum shot = new Magnum(magnumShot[0], new Vector2(position.X, position.Y - 60));
+                    Magnum shot = new Magnum(magnumShot[0], new Vector2(position.X, position.Y));
                     GameWorld.InstantiateGameObject(shot);
-                    cooldown = false;
                 }
-                cooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (cooldownTimer >= 0.3f)
+                if (hasKatana == true)
                 {
-                    cooldown = true;
-                    cooldownTimer = 0;
+                    Katana slash = new Katana(katanaSlash[0], new Vector2(position.X, position.Y));
+                    GameWorld.InstantiateGameObject(slash);
                 }
+                cooldown = false;
             }
-        }
+            cooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (cooldownTimer >= 0.3f)
+            {
+                cooldown = true;
+                cooldownTimer = 0;
+            }
 
+        }
     }
 }

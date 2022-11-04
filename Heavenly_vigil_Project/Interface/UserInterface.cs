@@ -47,13 +47,10 @@ namespace Heavenly_vigil_Project
         public override void Update(GameTime gameTime)
         {
             TimeManager.UpdateClock(gameTime);
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
 
-                ExperiencePoints.PlayerExp++;
                 ExperiencePoints.CheckForLevelUp();
                 blueRectangle.Width = (int)(ExperiencePoints.ExpPercentage * 18.75);
-            }
+
                 greenRectangle.Width = Player.Health * 2;
 
             

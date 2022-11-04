@@ -5,6 +5,7 @@ using SharpDX.XAudio2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,6 +62,12 @@ namespace Heavenly_vigil_Project
             }
         }
 
+        public float Speed
+        {
+            get { return speed; }
+            set { speed = value; }
+        }
+
         // -----CONSTRUCTORS-----
 
 
@@ -113,5 +120,7 @@ namespace Heavenly_vigil_Project
         {
             return (position.Y > GameWorld.ScreenSize.Y || position.X > GameWorld.ScreenSize.X || position.Y < -50 || position.X < -50);
         }
+
+
     }
 }

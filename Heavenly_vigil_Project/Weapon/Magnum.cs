@@ -6,6 +6,7 @@ using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,8 +17,8 @@ namespace Heavenly_vigil_Project
 
         // -----FIELDS-----
         private float rotation;
-        private Texture2D[] magnumShot;
-        private Vector2 playerPosition;
+        private static int damage;
+        private Vector2 enemyPosition;
 
         // -----PROPERTIES-----
         public float Rotation
@@ -27,6 +28,12 @@ namespace Heavenly_vigil_Project
         }
 
 
+        public static int Damage
+        {
+            get { return damage; }
+            set { damage = value; }
+        }
+
         // -----CONSTRUCTORS-----
         public Magnum(Texture2D sprite, Vector2 position)
         {
@@ -35,9 +42,11 @@ namespace Heavenly_vigil_Project
             this.position = position;
             scale = 1f;
             rotation = 0f;
-            speed = 800;
+            speed = 1500f;
+            ChooseDirection();
+            damage = 5;
         }
-        
+        // -----METHODS-----
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(objectSprites[0], position, null, Color.Blue, rotation, origin, scale, SpriteEffects.None, 0);
@@ -50,14 +59,16 @@ namespace Heavenly_vigil_Project
 
         public override void OnCollision(GameObject other)
         {
-
+            if (other is Enemy)
+            {
+                position.Y = 1000000f;
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
             Move(gameTime);
             Attack(gameTime);
-            ChooseDirection();
         }
 
         public override void Attack(GameTime gameTime)
@@ -67,9 +78,9 @@ namespace Heavenly_vigil_Project
 
         private void ChooseDirection()
         {
-            Vector2 playerPosition = ReturnEnemyPosition();
+            Vector2 enemyPosition = ReturnEnemyPosition();
 
-            velocity = playerPosition - position;
+            velocity += enemyPosition - position;
             velocity.Normalize();
         }
 
@@ -77,12 +88,16 @@ namespace Heavenly_vigil_Project
         {
             foreach (GameObject go in GameWorld.GameObjects)
             {
+
                 if (go is Enemy)
                 {
+
                     return go.Position;
                 }
             }
-            return new Vector2(0, 0);
+
+            return new Vector2(position.X, -100);
         }
+        
     }
 }
