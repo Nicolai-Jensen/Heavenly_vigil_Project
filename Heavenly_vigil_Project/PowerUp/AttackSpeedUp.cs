@@ -36,9 +36,9 @@ namespace Heavenly_vigil_Project
         {
             spriteBatch.Draw(objectSprites[0], position, Color.White);
         }
-        public override void AddValue(Player player)
+        public override void AddValue(GameObject player)
         {
-           
+            player.AttackSpeed += attackSpdAmp;
         }
     }
 }
