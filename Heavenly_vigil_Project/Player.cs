@@ -90,7 +90,7 @@ namespace Heavenly_vigil_Project
 
 
             magnumShot = new Texture2D[1];
-            magnumShot[0] = content.Load<Texture2D>("laser");
+            magnumShot[0] = content.Load<Texture2D>("BulletSprite");
         }
 
         /// <summary>
