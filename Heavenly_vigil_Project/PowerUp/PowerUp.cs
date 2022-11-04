@@ -27,6 +27,18 @@ namespace Heavenly_vigil_Project
         {
             
         }
-        public abstract void AddValue(GameObject player);
+        public abstract void AddValue();
+
+        public Player ReturnPlayer()
+        {
+            foreach (GameObject go in GameWorld.GameObjects)
+            {
+                if (go is Player)
+                {
+                    return (Player)go;
+                }
+            }
+            return new Player(new(0, 0)); ;
+        }
     }
 }
