@@ -17,6 +17,7 @@ namespace Heavenly_vigil_Project
         // -----FIELDS-----
         private float rotation;
         private Texture2D[] magnumShot;
+        private Vector2 playerPosition;
 
         // -----PROPERTIES-----
         public float Rotation
@@ -34,8 +35,7 @@ namespace Heavenly_vigil_Project
             this.position = position;
             scale = 1f;
             rotation = 0f;
-            velocity += new Vector2(0, -1);
-            speed = 1000;
+            speed = 800;
         }
         
         public override void Draw(SpriteBatch spriteBatch)
@@ -57,11 +57,32 @@ namespace Heavenly_vigil_Project
         {
             Move(gameTime);
             Attack(gameTime);
+            ChooseDirection();
         }
 
         public override void Attack(GameTime gameTime)
         {
 
+        }
+
+        private void ChooseDirection()
+        {
+            Vector2 playerPosition = ReturnEnemyPosition();
+
+            velocity = playerPosition - position;
+            velocity.Normalize();
+        }
+
+        private Vector2 ReturnEnemyPosition()
+        {
+            foreach (GameObject go in GameWorld.GameObjects)
+            {
+                if (go is Enemy)
+                {
+                    return go.Position;
+                }
+            }
+            return new Vector2(0, 0);
         }
     }
 }
