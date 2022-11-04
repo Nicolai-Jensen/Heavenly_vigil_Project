@@ -19,6 +19,8 @@ namespace Heavenly_vigil_Project
         {
             this.position = position;
             this.damageAmp = damageAmp;
+            powerUpDescription = "increases the players damage";
+            powerUpTitle = "Damage";
         }
         //Methods
         public override void LoadContent(ContentManager content)
