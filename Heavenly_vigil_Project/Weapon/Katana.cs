@@ -16,7 +16,8 @@ namespace Heavenly_vigil_Project
         private float rotation;
         private static int damage;
         private Vector2 enemyPosition;
-        
+        private bool attacked = false;
+        private float attackedTimer;
 
         // -----PROPERTIES-----
         public float Rotation
@@ -30,7 +31,7 @@ namespace Heavenly_vigil_Project
             set { damage = value; }
         }
         // -----CONSTRUCTORS-----
-        public Katana(Texture2D sprite, Vector2 position)
+        public Katana(Texture2D sprite, Vector2 position, GameTime gameTime)
         {
             objectSprites = new Texture2D[1];
             objectSprites[0] = sprite;
@@ -62,6 +63,7 @@ namespace Heavenly_vigil_Project
         {
             Move(gameTime);
             Attack(gameTime);
+            Attacking(gameTime);
         }
 
         public override void Attack(GameTime gameTime)
@@ -75,6 +77,24 @@ namespace Heavenly_vigil_Project
 
             velocity += enemyPosition - position;
             velocity.Normalize();
+            rotation = (float)Math.Atan2(enemyPosition.Y - position.Y, enemyPosition.X - position.X);
+
+        }
+
+        private void Attacking(GameTime gameTime)
+        {
+            if (attacked == false)
+            {
+                speed = 100f;
+                attacked = true;
+            }
+            attackedTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (attackedTimer >= 0.15f)
+            {
+                position.Y = 10000000f;
+                attacked = false;
+                attackedTimer = 0;
+            }
         }
 
         private Vector2 ReturnEnemyPosition()

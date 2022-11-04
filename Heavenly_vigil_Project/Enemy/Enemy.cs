@@ -69,6 +69,11 @@ namespace Heavenly_vigil_Project
                 health -= Magnum.Damage;
             }
 
+            if (other is Katana)
+            {
+                health -= Katana.Damage;
+            }
+
         }
 
         private void ChooseDirection()

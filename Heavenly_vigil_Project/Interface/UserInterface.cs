@@ -46,7 +46,7 @@ namespace Heavenly_vigil_Project
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-                ExperiencePoints.CheckForLevelUp();
+                ExperiencePoints.CheckForLevelUp(gameTime);
                 blueRectangle.Width = (int)(ExperiencePoints.ExpPercentage * 18.75);
 
                 greenRectangle.Width = Player.Health * 2;

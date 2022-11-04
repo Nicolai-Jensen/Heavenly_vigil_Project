@@ -271,7 +271,7 @@ namespace Heavenly_vigil_Project
                 }
                 if (hasKatana == true)
                 {
-                    Katana slash = new Katana(katanaSlash[0], new Vector2(position.X, position.Y));
+                    Katana slash = new Katana(katanaSlash[0], new Vector2(position.X, position.Y), gameTime);
                     GameWorld.InstantiateGameObject(slash);
                 }
                 cooldown = false;
