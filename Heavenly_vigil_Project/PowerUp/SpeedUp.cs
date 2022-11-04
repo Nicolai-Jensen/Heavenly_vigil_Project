@@ -12,9 +12,16 @@ namespace Heavenly_vigil_Project
     internal class SpeedUp : PowerUp
     {
         //Fields
-        public int speedAmp;
+        public float speedAmp;
         //Properties
         //Constructors
+
+        public SpeedUp(Vector2 position, float speedAmp)
+        {
+            this.position = position;
+            this.speedAmp = speedAmp;
+        }
+
         //Methods
         public override void LoadContent(ContentManager content)
         {
@@ -26,9 +33,14 @@ namespace Heavenly_vigil_Project
         {
             
         }
-        public override void AddValue(GameObject player)
+
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            player.Speed += 100f;
+            spriteBatch.Draw(objectSprites[0], position, Color.White);
+        }
+        public override void AddValue(Player player)
+        {
+            player.Speed += speedAmp;
         }
     }
 }
