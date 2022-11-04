@@ -87,9 +87,7 @@ namespace Heavenly_vigil_Project
         // -----METHODS-----
 
         public abstract void LoadContent(ContentManager content);
-
         public abstract void Update(GameTime gameTime);
-
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             Vector2 origin = new Vector2(CurrentSprite.Width / 2, CurrentSprite.Height / 2);
