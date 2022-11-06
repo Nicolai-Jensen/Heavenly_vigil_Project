@@ -65,6 +65,11 @@ namespace Heavenly_vigil_Project
                 }
             }
 
+            if (other is Enemy)
+            {
+                position -= new Vector2(rnd.Next(-10, 10), rnd.Next(-10, 10));
+            }
+
             if (other is Magnum)
             {
                 health -= Magnum.Damage;
