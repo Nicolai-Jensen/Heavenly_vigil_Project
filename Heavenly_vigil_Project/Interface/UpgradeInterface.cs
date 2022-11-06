@@ -18,6 +18,8 @@ namespace Heavenly_vigil_Project
         private Rectangle textureRectangle;
         private bool canBeChosen = false;
         private SpriteFont upgradeCount;
+        private bool cooldown = true;
+        private float cooldownTimer;
 
         public bool CanBeChosen
         {
@@ -62,25 +64,36 @@ namespace Heavenly_vigil_Project
         {
             KeyboardState keyState = Keyboard.GetState();
 
-
-            if (keyState.IsKeyDown(Keys.D1) && canBeChosen)
+            if (cooldown == true)
             {
-                GameWorld.UpgradeInterfaces.ElementAt(0).AddValue();
 
-                RemoveUpgradeInterface();
+                if (keyState.IsKeyDown(Keys.D1) && canBeChosen)
+                {
+                    GameWorld.UpgradeInterfaces.ElementAt(0).AddValue();
+
+                    RemoveUpgradeInterface();
+                }
+                else if (keyState.IsKeyDown(Keys.D2) && canBeChosen)
+                {
+                    GameWorld.UpgradeInterfaces.ElementAt(1).AddValue();
+
+                    RemoveUpgradeInterface();
+                }
+                else if (keyState.IsKeyDown(Keys.D3) && canBeChosen)
+                {
+                    GameWorld.UpgradeInterfaces.ElementAt(0).AddValue();
+
+                    RemoveUpgradeInterface();
+                    toBeRemoved = true;
+                }
+
+                cooldown = false;
             }
-            else if(keyState.IsKeyDown(Keys.D2) && canBeChosen)
+            cooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (cooldownTimer >= 0.2f)
             {
-                GameWorld.UpgradeInterfaces.ElementAt(1).AddValue();
-
-                RemoveUpgradeInterface();
-            }
-            else if(keyState.IsKeyDown(Keys.D3) && canBeChosen)
-            {
-                GameWorld.UpgradeInterfaces.ElementAt(0).AddValue();
-
-                RemoveUpgradeInterface();
-                toBeRemoved = true;
+                cooldown = true;
+                cooldownTimer = 0;
             }
         }
         public Player ReturnPlayer()
