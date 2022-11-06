@@ -17,6 +17,9 @@ namespace Heavenly_vigil_Project
         private static List<GameObject> gameObjects = new List<GameObject>();
         private static List<GameObject> gameObjectsToAdd = new List<GameObject>();
         private List<GameObject> gameObjectsToRemove = new List<GameObject>();
+        private static Stack<PowerUp> upgradeInterfaces = new Stack<PowerUp>();
+        private static List<PowerUp> upgradeIToAdd = new List<PowerUp>();
+        private List<PowerUp> upgradeIToRemove = new List<PowerUp>();
         private Texture2D pixel;
         private float spawnTimer;
 
@@ -34,6 +37,12 @@ namespace Heavenly_vigil_Project
         public static List<GameObject> GameObjects
         {
             get { return gameObjects; }
+        }
+
+        public static Stack<PowerUp> UpgradeInterfaces
+        {
+            get { return upgradeInterfaces; }
+            set { upgradeInterfaces = value; }
         }
 
         //-----CONSTRUCTORS-----
@@ -68,6 +77,10 @@ namespace Heavenly_vigil_Project
             gameObjects.Add(new UserInterface());
             gameObjects.Add(player1);
             foreach (GameObject go in gameObjects)
+            {
+                go.LoadContent(Content);
+            }
+            foreach (PowerUp go in upgradeInterfaces)
             {
                 go.LoadContent(Content);
             }
@@ -106,9 +119,36 @@ namespace Heavenly_vigil_Project
 
                 gameObjectsToAdd.Clear();
 
-                // TODO: Add your update logic here
+            // UPGRADE INTERFACE
 
-                base.Update(gameTime);
+            foreach (PowerUp go in upgradeInterfaces)
+            {
+                go.Update(gameTime);
+
+                foreach (PowerUp other in upgradeInterfaces)
+                {
+                    if (go.IsColliding(other))
+                    {
+                        go.OnCollision(other);
+                        other.OnCollision(go);
+                    }
+                }
+            }
+
+            foreach (PowerUp gameObjectsToSpawn in upgradeIToAdd)
+            {
+                gameObjectsToSpawn.LoadContent(Content);
+                upgradeInterfaces.Push(gameObjectsToSpawn);
+            }
+
+            upgradeIToAdd.Clear();
+
+            SetUpgradeCanBeChosen();
+
+
+            // TODO: Add your update logic here
+
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -119,6 +159,11 @@ namespace Heavenly_vigil_Project
 
 
             foreach (GameObject go in gameObjects)
+            {
+                go.Draw(_spriteBatch);
+                DrawCollisionBox(go);
+            }
+            foreach (PowerUp go in upgradeInterfaces)
             {
                 go.Draw(_spriteBatch);
                 DrawCollisionBox(go);
@@ -147,12 +192,33 @@ namespace Heavenly_vigil_Project
             {
                 gameObjects.Remove(goToRemove);
             }
+
+            // UPGRADE INTERFACE
+
+            foreach (PowerUp go in upgradeInterfaces)
+            {
+                bool shouldRemoveGameObject = go.IsOutOfBounds();
+                if (shouldRemoveGameObject || go.ToBeRemoved)
+                {
+                    upgradeIToRemove.Add(go);
+                }
+            }
+
+            foreach (PowerUp goToRemove in upgradeIToRemove)
+            {
+                upgradeInterfaces.Pop();
+            }
         }
 
 
         public static void InstantiateGameObject(GameObject gObject)
         {
             gameObjectsToAdd.Add(gObject);
+        }
+
+        public static void InstantiateUpgrade(PowerUp gameObject)
+        {
+            upgradeIToAdd.Add(gameObject);
         }
 
         private void SpawnEnemy(GameTime gameTime)
@@ -180,6 +246,21 @@ namespace Heavenly_vigil_Project
             _spriteBatch.Draw(pixel, left, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
             _spriteBatch.Draw(pixel, right, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
 
+        }
+
+        private void SetUpgradeCanBeChosen()
+        {
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                if (gameObjects[i] is UpgradeInterface)
+                {
+                    UpgradeInterface activeUpgrade = (UpgradeInterface)gameObjects[i];
+
+                    activeUpgrade.CanBeChosen = true;
+
+                    break;
+                }
+            }
         }
 
 

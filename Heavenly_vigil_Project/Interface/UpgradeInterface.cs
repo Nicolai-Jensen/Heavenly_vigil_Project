@@ -16,11 +16,15 @@ namespace Heavenly_vigil_Project
     {
         private Vector2 pos;
         private Rectangle textureRectangle;
+        private bool canBeChosen = false;
+        private SpriteFont upgradeCount;
 
-        public static UserInterface lvlup;
-        public static AttackSpeedUp atkSpd;
-        public static DamageUp dmgUp;
-        public static SpeedUp spdUp;
+        public bool CanBeChosen
+        {
+            get { return canBeChosen; }
+            set { canBeChosen = value; }
+        }
+
 
         public override void LoadContent(ContentManager content)
         {
@@ -30,11 +34,13 @@ namespace Heavenly_vigil_Project
             pos.X = 1010;
             pos.Y = 975;
             objectSprites[0] = content.Load<Texture2D>("BlackHealth");
+            upgradeCount = content.Load<SpriteFont>("GameFont");
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             Vector2 origin = new Vector2(250, 100);
             spriteBatch.Draw(objectSprites[0], pos, textureRectangle, Color.White, 0, origin, scale, SpriteEffects.None, 0);
+            spriteBatch.DrawString(upgradeCount, $"Upgrades left: {GameWorld.UpgradeInterfaces.Count / 3}", new Vector2(pos.X - 110, pos.Y), Color.White);
         }
 
         public override void Update(GameTime gameTime)
@@ -45,18 +51,10 @@ namespace Heavenly_vigil_Project
         public static void ChooseUpgrade(GameTime gameTime)
         {
 
-            lvlup = new UpgradeInterface();
-            atkSpd = new AttackSpeedUp(new Vector2(960, 925), 2);
-            dmgUp = new DamageUp(new Vector2(830, 925), 2);
-            spdUp = new SpeedUp(new Vector2(1090, 925), 400f);
-
-
-            //All the instantiated Power-ups and UpgradeInterface, being added to the GameObjectListToAdd.
-            GameWorld.InstantiateGameObject(lvlup);
-            GameWorld.InstantiateGameObject(atkSpd);
-            GameWorld.InstantiateGameObject(dmgUp);
-            GameWorld.InstantiateGameObject(spdUp);
-
+            GameWorld.InstantiateGameObject(new UpgradeInterface());
+            GameWorld.InstantiateUpgrade(new AttackSpeedUp(new Vector2(960, 925), 2));
+            GameWorld.InstantiateUpgrade(new DamageUp(new Vector2(830, 925), 2));
+            GameWorld.InstantiateUpgrade(new SpeedUp(new Vector2(1090, 925), 400f));
 
         }
 
@@ -65,23 +63,24 @@ namespace Heavenly_vigil_Project
             KeyboardState keyState = Keyboard.GetState();
 
 
-            if (keyState.IsKeyDown(Keys.D1))
+            if (keyState.IsKeyDown(Keys.D1) && canBeChosen)
             {
-                dmgUp.AddValue();
+                GameWorld.UpgradeInterfaces.ElementAt(0).AddValue();
 
                 RemoveUpgradeInterface();
             }
-            else if(keyState.IsKeyDown(Keys.D2))
+            else if(keyState.IsKeyDown(Keys.D2) && canBeChosen)
             {
-                atkSpd.AddValue();
+                GameWorld.UpgradeInterfaces.ElementAt(1).AddValue();
 
                 RemoveUpgradeInterface();
             }
-            else if(keyState.IsKeyDown(Keys.D3))
+            else if(keyState.IsKeyDown(Keys.D3) && canBeChosen)
             {
-                spdUp.AddValue();
+                GameWorld.UpgradeInterfaces.ElementAt(0).AddValue();
 
                 RemoveUpgradeInterface();
+                toBeRemoved = true;
             }
         }
         public Player ReturnPlayer()
@@ -98,10 +97,9 @@ namespace Heavenly_vigil_Project
 
         private void RemoveUpgradeInterface()
         {
-            spdUp.ToBeRemoved = true;
-            atkSpd.ToBeRemoved = true;
-            dmgUp.ToBeRemoved = true;
-            lvlup.ToBeRemoved = true;
+            GameWorld.UpgradeInterfaces.Pop();
+            GameWorld.UpgradeInterfaces.Pop();
+            GameWorld.UpgradeInterfaces.Pop();
         }
 
     }
