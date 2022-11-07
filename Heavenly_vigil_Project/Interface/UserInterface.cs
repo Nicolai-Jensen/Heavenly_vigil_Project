@@ -26,10 +26,7 @@ namespace Heavenly_vigil_Project
 
         //Constructors
         //Methods
-        /// <summary>
-        /// This Method loads in information and code needed for the game
-        /// </summary>
-        /// <param name="content"></param>
+
         public override void LoadContent(ContentManager content)
         {
             objectSprites = new Texture2D[3];
@@ -44,10 +41,7 @@ namespace Heavenly_vigil_Project
             timerFont = content.Load<SpriteFont>("TimerFont");
 
         }
-        /// <summary>
-        /// This Update Method constantly loops throughout the program aslong as it is running, other methods we want to be looped are called inside this one
-        /// </summary>
-        /// <param name="gameTime"></param>
+
         public override void Update(GameTime gameTime)
         {
             TimeManager.UpdateClock(gameTime);
@@ -57,10 +51,7 @@ namespace Heavenly_vigil_Project
 
             
         }
-        /// <summary>
-        /// The Method for drawing out a sprite to the screen, this method is an override for the virtual one in GameObject and is called in GameWorld
-        /// </summary>
-        /// <param name="spriteBatch"></param>
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(objectSprites[1], new Vector2(10, 10), blackRectangle, Color.White);
