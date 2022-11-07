@@ -112,7 +112,7 @@ namespace Heavenly_vigil_Project
                     return go.Position;
                 }
             }
-            return new Vector2(0, 0);
+            return new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
         }
         /// <summary>
         /// Uses a random number, to set the enemy´s position outside of the gameworld, and which side the enemy should spawn from. 
