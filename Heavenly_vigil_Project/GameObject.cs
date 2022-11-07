@@ -87,9 +87,20 @@ namespace Heavenly_vigil_Project
 
 
         // -----METHODS-----
-
+        /// <summary>
+        /// This Method loads in information and code needed for the game
+        /// </summary>
+        /// <param name="content"></param>
         public abstract void LoadContent(ContentManager content);
+        /// <summary>
+        /// This Update Method constantly loops throughout the program aslong as it is running, other methods we want to be looped are called inside this one
+        /// </summary>
+        /// <param name="gameTime"></param>
         public abstract void Update(GameTime gameTime);
+        /// <summary>
+        /// The Method for drawing out a sprite to the screen, this method is a virtual so we can override it, and is called in GameWorld
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             Vector2 origin = new Vector2(CurrentSprite.Width / 2, CurrentSprite.Height / 2);

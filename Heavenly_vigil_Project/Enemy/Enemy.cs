@@ -130,7 +130,9 @@ namespace Heavenly_vigil_Project
 
             }
         }
-        //Removes the Enemy when killed and grant XP to the player.
+        /// <summary>
+        /// Removes the Enemy when killed and grant XP to the player.
+        /// </summary>
         public void Death()
         {
             if (health <= 0)
