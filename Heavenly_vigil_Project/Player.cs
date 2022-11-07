@@ -22,15 +22,18 @@ namespace Heavenly_vigil_Project
         private float cooldownTimer;
         private static bool hitCooldown = false;
         private float hitCooldownTimer;
-        private bool dashCooldown = true;
-        private float dashCooldownTimer;
-        private bool dashed = false;
-        private float dashedTimer;
         private Color color;
         private static bool healthModified = false;
         private static bool hasKatana = true;
         private static bool hasMagnum = false;
         private float cooldownTimerNumber;
+        private static int mana;
+        private bool manaCooldown = false;
+        private bool manaRegen = false;
+        private float manaRegenerating = 0;
+        private bool manadecrease = false;
+        private float manadecreasing = 0;
+
 
         // -----PROPERTIES-----
 
@@ -38,6 +41,11 @@ namespace Heavenly_vigil_Project
         {
             get { return health; }
             set { health = value; }
+        }
+        public static int Mana
+        {
+            get { return mana; }
+            set { mana = value; }
         }
 
         public float CooldownTimerNumber
@@ -68,6 +76,7 @@ namespace Heavenly_vigil_Project
             position = vector2;
             scale = 2f;
             health = 100;
+            mana = 100;
             speed = 400f;
             color = Color.White;
             cooldownTimerNumber = 0.6f;
@@ -114,6 +123,7 @@ namespace Heavenly_vigil_Project
             Death();
             Damaged(gameTime);
             Attack(gameTime);
+            PowerState(gameTime);
         }
 
         /// <summary>
@@ -161,31 +171,9 @@ namespace Heavenly_vigil_Project
                 velocity += new Vector2(0, +1);
             }
 
-           /* if (keyState.IsKeyDown(Keys.Space))
-            {
-                if (dashCooldown == true)
-                {
-                    if (dashed == false)
-                    {
-                        speed = 1200f;
-                        dashed = true;
-                        dashCooldown = false;
-                    }              
-                }
-                dashedTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (dashedTimer >= 0.1f)
-                {
-                    speed = 400f;
-                    dashedTimer = 0;
-                }
-                dashCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (dashCooldownTimer >= 1.3f)
-                {
-                    dashCooldownTimer = 0;
-                    dashed = false;
-                    dashCooldown = true;
-                }
-            } */
+
+
+
 
             //Code needed so that the objects speed isn't increased when moving diagonally
             if (velocity != Vector2.Zero)
@@ -194,6 +182,74 @@ namespace Heavenly_vigil_Project
             }
 
            
+        }
+
+
+        public void PowerState(GameTime gameTime)
+        {
+
+
+            //Keystate reads which key is being used
+            KeyboardState keyState2 = Keyboard.GetState();
+
+            if (keyState2.IsKeyDown(Keys.Space) && manaCooldown == false)
+            {
+                color = Color.Blue;
+                scale *= 2;
+                speed *= 2;
+                cooldownTimerNumber /= 2f;
+                Katana.ScaleValue *= 2f;
+                Katana.SpeedValue *= 3f;
+                Katana.TravelDistance = 1f;
+                manadecrease = true;
+                manaCooldown = true;
+            }
+
+
+            
+            if (mana > 0 && manadecrease == true)
+            {
+                manadecreasing += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (manadecreasing >= 0.05f)
+                {
+                    mana--;
+                    manadecreasing = 0;
+                }
+
+            }
+
+            if (mana == 0 && manadecrease == true)
+            {
+                manaRegen = true;
+                manadecrease = false;
+
+                color = Color.White;
+                scale /= 2;
+                speed /= 2;
+                cooldownTimerNumber *= 2f;
+                Katana.ScaleValue /= 2f;
+                Katana.SpeedValue /= 3f;
+                Katana.TravelDistance = 0.3f;
+            }
+            
+            if (manaRegen == true && mana < 100)
+            {
+
+                manaRegenerating += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (manaRegenerating >= 0.25f)
+                {
+                    mana++;
+                    manaRegenerating = 0;
+                }
+            }
+
+            if (mana == 100 && manaRegen == true)
+            {
+                manaRegen = false;
+                manaCooldown = false;
+            }
+
+            
         }
 
         /// <summary>
@@ -245,7 +301,7 @@ namespace Heavenly_vigil_Project
                     color = Color.Red;
                 }
                 hitCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (hitCooldownTimer >= 0.3f)
+                if (hitCooldownTimer >= 0.4f)
                 {
                     hitCooldown = false;
                     color = Color.White;
