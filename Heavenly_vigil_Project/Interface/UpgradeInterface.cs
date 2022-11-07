@@ -1,20 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct3D9;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
     internal class UpgradeInterface : UserInterface
     {
         private Vector2 pos;
+        //Rectangle for the Power-up background
         private Rectangle textureRectangle;
         private bool canBeChosen = false;
         private SpriteFont upgradeCount;
@@ -27,7 +22,6 @@ namespace Heavenly_vigil_Project
             set { canBeChosen = value; }
         }
 
-
         public override void LoadContent(ContentManager content)
         {
             scale = 1; 
@@ -38,6 +32,7 @@ namespace Heavenly_vigil_Project
             objectSprites[0] = content.Load<Texture2D>("BlackHealth");
             upgradeCount = content.Load<SpriteFont>("GameFont");
         }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             Vector2 origin = new Vector2(250, 100);
@@ -50,6 +45,10 @@ namespace Heavenly_vigil_Project
             HandleUpgradeInput(gameTime);
         }
 
+        /// <summary>
+        /// instantiates a black background and 3 upgrades to choose from.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public static void ChooseUpgrade(GameTime gameTime)
         {
 
@@ -59,7 +58,10 @@ namespace Heavenly_vigil_Project
             GameWorld.InstantiateUpgrade(new SpeedUp(new Vector2(1090, 925), 400f));
 
         }
-
+        /// <summary>
+        /// You choose and upgrade using Key 1, 2 or 3. and adds the value to the player.  After upgrade have been chosen its getting removed from the screen.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void HandleUpgradeInput(GameTime gameTime)
         {
             KeyboardState keyState = Keyboard.GetState();
@@ -108,6 +110,9 @@ namespace Heavenly_vigil_Project
             return new Player(new(0, 0));
         }
 
+        /// <summary>
+        /// Removes the UpgradeInterface, After you pick and Upgrade.
+        /// </summary>
         private void RemoveUpgradeInterface()
         {
             GameWorld.UpgradeInterfaces.Pop();

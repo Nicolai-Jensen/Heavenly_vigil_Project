@@ -176,7 +176,10 @@ namespace Heavenly_vigil_Project
 
             base.Draw(gameTime);
         }
-
+        /// <summary>
+        /// Checks if a gameObject is out of bounds, or should be removed. If true. Adds the Gameobject to the gameObjectsToRemove list.
+        ///  Checks if a Power-up should be removed. If true. Adds the Power-up to the upgradeIToRemove list. and pops the stack.
+        /// </summary>
         private void RemoveGameObjects()
         {
             foreach (GameObject go in gameObjects)
@@ -210,17 +213,26 @@ namespace Heavenly_vigil_Project
             }
         }
 
-
+        /// <summary>
+        /// Adds a Gameobject to the gameObjectsToAdd list.
+        /// </summary>
+        /// <param name="gObject"></param>
         public static void InstantiateGameObject(GameObject gObject)
         {
             gameObjectsToAdd.Add(gObject);
         }
-
+        /// <summary>
+        /// Adds a Gameobject to the upgradeIToAdd list.
+        /// </summary>
+        /// <param name="gameObject"></param>
         public static void InstantiateUpgrade(PowerUp gameObject)
         {
             upgradeIToAdd.Add(gameObject);
         }
-
+        /// <summary>
+        /// After a set amount of time, it instantiates an enemy, and adds it to the gameObjects list.
+        /// </summary>
+        /// <param name="gameTime"></param>
         private void SpawnEnemy(GameTime gameTime)
         {
             spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -233,6 +245,10 @@ namespace Heavenly_vigil_Project
             }
 
         }
+        /// <summary>
+        /// Draws a CollisionBoxto all gameObjects on screen.
+        /// </summary>
+        /// <param name="go"></param>
         private void DrawCollisionBox(GameObject go)
 
         {
