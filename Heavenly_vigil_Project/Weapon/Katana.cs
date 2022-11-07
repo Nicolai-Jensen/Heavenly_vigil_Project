@@ -19,12 +19,33 @@ namespace Heavenly_vigil_Project
         private bool attacked = false;
         private float attackedTimer;
         private static bool attackAnimation = true;
+        private static float scaleValue = 1f;
+        private static float speedValue = 120f;
+        private static float travelDistance = 0.3f;
 
         // -----PROPERTIES-----
         public float Rotation
         {
             get { return rotation; }
             set { rotation = value; }
+        }
+
+        public static float SpeedValue
+        {
+            get { return speedValue; }
+            set { speedValue = value;}
+        }
+
+        public static float TravelDistance
+        {
+            get { return travelDistance; }
+            set { travelDistance = value; }
+        }
+
+        public static float ScaleValue
+        {
+            get { return scaleValue; }
+            set { scaleValue = value; }
         }
         public static int Damage
         {
@@ -43,8 +64,8 @@ namespace Heavenly_vigil_Project
             objectSprites = new Texture2D[1];
             objectSprites[0] = sprite;
             this.position = position;
-            scale = 1f;
             rotation = 0f;
+            scale = scaleValue;
             speed = 0f;
             velocity = DirectionClosestEnemy(ReturnPlayerPosition());
             damage = 2 + DamageMultiplyer;
@@ -103,11 +124,11 @@ namespace Heavenly_vigil_Project
         {
             if (attacked == false)
             {
-                speed = 100f;
+                speed = speedValue;
                 attacked = true;
             }
             attackedTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (attackedTimer >= 0.3f)
+            if (attackedTimer >= travelDistance)
             {
                 position.Y = 10000000f;
                 attacked = false;

@@ -54,7 +54,7 @@ namespace Heavenly_vigil_Project
 
             GameWorld.InstantiateGameObject(new UpgradeInterface());            
             GameWorld.InstantiateUpgrade(new DamageUp(new Vector2(830, 925), 2));
-            GameWorld.InstantiateUpgrade(new AttackSpeedUp(new Vector2(960, 925), 0.1f));
+            GameWorld.InstantiateUpgrade(new AttackSpeedUp(new Vector2(960, 925), 1.1f));
             GameWorld.InstantiateUpgrade(new SpeedUp(new Vector2(1090, 925), 400f));
 
         }

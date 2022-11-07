@@ -48,7 +48,7 @@ namespace Heavenly_vigil_Project
         public override void AddValue()
         {
             Player player = ReturnPlayer();
-            player.CooldownTimerNumber -= attackSpdAmp;
+            player.CooldownTimerNumber /= attackSpdAmp;
         }
 
 

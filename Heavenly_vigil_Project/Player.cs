@@ -30,7 +30,10 @@ namespace Heavenly_vigil_Project
         private static int mana;
         private bool manaCooldown = false;
         private bool manaRegen = false;
-        private float manaRegenerating;
+        private float manaRegenerating = 0;
+        private bool manadecrease = false;
+        private float manadecreasing = 0;
+
 
         // -----PROPERTIES-----
 
@@ -120,6 +123,7 @@ namespace Heavenly_vigil_Project
             Death();
             Damaged(gameTime);
             Attack(gameTime);
+            PowerState(gameTime);
         }
 
         /// <summary>
@@ -167,15 +171,7 @@ namespace Heavenly_vigil_Project
                 velocity += new Vector2(0, +1);
             }
 
-            if (manaCooldown == false)
-            {
-                if (keyState.IsKeyDown(Keys.Space))
-                {
-                    PowerState(gameTime);
-                }
 
-                
-            }
 
 
 
@@ -191,54 +187,67 @@ namespace Heavenly_vigil_Project
 
         public void PowerState(GameTime gameTime)
         {
-            manaCooldown = true;
-            float regen = 1f;
 
-            color = Color.Blue;
-            scale *= 2;
-            speed *= 2;
-            cooldownTimer *= 2f;
-            while (mana > 0)
+
+            //Keystate reads which key is being used
+            KeyboardState keyState2 = Keyboard.GetState();
+
+            if (keyState2.IsKeyDown(Keys.Space) && manaCooldown == false)
             {
-
-                mana--;
+                color = Color.Blue;
+                scale *= 2;
+                speed *= 2;
+                cooldownTimerNumber /= 2f;
+                Katana.ScaleValue *= 2f;
+                Katana.SpeedValue *= 3f;
+                Katana.TravelDistance = 1f;
+                manadecrease = true;
+                manaCooldown = true;
             }
 
-            if (mana == 0)
+
+            
+            if (mana > 0 && manadecrease == true)
+            {
+                manadecreasing += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (manadecreasing >= 0.05f)
+                {
+                    mana--;
+                    manadecreasing = 0;
+                }
+
+            }
+
+            if (mana == 0 && manadecrease == true)
             {
                 manaRegen = true;
+                manadecrease = false;
+
+                color = Color.White;
+                scale /= 2;
+                speed /= 2;
+                cooldownTimerNumber *= 2f;
+                Katana.ScaleValue /= 2f;
+                Katana.SpeedValue /= 3f;
+                Katana.TravelDistance = 0.3f;
             }
             
-            if (manaRegen == true)
+            if (manaRegen == true && mana < 100)
             {
-                while (mana < 100)
+
+                manaRegenerating += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (manaRegenerating >= 0.25f)
                 {
-                    if (manaRegen == true)
-                    {
-
-                        manaRegenerating += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        if (manaRegenerating >= regen)
-                        {
-                            mana++;
-                            regen = manaRegenerating + 1f;
-                        }
-
-                    }
+                    mana++;
+                    manaRegenerating = 0;
                 }
             }
 
-            if (mana == 100)
+            if (mana == 100 && manaRegen == true)
             {
                 manaRegen = false;
+                manaCooldown = false;
             }
-
-            color = Color.White;
-            scale /= 2;
-            speed /= 2;
-            cooldownTimer /= 2f;
-
-            manaCooldown = false;
-
 
             
         }
