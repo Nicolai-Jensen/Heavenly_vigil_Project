@@ -30,6 +30,7 @@ namespace Heavenly_vigil_Project
         private static bool healthModified = false;
         private static bool hasKatana = true;
         private static bool hasMagnum = false;
+        private float cooldownTimerNumber;
 
         // -----PROPERTIES-----
 
@@ -37,6 +38,12 @@ namespace Heavenly_vigil_Project
         {
             get { return health; }
             set { health = value; }
+        }
+
+        public float CooldownTimerNumber
+        {
+            get { return cooldownTimerNumber; }
+            set { cooldownTimerNumber = value; }
         }
 
         public static bool HasMagnum
@@ -63,6 +70,7 @@ namespace Heavenly_vigil_Project
             health = 100;
             speed = 400f;
             color = Color.White;
+            cooldownTimerNumber = 0.6f;
         }
         // -----METHODS-----
 
@@ -153,7 +161,7 @@ namespace Heavenly_vigil_Project
                 velocity += new Vector2(0, +1);
             }
 
-            if (keyState.IsKeyDown(Keys.Space))
+           /* if (keyState.IsKeyDown(Keys.Space))
             {
                 if (dashCooldown == true)
                 {
@@ -177,7 +185,7 @@ namespace Heavenly_vigil_Project
                     dashed = false;
                     dashCooldown = true;
                 }
-            }
+            } */
 
             //Code needed so that the objects speed isn't increased when moving diagonally
             if (velocity != Vector2.Zero)
@@ -274,11 +282,16 @@ namespace Heavenly_vigil_Project
                 {
                     Katana slash = new Katana(katanaSlash[0], new Vector2(position.X, position.Y), gameTime);
                     GameWorld.InstantiateGameObject(slash);
+                    if (Katana.AttackAnimation == true)
+                    {
+                        Katana.AttackAnimation = false;
+                    }
+                    else { Katana.AttackAnimation = true; }
                 }
                 cooldown = false;
             }
             cooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (cooldownTimer >= 0.3f)
+            if (cooldownTimer >= CooldownTimerNumber)
             {
                 cooldown = true;
                 cooldownTimer = 0;

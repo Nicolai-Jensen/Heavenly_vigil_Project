@@ -27,6 +27,7 @@ namespace Heavenly_vigil_Project
         protected int layerDepth;
         protected int damage;
         protected float attackSpeed;
+        protected static int damageMultiplyer = 0;
 
         // -----PROPERTIES-----
         private Texture2D CurrentSprite
@@ -37,6 +38,13 @@ namespace Heavenly_vigil_Project
         protected Vector2 SpriteSize
         {
             get { return new Vector2(CurrentSprite.Width * scale, CurrentSprite.Height * scale); }
+        }
+
+        public static int DamageMultiplyer
+        {
+            get { return damageMultiplyer; }
+            set { damageMultiplyer = value; }
+
         }
 
         public Vector2 Position
@@ -71,11 +79,6 @@ namespace Heavenly_vigil_Project
             set { damage = value; }
         }
 
-        public float AttackSpeed
-        {
-            get { return attackSpeed; }
-            set { attackSpeed = value; }
-        }
         public float Speed
         {
             get { return speed; }

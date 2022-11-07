@@ -40,12 +40,11 @@ namespace Heavenly_vigil_Project
             objectSprites = new Texture2D[1];
             objectSprites[0] = sprite;
             this.position = position;
-            scale = 1f;
+            scale = 2f;
             rotation = 0f;
             speed = 1500f;
             velocity = DirectionClosestEnemy(ReturnPlayerPosition());
-            //ChooseDirection();
-            damage = 5;
+            damage = 1 + DamageMultiplyer;
         }
         // -----METHODS-----
         public override void Draw(SpriteBatch spriteBatch)

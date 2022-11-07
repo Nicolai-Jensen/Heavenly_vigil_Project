@@ -46,8 +46,9 @@ namespace Heavenly_vigil_Project
 
         public override void AddValue()
         {
-            Player player = ReturnPlayer();
-            player.Damage += damageAmp;
+
+            Katana.DamageMultiplyer += 2;
+            Magnum.DamageMultiplyer += 1;
         }
 
     }
