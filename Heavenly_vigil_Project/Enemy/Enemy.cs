@@ -15,6 +15,15 @@ namespace Heavenly_vigil_Project
 
         private int health;
         protected static Random rnd = new Random();
+        private bool katanahit = false;
+        private bool hitCooldown = false;
+        private float hitCooldownTimer;
+        private bool hitFeedback = false;
+        private bool gotHit = false;
+        private float feedbackTimer;
+        private Color color;
+        private int hpValue;
+
 
         //Properties
 
@@ -26,6 +35,8 @@ namespace Heavenly_vigil_Project
             scale = 2;
             health = 20;
             damage = 10;
+            color = Color.White;
+            hpValue = 20;
         }
         //Method
         public override void LoadContent(ContentManager content)
@@ -40,11 +51,13 @@ namespace Heavenly_vigil_Project
             ChooseDirection();
             Move(gameTime);
             Death();
+            KatanaDamaged(gameTime);
+            DamagedFeedBack(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             Vector2 origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
-            spriteBatch.Draw(objectSprites[0], position, null, Color.White, 0, origin, scale, SpriteEffects.None, 1f);
+            spriteBatch.Draw(objectSprites[0], position, null, color, 0, origin, scale, SpriteEffects.None, 1f);
         }
         public override void OnCollision(GameObject other)
         {
@@ -66,11 +79,15 @@ namespace Heavenly_vigil_Project
             if (other is Magnum)
             {
                 health -= Magnum.Damage;
+                gotHit = true;
+
             }
 
-            if (other is Katana)
+            if (other is Katana && katanahit == false)
             {
                 health -= Katana.Damage;
+                gotHit = true;
+                katanahit = true;
             }
 
         }
@@ -131,6 +148,51 @@ namespace Heavenly_vigil_Project
 
             }
         }
+
+
+        public void KatanaDamaged(GameTime gameTime)
+        {
+            if (katanahit == true)
+            {
+                hitCooldown = true;
+                if (hitCooldown == true)
+                {
+                }
+                hitCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (hitCooldownTimer >= 0.2f)
+                {
+                    hitCooldown = false;
+                    hitCooldownTimer = 0;
+                    katanahit = false;
+                }
+
+            }
+        }
+
+        public void DamagedFeedBack(GameTime gameTime)
+        {
+            if (gotHit == true)
+            {
+                hitFeedback = true;
+                if (hitFeedback == true)
+                {
+                    color = Color.Red;
+                }
+                feedbackTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (feedbackTimer >= 0.1f)
+                {
+                    hitFeedback = false;
+                    color = Color.White;
+                    feedbackTimer = 0;
+                    gotHit = false;
+                }
+
+            }
+
+        }
+
+
+
         /// <summary>
         /// Removes the Enemy when killed and grant XP to the player.
         /// </summary>
