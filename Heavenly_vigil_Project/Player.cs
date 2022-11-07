@@ -22,15 +22,15 @@ namespace Heavenly_vigil_Project
         private float cooldownTimer;
         private static bool hitCooldown = false;
         private float hitCooldownTimer;
-        private bool dashCooldown = true;
-        private float dashCooldownTimer;
-        private bool dashed = false;
-        private float dashedTimer;
         private Color color;
         private static bool healthModified = false;
         private static bool hasKatana = true;
         private static bool hasMagnum = false;
         private float cooldownTimerNumber;
+        private static int mana;
+        private bool manaCooldown = false;
+        private bool manaRegen = false;
+        private float manaRegenerating;
 
         // -----PROPERTIES-----
 
@@ -38,6 +38,11 @@ namespace Heavenly_vigil_Project
         {
             get { return health; }
             set { health = value; }
+        }
+        public static int Mana
+        {
+            get { return mana; }
+            set { mana = value; }
         }
 
         public float CooldownTimerNumber
@@ -68,6 +73,7 @@ namespace Heavenly_vigil_Project
             position = vector2;
             scale = 2f;
             health = 100;
+            mana = 100;
             speed = 400f;
             color = Color.White;
             cooldownTimerNumber = 0.6f;
@@ -161,31 +167,17 @@ namespace Heavenly_vigil_Project
                 velocity += new Vector2(0, +1);
             }
 
-           /* if (keyState.IsKeyDown(Keys.Space))
+            if (manaCooldown == false)
             {
-                if (dashCooldown == true)
+                if (keyState.IsKeyDown(Keys.Space))
                 {
-                    if (dashed == false)
-                    {
-                        speed = 1200f;
-                        dashed = true;
-                        dashCooldown = false;
-                    }              
+                    PowerState(gameTime);
                 }
-                dashedTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (dashedTimer >= 0.1f)
-                {
-                    speed = 400f;
-                    dashedTimer = 0;
-                }
-                dashCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (dashCooldownTimer >= 1.3f)
-                {
-                    dashCooldownTimer = 0;
-                    dashed = false;
-                    dashCooldown = true;
-                }
-            } */
+
+                
+            }
+
+
 
             //Code needed so that the objects speed isn't increased when moving diagonally
             if (velocity != Vector2.Zero)
@@ -194,6 +186,61 @@ namespace Heavenly_vigil_Project
             }
 
            
+        }
+
+
+        public void PowerState(GameTime gameTime)
+        {
+            manaCooldown = true;
+            float regen = 1f;
+
+            color = Color.Blue;
+            scale *= 2;
+            speed *= 2;
+            cooldownTimer *= 2f;
+            while (mana > 0)
+            {
+
+                mana--;
+            }
+
+            if (mana == 0)
+            {
+                manaRegen = true;
+            }
+            
+            if (manaRegen == true)
+            {
+                while (mana < 100)
+                {
+                    if (manaRegen == true)
+                    {
+
+                        manaRegenerating += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        if (manaRegenerating >= regen)
+                        {
+                            mana++;
+                            regen = manaRegenerating + 1f;
+                        }
+
+                    }
+                }
+            }
+
+            if (mana == 100)
+            {
+                manaRegen = false;
+            }
+
+            color = Color.White;
+            scale /= 2;
+            speed /= 2;
+            cooldownTimer /= 2f;
+
+            manaCooldown = false;
+
+
+            
         }
 
         /// <summary>
@@ -245,7 +292,7 @@ namespace Heavenly_vigil_Project
                     color = Color.Red;
                 }
                 hitCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (hitCooldownTimer >= 0.3f)
+                if (hitCooldownTimer >= 0.4f)
                 {
                     hitCooldown = false;
                     color = Color.White;
