@@ -1,17 +1,10 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using SharpDX.Direct3D9;
+using Microsoft.Xna.Framework.Graphics;
 using SharpDX;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
 using Color = Microsoft.Xna.Framework.Color;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
-using Microsoft.Xna.Framework.Input;
 
 namespace Heavenly_vigil_Project
 {
@@ -21,7 +14,6 @@ namespace Heavenly_vigil_Project
         //Fields
 
         private int health;
-        private int damage;
         protected static Random rnd = new Random();
 
         //Properties
@@ -82,6 +74,9 @@ namespace Heavenly_vigil_Project
 
         }
 
+        /// <summary>
+        /// Enemy Movement, Makes the enemy move towards the player.
+        /// </summary>
         private void ChooseDirection()
         {
             Vector2 playerPosition = ReturnPlayerPosition();
@@ -135,7 +130,7 @@ namespace Heavenly_vigil_Project
 
             }
         }
-
+        //Removes the Enemy when killed and grant XP to the player.
         public void Death()
         {
             if (health <= 0)
