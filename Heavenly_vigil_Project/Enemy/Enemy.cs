@@ -59,7 +59,8 @@ namespace Heavenly_vigil_Project
 
             if (other is Enemy)
             {
-                position -= new Vector2(rnd.Next(-10, 10), rnd.Next(-10, 10));
+                Vector2 d = position - other.Position;
+                position += 10 * d / (d.LengthSquared() + 1);
             }
 
             if (other is Magnum)
