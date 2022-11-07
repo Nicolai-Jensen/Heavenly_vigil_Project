@@ -68,7 +68,8 @@ namespace Heavenly_vigil_Project
             spriteBatch.DrawString(gameFont, $"Lvl. {ExperiencePoints.PlayerLevel}", new Vector2(950, 1009), Color.White);
             spriteBatch.End();
             spriteBatch.Begin();
-            spriteBatch.DrawString(timerFont, $"{TimeManager.timerMinutes} : {TimeManager.timerSeconds}", new Vector2(GameWorld.ScreenSize.X / 2, 10), Color.White);
-        }
+
+            spriteBatch.DrawString(timerFont, $"{TimeManager.timerMinutes} : {TimeManager.timerSeconds}", new Vector2(GameWorld.ScreenSize.X / 2 - 57, 10), Color.White);
+         }
     }
 }

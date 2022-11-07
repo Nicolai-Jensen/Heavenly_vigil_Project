@@ -320,6 +320,8 @@ namespace Heavenly_vigil_Project
         {
             if (health <= 0)
             {
+                GameOverScreen gameover = new GameOverScreen();
+                GameWorld.InstantiateGameObject(gameover);
                 position.Y = 1000000;
             }
         }

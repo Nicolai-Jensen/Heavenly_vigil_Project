@@ -16,12 +16,13 @@ namespace Heavenly_vigil_Project
         public static void UpdateClock(GameTime gameTime)
         {
             currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (currentTime > 1)
+            if(Player.Health > 0)
             {
-                timerSeconds++;
-                currentTime = 0;
-
+                if (currentTime > 1)
+                {
+                    timerSeconds++;
+                    currentTime = 0;
+                }
                 if (timerSeconds > 59)
                 {
                     timerMinutes++;

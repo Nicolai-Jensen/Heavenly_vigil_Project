@@ -64,7 +64,10 @@ namespace Heavenly_vigil_Project
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            Player player1 = new Player(new Vector2(0, 50));
+            gameObjects.Add(new Background());
+            gameObjects.Add(new UserInterface());
+            gameObjects.Add(player1);
 
             base.Initialize();
         }
@@ -72,10 +75,10 @@ namespace Heavenly_vigil_Project
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Player player1 = new Player(new Vector2(0, 50));
-            gameObjects.Add(new Background());
-            gameObjects.Add(new UserInterface());
-            gameObjects.Add(player1);
+            //Player player1 = new Player(new Vector2(0, 50));
+            //gameObjects.Add(new Background());
+            //gameObjects.Add(new UserInterface());
+            //gameObjects.Add(player1);
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
@@ -94,30 +97,31 @@ namespace Heavenly_vigil_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-                SpawnEnemy(gameTime);
-                RemoveGameObjects();
+            SpawnEnemy(gameTime);
+            RemoveGameObjects();
+            ResetInitialize();
 
-                foreach (GameObject go in gameObjects)
+            foreach (GameObject go in gameObjects)
+            {
+                go.Update(gameTime);
+
+                foreach (GameObject other in gameObjects)
                 {
-                    go.Update(gameTime);
-
-                    foreach (GameObject other in gameObjects)
+                    if (go.IsColliding(other))
                     {
-                        if (go.IsColliding(other))
-                        {
-                            go.OnCollision(other);
-                            other.OnCollision(go);
-                        }
+                        go.OnCollision(other);
+                        other.OnCollision(go);
                     }
                 }
+            }
 
-                foreach (GameObject gameObjectsToSpawn in gameObjectsToAdd)
-                {
-                    gameObjectsToSpawn.LoadContent(Content);
-                    gameObjects.Add(gameObjectsToSpawn);
-                }
+            foreach (GameObject gameObjectsToSpawn in gameObjectsToAdd)
+            {
+                gameObjectsToSpawn.LoadContent(Content);
+                gameObjects.Add(gameObjectsToSpawn);
+            }
 
-                gameObjectsToAdd.Clear();
+            gameObjectsToAdd.Clear();
 
             // UPGRADE INTERFACE
 
@@ -144,7 +148,6 @@ namespace Heavenly_vigil_Project
             upgradeIToAdd.Clear();
 
             SetUpgradeCanBeChosen();
-
 
             // TODO: Add your update logic here
 
@@ -278,8 +281,23 @@ namespace Heavenly_vigil_Project
                 }
             }
         }
+        public void ResetInitialize()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            {
+                foreach (GameObject go in GameWorld.GameObjects)
+                {
+                    go.ToBeRemoved = true;
+                }
+                foreach (PowerUp go in GameWorld.UpgradeInterfaces)
+                {
+                    go.ToBeRemoved = true;
+                }
+                this.Initialize();
+            }
 
 
 
+        }
     }
 }
