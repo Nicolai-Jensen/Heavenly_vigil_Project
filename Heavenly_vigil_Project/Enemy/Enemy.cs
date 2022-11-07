@@ -139,7 +139,7 @@ namespace Heavenly_vigil_Project
             if (health <= 0)
             {
                 position.Y = 1000000;
-                ExperiencePoints.PlayerExp += 10;
+                ExperiencePoints.PlayerExp += 100;
             }
         }
     }

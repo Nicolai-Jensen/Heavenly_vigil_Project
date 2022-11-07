@@ -52,9 +52,9 @@ namespace Heavenly_vigil_Project
         public static void ChooseUpgrade(GameTime gameTime)
         {
 
-            GameWorld.InstantiateGameObject(new UpgradeInterface());
-            GameWorld.InstantiateUpgrade(new AttackSpeedUp(new Vector2(960, 925), 2));
+            GameWorld.InstantiateGameObject(new UpgradeInterface());            
             GameWorld.InstantiateUpgrade(new DamageUp(new Vector2(830, 925), 2));
+            GameWorld.InstantiateUpgrade(new AttackSpeedUp(new Vector2(960, 925), 0.1f));
             GameWorld.InstantiateUpgrade(new SpeedUp(new Vector2(1090, 925), 400f));
 
         }
@@ -71,15 +71,17 @@ namespace Heavenly_vigil_Project
 
                 if (keyState.IsKeyDown(Keys.D1) && canBeChosen)
                 {
-                    GameWorld.UpgradeInterfaces.ElementAt(0).AddValue();
+                    GameWorld.UpgradeInterfaces.ElementAt(2).AddValue();
 
                     RemoveUpgradeInterface();
+                    toBeRemoved = true;
                 }
                 else if (keyState.IsKeyDown(Keys.D2) && canBeChosen)
                 {
                     GameWorld.UpgradeInterfaces.ElementAt(1).AddValue();
 
                     RemoveUpgradeInterface();
+                    toBeRemoved = true;
                 }
                 else if (keyState.IsKeyDown(Keys.D3) && canBeChosen)
                 {

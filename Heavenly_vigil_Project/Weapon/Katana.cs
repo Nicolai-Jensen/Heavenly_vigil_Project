@@ -18,6 +18,7 @@ namespace Heavenly_vigil_Project
         private Vector2 enemyPosition;
         private bool attacked = false;
         private float attackedTimer;
+        private static bool attackAnimation = true;
 
         // -----PROPERTIES-----
         public float Rotation
@@ -30,23 +31,39 @@ namespace Heavenly_vigil_Project
             get { return damage; }
             set { damage = value; }
         }
+
+        public static bool AttackAnimation
+        {
+            get { return attackAnimation; }
+            set { attackAnimation = value; }
+        }
         // -----CONSTRUCTORS-----
         public Katana(Texture2D sprite, Vector2 position, GameTime gameTime)
         {
             objectSprites = new Texture2D[1];
             objectSprites[0] = sprite;
             this.position = position;
-            scale = 0.7f;
+            scale = 1f;
             rotation = 0f;
             speed = 0f;
-            ChooseDirection();
-            damage = 10;
+            velocity = DirectionClosestEnemy(ReturnPlayerPosition());
+            damage = 2 + DamageMultiplyer;
+
         }
 
         // -----METHODS-----
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(objectSprites[0], position, null, Color.Blue, rotation, origin, scale, SpriteEffects.None, 0);
+
+            if (attackAnimation == true)
+            {
+                spriteBatch.Draw(objectSprites[0], position, null, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
+            }
+            else
+            {
+                spriteBatch.Draw(objectSprites[0], position, null, Color.White, rotation, origin, scale, SpriteEffects.FlipHorizontally, 0);
+            }
+            
         }
 
         public override void LoadContent(ContentManager content)
@@ -71,15 +88,16 @@ namespace Heavenly_vigil_Project
 
         }
 
-        private void ChooseDirection()
+        /*private void ChooseDirection()
         {
             Vector2 enemyPosition = ReturnEnemyPosition();
 
             velocity += enemyPosition - position;
             velocity.Normalize();
-            rotation = (float)Math.Atan2(enemyPosition.Y - position.Y, enemyPosition.X - position.X);
+            rotation = (float)Math.Atan2(enemyPosition.Y - position.Y, enemyPosition.X - position.X) + 1.4f;
 
-        }
+
+        }*/
 
         private void Attacking(GameTime gameTime)
         {
@@ -89,7 +107,7 @@ namespace Heavenly_vigil_Project
                 attacked = true;
             }
             attackedTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (attackedTimer >= 0.15f)
+            if (attackedTimer >= 0.3f)
             {
                 position.Y = 10000000f;
                 attacked = false;
@@ -97,12 +115,27 @@ namespace Heavenly_vigil_Project
             }
         }
 
-        private Vector2 ReturnEnemyPosition()
+        /* private Vector2 ReturnEnemyPosition()
+         {
+             foreach (GameObject go in GameWorld.GameObjects)
+             {
+
+                 if (go is Enemy)
+                 {
+
+                     return go.Position;
+                 }
+             }
+
+             return new Vector2(position.X, -100);
+         } */
+
+        private Vector2 ReturnPlayerPosition()
         {
             foreach (GameObject go in GameWorld.GameObjects)
             {
 
-                if (go is Enemy)
+                if (go is Player)
                 {
 
                     return go.Position;
@@ -110,6 +143,33 @@ namespace Heavenly_vigil_Project
             }
 
             return new Vector2(position.X, -100);
+        }
+        public Vector2 DirectionClosestEnemy(Vector2 playerPosition)
+        {
+            Vector2 direction;
+            Vector2 enemyPosition = new Vector2(0, 0);
+            float distance = 1000f;
+            float shortestDistance = 2000f;
+
+            foreach (GameObject enemy in GameWorld.GameObjects)
+            {
+                if (enemy is Enemy)
+                {
+                    distance = Vector2.Distance(playerPosition, enemy.Position);
+                }
+
+                if (distance < shortestDistance && enemy is Enemy)
+                {
+                    shortestDistance = distance;
+                    enemyPosition = enemy.Position;
+                }
+            }
+
+            direction = enemyPosition - playerPosition;
+            direction.Normalize();
+            rotation = (float)Math.Atan2(enemyPosition.Y - position.Y, enemyPosition.X - position.X) + 1.4f;
+
+            return direction;
         }
     }
 }
