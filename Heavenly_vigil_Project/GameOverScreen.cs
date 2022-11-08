@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// Loads and Draws the GameOver screen and the Font.
+    /// </summary>
     internal class GameOverScreen : GameObject
     {
         Rectangle gameOverRectangle;

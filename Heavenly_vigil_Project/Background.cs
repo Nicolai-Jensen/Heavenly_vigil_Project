@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// Loads and Draws the Background screen.
+    /// </summary>
     internal class Background : GameObject
     {
         //Fields

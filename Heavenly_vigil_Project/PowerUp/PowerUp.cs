@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// Super class for the Power-ups. holds the fields and Methods, the other powerups should have.
+    /// </summary>
     public abstract class PowerUp : GameObject
     {
         //Fields

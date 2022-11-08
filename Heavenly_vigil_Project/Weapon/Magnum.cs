@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// A projectile, which shoots after the nearest enemy.
+    /// </summary>
     internal class Magnum : Weapon
     {
 

@@ -6,6 +6,9 @@ using System;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// Controls the UI of the game.
+    /// </summary>
     internal class UserInterface : GameObject
     {
         //Fields

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// Super class for all weapons, holds the fields and Methods, for other weapons.
+    /// </summary>
     public abstract class Weapon : GameObject
     {
 

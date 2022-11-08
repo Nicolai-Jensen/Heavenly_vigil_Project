@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// Controls the Level up system, instantiates 3 Power-ups, and the Player picks 1 out of 3 power-ups.
+    /// </summary>
     internal class UpgradeInterface : UserInterface
     {
         private Vector2 pos;

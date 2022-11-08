@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// A short but wide projectile, which goes after the nearest enemy.
+    /// </summary>
     internal class Katana : Weapon
     {
 
