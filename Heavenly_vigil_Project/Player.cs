@@ -352,6 +352,10 @@ namespace Heavenly_vigil_Project
             }
         }
 
+        /// <summary>
+        /// This Method indicates what the player object does when colliding with another object
+        /// </summary>
+        /// <param name="other">"other" in this case would refer to the object that is colliding with the player object</param>
         public override void OnCollision(GameObject other)
         {
 
@@ -362,24 +366,29 @@ namespace Heavenly_vigil_Project
         /// when the player is damaged it makes the enemy unable to hit the player and marks the player as red
         /// a timer starts and when it is over the player is tangible again for enemies to hit reseting the timer and color.
         /// </summary>
-        /// <param name="gameTime"></param>
+        /// <param name="gameTime">A parameter from the Framework that acts as a timer</param>
         public void Damaged(GameTime gameTime)
         {
+            //When Damaged by an enemy they set this value to true on their collision method
             if (healthModified == true)
             {
+                //when hit cooldown is true it turns the player red and prevents enemies from doing damage to the player. It also starts the a timer
                 hitCooldown = true;
                 if (hitCooldown == true)
                 {
                     color = Color.Red;
                 }
                 hitCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                //this timer if statement is hit almost immediately, making the code inside only able to play effectly once
                 if (hitCooldownTimer <= 0.05f)
                 {
+                    //plays a Sound effect that indicates the player has been hit
                     SoundEffectInstance hurtSoundIntance = hurtSound.CreateInstance();
                     hurtSoundIntance.Volume = 0.5f;
                     hurtSoundIntance.Play();
                 }
 
+                //When the timer hits over this value it makes the player normal colored and enables them to be hit again
                 if (hitCooldownTimer >= 0.4f)
                 {
                     hitCooldown = false;
@@ -393,37 +402,58 @@ namespace Heavenly_vigil_Project
         /// <summary>
         /// This Method is used to kill off the player entity if it reaches 0 health value.
         /// this is done by using a bool where it is added to the gameObjectsToRemove list.
+        /// Moreover this bool also activates the GameOver screen object and sound effect
         /// </summary>
         public void Death()
         {
             if (health <= 0)
             {
+                //deletes player
                 ToBeRemoved = true;
+
+                //instantiates the gameover screen
                 GameOverScreen gameover = new GameOverScreen();
                 GameWorld.InstantiateGameObject(gameover);
+
+                //plays the gameover sound effect
                 SoundEffectInstance newSoundIntance = gameOverSound.CreateInstance();
                 newSoundIntance.Volume = 0.5f;
                 newSoundIntance.Play();
             }
         }
 
+        /// <summary>
+        /// The Attack method here opperates the players weapons and their attackspeed
+        /// </summary>
+        /// <param name="gameTime">FrameWork parameter, used to simulate in game time</param>
         public void Attack(GameTime gameTime)
         {
+            //Gives the player use of both existing weapon types
             bool hasKatana = true;
             bool hasMagnum = true;
 
+            //Checks if the Magnum is ready to attack
             if (cooldown == true)
             {
+                //If the player has the magnum, the player attacks with a magnum shot
                 if (hasMagnum == true)
                 {
+                    //instantiates a new bullet that spawns from the player
                     Magnum shot = new Magnum(magnumShot[0], new Vector2(position.X, position.Y));
                     GameWorld.InstantiateGameObject(shot);
+
+                    //Plays a soundeffect to indicate that a bullet is being fired
                     SoundEffectInstance shootingSoundIntance = shootingSound.CreateInstance();
                     shootingSoundIntance.Volume = 0.04f;
                     shootingSoundIntance.Play();
                 }
+
+                //Sets the magnum to not be ready to attack
                 cooldown = false;
             }
+
+            //Starts a timer that will determine the time before the magnum is ready to shoot again, then resets the timer
+            //This is essentially a "time between shots" indicator
             cooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (cooldownTimer >= CooldownTimerNumber)
             {
@@ -431,23 +461,34 @@ namespace Heavenly_vigil_Project
                 cooldownTimer = 0;
             }
 
+            //Checks if the Katana is ready to attack
             if (cooldown2 == true)
             {
+                //If the player has the Katana, the player attacks with a swooping slash
                 if (hasKatana == true)
                 {
+                    //instantiates a new slash sprite that spawns from the player
                     Katana slash = new Katana(katanaSlash[0], new Vector2(position.X, position.Y), gameTime);
                     GameWorld.InstantiateGameObject(slash);
+
+                    //Makes a sword swoosh sound effect
                     SoundEffectInstance newSoundIntance = swordSound.CreateInstance();
                     newSoundIntance.Volume = 0.08f;
                     newSoundIntance.Play();
+
+                    //In the Katana class there is a bool that determines a Draw() Method, this code cycles through those 2 each swing
                     if (Katana.AttackAnimation == true)
                     {
                         Katana.AttackAnimation = false;
                     }
                     else { Katana.AttackAnimation = true; }
                 }
+
+                //Sets the Katana to unable to swing
                 cooldown2 = false;
             }
+
+            //Like the magnum this is essentially a time between swings timer that determines when the Katana is ready to swing again
             cooldownTimer2 += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (cooldownTimer2 >= cooldownTimerNumber2)
             {
