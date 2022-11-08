@@ -33,7 +33,7 @@ namespace Heavenly_vigil_Project
         private float manaRegenerating = 0;
         private bool manadecrease = false;
         private float manadecreasing = 0;
-
+        private int Levelup;
 
         // -----PROPERTIES-----
 
@@ -74,10 +74,11 @@ namespace Heavenly_vigil_Project
         public Player(Vector2 vector2)
         {
             position = vector2;
+            Levelup = ExperiencePoints.PlayerLevel;
             scale = 2f;
             health = 100;
             mana = 100;
-            speed = 400f;
+            speed = 300f;
             color = Color.White;
             cooldownTimerNumber = 0.6f;
         }
@@ -124,6 +125,7 @@ namespace Heavenly_vigil_Project
             Damaged(gameTime);
             Attack(gameTime);
             PowerState(gameTime);
+            Restorehealth();
         }
 
         /// <summary>
@@ -184,6 +186,20 @@ namespace Heavenly_vigil_Project
            
         }
 
+        public void Restorehealth()
+        {
+            if (ExperiencePoints.PlayerLevel > Levelup)
+            {
+                health += 3;
+                if (health > 100)
+                {
+                    health = 100;
+                }
+
+                Levelup = ExperiencePoints.PlayerLevel;
+            }
+        }
+
 
         public void PowerState(GameTime gameTime)
         {
@@ -198,9 +214,9 @@ namespace Heavenly_vigil_Project
                 scale *= 2;
                 speed *= 2;
                 cooldownTimerNumber /= 2f;
-                Katana.ScaleValue *= 2f;
+                Katana.ScaleValue *= 1.5f;
                 Katana.SpeedValue *= 3f;
-                Katana.TravelDistance = 1f;
+                Katana.TravelDistance = 0.8f;
                 manadecrease = true;
                 manaCooldown = true;
             }
@@ -227,7 +243,7 @@ namespace Heavenly_vigil_Project
                 scale /= 2;
                 speed /= 2;
                 cooldownTimerNumber *= 2f;
-                Katana.ScaleValue /= 2f;
+                Katana.ScaleValue /= 1.5f;
                 Katana.SpeedValue /= 3f;
                 Katana.TravelDistance = 0.3f;
             }

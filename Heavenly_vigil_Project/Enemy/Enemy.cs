@@ -22,7 +22,7 @@ namespace Heavenly_vigil_Project
         private bool gotHit = false;
         private float feedbackTimer;
         private Color color;
-        private int hpValue;
+ 
 
 
         //Properties
@@ -33,10 +33,10 @@ namespace Heavenly_vigil_Project
             speed = 150;
             position = SpawnPosition();
             scale = 2;
-            health = 20;
-            damage = 10;
+            health = 15 + ExperiencePoints.PlayerLevel * 4;
+            damage = 5;
             color = Color.White;
-            hpValue = 20;
+ 
         }
         //Method
         public override void LoadContent(ContentManager content)
