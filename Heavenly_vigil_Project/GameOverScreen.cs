@@ -22,7 +22,7 @@ namespace Heavenly_vigil_Project
         {
             Vector2 origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
             spriteBatch.Draw(objectSprites[0], new Vector2(950, 450), gameOverRectangle, Color.White, 0f, origin, 1, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(gameOver, "Press 'ESC' to quit the game", new Vector2(710, 700), Color.Red);
+            spriteBatch.DrawString(gameOver, "Press 'R' to reset the game", new Vector2(720, 700), Color.Red);
         }      
     }
 }

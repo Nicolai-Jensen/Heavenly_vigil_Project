@@ -36,6 +36,7 @@ namespace Heavenly_vigil_Project
         public static int PlayerLevel
         {
             get { return playerLevel; }
+            set { playerLevel = value; }
         }
 
         public static int ExpPercentage
