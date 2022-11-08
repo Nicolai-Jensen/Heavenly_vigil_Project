@@ -16,16 +16,16 @@ namespace Heavenly_vigil_Project
     {
 
         //Fields
-        private SoundEffect defeatedSound;
-        private int health;
+        protected SoundEffect defeatedSound;
+        protected int health;
         protected static Random rnd = new Random();
-        private bool katanahit = false;
-        private bool hitCooldown = false;
-        private float hitCooldownTimer;
-        private bool hitFeedback = false;
-        private bool gotHit = false;
-        private float feedbackTimer;
-        private Color color;
+        protected bool katanahit = false;
+        protected bool hitCooldown = false;
+        protected float hitCooldownTimer;
+        protected bool hitFeedback = false;
+        protected bool gotHit = false;
+        protected float feedbackTimer;
+        protected Color color;
  
 
 
@@ -107,7 +107,7 @@ namespace Heavenly_vigil_Project
         /// <summary>
         /// Enemy Movement, Makes the enemy move towards the player.
         /// </summary>
-        private void ChooseDirection()
+        protected void ChooseDirection()
         {
             Vector2 playerPosition = ReturnPlayerPosition();
 
@@ -115,7 +115,7 @@ namespace Heavenly_vigil_Project
             velocity.Normalize();
         }
 
-        private Vector2 ReturnPlayerPosition()
+        protected Vector2 ReturnPlayerPosition()
         {
             foreach (GameObject go in GameWorld.GameObjects)
             {
