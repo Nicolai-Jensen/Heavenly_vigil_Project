@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// Super class for all gameObjects.
+    /// </summary>
     public abstract class GameObject
     {
 

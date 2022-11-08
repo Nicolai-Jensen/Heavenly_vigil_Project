@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Security.Cryptography.Xml;
 
 namespace Heavenly_vigil_Project
-{
+{/// <summary>
+/// Makes the World, and instantiates the objects.
+/// </summary>
     public class GameWorld : Game
     {
         //-----FIELDS-----
@@ -309,6 +311,7 @@ namespace Heavenly_vigil_Project
                 ExperiencePoints.PlayerExp = 0;
                 TimeManager.timerSeconds = 0;
                 TimeManager.timerMinutes = 0;
+                GameObject.DamageMultiplyer = 0;
             }
 
 

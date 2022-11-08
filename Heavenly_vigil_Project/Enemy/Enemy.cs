@@ -8,6 +8,9 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// loads and draws the enemy with all the Fields and Methods, the enemy should have.
+    /// </summary>
     internal class Enemy : GameObject
     {
 

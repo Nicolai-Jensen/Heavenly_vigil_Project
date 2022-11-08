@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
-{
+{/// <summary>
+/// Controls and updates the clock.
+/// </summary>
     public static class TimeManager
     {
         public static float currentTime;

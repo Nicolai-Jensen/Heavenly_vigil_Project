@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// Handles the experience to the player and checks if the player levelup.
+    /// </summary>
     public static class ExperiencePoints
     {
         //-----FIELDS-----

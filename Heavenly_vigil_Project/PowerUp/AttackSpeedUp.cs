@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// Sets a constructor, load and draws the Speedup Powerup, and Adds the value to the player. 
+    /// </summary>
     internal class AttackSpeedUp : PowerUp
     {
         //Fields

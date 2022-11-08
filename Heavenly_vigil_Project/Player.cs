@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+ /// <summary>
+ /// loads and draws the player with all the functionality, the player should have.
+ /// </summary>
     public class Player : GameObject
     {
         // -----FIELDS-----
