@@ -329,16 +329,16 @@ namespace Heavenly_vigil_Project
         }
 
         /// <summary>
-        /// This Method is used to kill off the player entity if it reaches 0 health value
-        /// ths is done by putting its position to an outofbounds area where it is automatically deleted from the gameObjects list
+        /// This Method is used to kill off the player entity if it reaches 0 health value.
+        /// this is done by using a bool where it is added to the gameObjectsToRemove list.
         /// </summary>
         public void Death()
         {
             if (health <= 0)
             {
+                ToBeRemoved = true;
                 GameOverScreen gameover = new GameOverScreen();
                 GameWorld.InstantiateGameObject(gameover);
-                position.Y = 1000000;
             }
         }
 

@@ -149,7 +149,6 @@ namespace Heavenly_vigil_Project
             }
         }
 
-
         public void KatanaDamaged(GameTime gameTime)
         {
             if (katanahit == true)
@@ -190,17 +189,15 @@ namespace Heavenly_vigil_Project
             }
 
         }
-
-
-
         /// <summary>
         /// Removes the Enemy when killed and grant XP to the player.
+        /// this is done by using a bool where it is added to the gameObjectsToRemove list.
         /// </summary>
         public void Death()
         {
             if (health <= 0)
             {
-                position.Y = 1000000;
+                toBeRemoved = true;
                 ExperiencePoints.PlayerExp += 100;
             }
         }
