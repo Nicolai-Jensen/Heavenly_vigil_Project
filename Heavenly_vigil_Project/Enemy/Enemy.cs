@@ -36,24 +36,28 @@ namespace Heavenly_vigil_Project
         {
             speed = 150;
             position = SpawnPosition();
-            scale = 2;
+            scale = 1;
             health = 15 + ExperiencePoints.PlayerLevel * 4;
             damage = 5;
             color = Color.White;
+            
  
         }
         //Method
         public override void LoadContent(ContentManager content)
         {
-            int i = rnd.Next(1, 4);
-            objectSprites = new Texture2D[1];
-            objectSprites[0] = content.Load<Texture2D>($"enemy_{i}");
+            objectSprites = new Texture2D[4];
+            for (int i = 0; i < objectSprites.Length; i++)
+            {
+                objectSprites[i] = content.Load<Texture2D>($"skeleton_0{i + 1}");
+            }
             defeatedSound = content.Load<SoundEffect>("enemy_defeat");
         }
 
         public override void Update(GameTime gameTime)
-        {  
+        {
             ChooseDirection();
+            Animate(gameTime);
             Move(gameTime);
             Death();
             KatanaDamaged(gameTime);
@@ -62,7 +66,10 @@ namespace Heavenly_vigil_Project
         public override void Draw(SpriteBatch spriteBatch)
         {
             Vector2 origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
-            spriteBatch.Draw(objectSprites[0], position, null, color, 0, origin, scale, SpriteEffects.None, 1f);
+            if(ReturnPlayerPosition().X < position.X)
+            spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.FlipHorizontally, 1f);
+            else
+            spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.None, 1f);
         }
         public override void OnCollision(GameObject other)
         {

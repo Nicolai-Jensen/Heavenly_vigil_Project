@@ -21,7 +21,7 @@ namespace Heavenly_vigil_Project
         protected Vector2 position;
         protected float scale;
         protected float animationTime;
-        protected float animationSpeed;
+        protected float animationSpeed = 8f;
         protected Vector2 origin;
         protected Texture2D[] objectSprites;
         protected Vector2 velocity;
@@ -145,7 +145,7 @@ namespace Heavenly_vigil_Project
         {
             animationTime += (float)gameTime.ElapsedGameTime.TotalSeconds * animationSpeed;
 
-            if (animationSpeed > objectSprites.Length)
+            if (animationTime > objectSprites.Length)
             {
                 animationTime = 0;
             }
