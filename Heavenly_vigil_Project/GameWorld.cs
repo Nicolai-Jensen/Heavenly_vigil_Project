@@ -239,7 +239,7 @@ namespace Heavenly_vigil_Project
         private void SpawnEnemy(GameTime gameTime)
         {
             spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (spawnTimer > 1)
+            if (spawnTimer > 1 - Math.Max((TimeManager.timerMinutes * 0.1) * 0.9, 0.1f))
             {
                 Enemy spawnedEnemy = new Enemy();
                 spawnedEnemy.LoadContent(Content);
