@@ -61,7 +61,7 @@ namespace Heavenly_vigil_Project
 
         public override void OnCollision(GameObject other)
         {
-            if (other is Enemy)
+            if (other is Enemy || other is EnemyBoss)
             {
                 toBeRemoved = true;
             }

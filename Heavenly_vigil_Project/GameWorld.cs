@@ -24,6 +24,7 @@ namespace Heavenly_vigil_Project
         private List<PowerUp> upgradeIToRemove = new List<PowerUp>();
         private Texture2D pixel;
         private float spawnTimer;
+        private float bossSpawnTimer;
 
         private static Vector2 screenSize;
 
@@ -77,10 +78,7 @@ namespace Heavenly_vigil_Project
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            //Player player1 = new Player(new Vector2(0, 50));
-            //gameObjects.Add(new Background());
-            //gameObjects.Add(new UserInterface());
-            //gameObjects.Add(player1);
+
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
@@ -258,6 +256,14 @@ namespace Heavenly_vigil_Project
                 gameObjects.Add(spawnedEnemy);
                 spawnTimer = 0;
             }
+            bossSpawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (bossSpawnTimer >= 30)
+            {
+                EnemyBoss boss = new EnemyBoss();
+                boss.LoadContent(Content);
+                gameObjects.Add(boss);
+                bossSpawnTimer = 0;
+            }
 
         }
         /// <summary>
@@ -312,6 +318,7 @@ namespace Heavenly_vigil_Project
                 TimeManager.timerSeconds = 0;
                 TimeManager.timerMinutes = 0;
                 GameObject.DamageMultiplyer = 0;
+                bossSpawnTimer = 0;
             }
 
 
