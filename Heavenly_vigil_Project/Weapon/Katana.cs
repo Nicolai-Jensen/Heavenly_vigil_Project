@@ -130,7 +130,7 @@ namespace Heavenly_vigil_Project
             attackedTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (attackedTimer >= travelDistance)
             {
-                position.Y = 10000000f;
+                toBeRemoved = true;
                 attacked = false;
                 attackedTimer = 0;
             }

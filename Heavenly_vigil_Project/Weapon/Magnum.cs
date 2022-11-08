@@ -61,7 +61,7 @@ namespace Heavenly_vigil_Project
         {
             if (other is Enemy)
             {
-                position.Y = 1000000f;
+                toBeRemoved = true;
             }
         }
 
