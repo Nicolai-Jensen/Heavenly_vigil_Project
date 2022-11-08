@@ -25,7 +25,7 @@ namespace Heavenly_vigil_Project
             this.speedAmp = speedAmp;
             powerUpDescription = "Increases the players speed.";
             powerUpTitle = "Speed";
-            scale = 0.75f;
+            scale = 1f;
         }
 
         //Methods
@@ -33,7 +33,7 @@ namespace Heavenly_vigil_Project
         {
             objectSprites = new Texture2D[1];
 
-            objectSprites[0] = content.Load<Texture2D>("GreenHealth");
+            objectSprites[0] = content.Load<Texture2D>("PowerUpSpeedl");
 
             titleFont = content.Load<SpriteFont>("GameFont");
         }
@@ -46,7 +46,8 @@ namespace Heavenly_vigil_Project
         {
             origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
             spriteBatch.Draw(objectSprites[0], position, null, Color.White, 0, origin, scale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(titleFont, powerUpTitle, new Vector2(position.X - objectSprites[0].Width / 2 + 20, position.Y - objectSprites[0].Height / 2 - 25), Color.White);
+            spriteBatch.DrawString(titleFont, powerUpTitle, new Vector2(position.X - objectSprites[0].Width / 2, position.Y - objectSprites[0].Height / 2 - 25), Color.White);
+            spriteBatch.DrawString(titleFont, "3.", new Vector2(position.X - objectSprites[0].Width / 2 - 30, position.Y - objectSprites[0].Height / 2 + 15), Color.White);
         }
         public override void AddValue()
         {

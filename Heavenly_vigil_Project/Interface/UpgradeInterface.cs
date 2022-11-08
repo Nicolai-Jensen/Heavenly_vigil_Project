@@ -38,17 +38,17 @@ namespace Heavenly_vigil_Project
             scale = 1; 
             textureRectangle = new Rectangle(0, 0, 400, 100);
             objectSprites = new Texture2D[1];
-            pos.X = 1010;
-            pos.Y = 975;
-            objectSprites[0] = content.Load<Texture2D>("BlackHealth");
+            pos.X = GameWorld.ScreenSize.X / 2;
+            pos.Y = 910;
+            objectSprites[0] = content.Load<Texture2D>("UIBase2");
             upgradeCount = content.Load<SpriteFont>("GameFont");
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 origin = new Vector2(250, 100);
-            spriteBatch.Draw(objectSprites[0], pos, textureRectangle, Color.White, 0, origin, scale, SpriteEffects.None, 0);
-            spriteBatch.DrawString(upgradeCount, $"Upgrades left: {GameWorld.UpgradeInterfaces.Count / 3}", new Vector2(pos.X - 110, pos.Y), Color.White);
+            Vector2 origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
+            spriteBatch.Draw(objectSprites[0], pos, null, Color.White, 0, origin, scale, SpriteEffects.None, 0);
+            spriteBatch.DrawString(upgradeCount, $"Upgrades left: {GameWorld.UpgradeInterfaces.Count / 3}", new Vector2(pos.X - 60, 975), Color.White);
         }
 
         public override void Update(GameTime gameTime)
