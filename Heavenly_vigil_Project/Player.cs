@@ -172,10 +172,12 @@ namespace Heavenly_vigil_Project
         public override void Draw(SpriteBatch spriteBatch)
         {
             //A Draw Method with different overloads, this particular one has 10 variables which can be defined
+            //If the player has last pressed "D" to move right, it calls the first draw method, which doesn't flip the sprites
             if (isFacingRight)
             {
                 spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.None, 0);
             }
+            //If the player has last pressed "A" to move left the draw method with the sprites flipped horizontally will be called
             else if (!isFacingRight)
             {
                 spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.FlipHorizontally, 0);
@@ -201,13 +203,13 @@ namespace Heavenly_vigil_Project
                 velocity += new Vector2(0, -1);
             }
 
-            //Moves the player left when pressing A by removing X position value, and sets the the bool to false
+            //Moves the player left when pressing A by removing X position value, and sets the the bool to false to determine which draw method to use
             if (keyState.IsKeyDown(Keys.A))
             {
                 velocity += new Vector2(-1, 0);
                 isFacingRight = false;
             }
-            //Moves the player right when pressing D by adding X position value, and sets the bool to true
+            //Moves the player right when pressing D by adding X position value, and sets the bool to true to determine which draw method to use
             if (keyState.IsKeyDown(Keys.D))
             {
                 velocity += new Vector2(+1, 0);
