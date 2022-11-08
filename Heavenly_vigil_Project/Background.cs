@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Heavenly_vigil_Project
     internal class Background : GameObject
     {
         //Fields
-
+        private Song backGroundMusic;
         //Properties
 
         //Constructors
@@ -25,6 +26,11 @@ namespace Heavenly_vigil_Project
         {
             objectSprites = new Texture2D[1];
             objectSprites[0] = content.Load<Texture2D>("NyBaggrund3");
+            backGroundMusic = content.Load<Song>("BackGroundSong");
+            MediaPlayer.Volume = 0.5f;
+            MediaPlayer.Play(backGroundMusic);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.1f;
         }
         public override void Update(GameTime gameTime)
         {
