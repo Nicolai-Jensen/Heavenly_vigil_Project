@@ -38,6 +38,12 @@ namespace Heavenly_vigil_Project
             get { return objectSprites[(int)animationTime]; }
         }
 
+        public Vector2 Velocity
+        {
+            get { return velocity; }
+            set { velocity = value; }
+        }
+
         protected Vector2 SpriteSize
         {
             get { return new Vector2(CurrentSprite.Width * scale, CurrentSprite.Height * scale); }

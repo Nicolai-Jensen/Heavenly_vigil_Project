@@ -21,7 +21,6 @@ namespace Heavenly_vigil_Project
         // -----FIELDS-----
         private float rotation;
         private static int damage;
-        private Vector2 enemyPosition;
 
         // -----PROPERTIES-----
         public float Rotation
@@ -78,31 +77,6 @@ namespace Heavenly_vigil_Project
         {
 
         }
-
-        //private void ChooseDirection()
-        //{
-        //    Vector2 enemyPosition = ReturnEnemyPosition();
-
-        //    velocity += enemyPosition - position;
-        //    velocity.Normalize();
-        //    rotation = (float)Math.Atan2(enemyPosition.Y - position.Y, enemyPosition.X - position.X);
-        //    rotation += 70f;
-        //}
-
-        //private Vector2 ReturnEnemyPosition()
-        //{
-        //    foreach (GameObject go in GameWorld.GameObjects)
-        //    {
-
-        //        if (go is Enemy)
-        //        {
-
-        //            return go.Position;
-        //        }
-        //    }
-
-        //    return new Vector2(position.X, -100);
-        //}
 
         private Vector2 ReturnPlayerPosition()
         {
