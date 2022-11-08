@@ -96,7 +96,7 @@ namespace Heavenly_vigil_Project
             //base stats and the sprites state
             position = vector2;
             Levelup = ExperiencePoints.PlayerLevel;
-            scale = 2f;
+            scale = 1f;
             health = 100;
             mana = 100;
             speed = 300f;
@@ -116,12 +116,12 @@ namespace Heavenly_vigil_Project
         public override void LoadContent(ContentManager content)
         {
             //instantiates a new Texture2D in an Array
-            objectSprites = new Texture2D[3];
+            objectSprites = new Texture2D[8];
 
             //The Array is then looped with this for loop where it cycles through a list of sprites with the array numbers
             for (int i = 0; i < objectSprites.Length; i++)
             {
-                objectSprites[i] = content.Load<Texture2D>($"tile_arara_azul");
+                objectSprites[i] = content.Load<Texture2D>($"hero_{i}");
             }
 
             //This line of code places the objects origin within the middle of the sprite assuming all sprites in the array share the same size
