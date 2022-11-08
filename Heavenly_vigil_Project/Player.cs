@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
- /// <summary>
- /// loads and draws the player with all the functionality, the player should have.
- /// </summary>
+    /// <summary>
+    /// loads and draws the player with all the functionality, the player should have.
+    /// </summary>
     public class Player : GameObject
     {
         // -----FIELDS-----
@@ -22,7 +22,7 @@ namespace Heavenly_vigil_Project
         //The extra Texture2D[] are here so that the weappons can be loaded and instantiated from the player itself
         private Texture2D[] magnumShot;
         private Texture2D[] katanaSlash;
-        
+
         //SoundEffect variables for the sounds loaded by the player object
         private SoundEffect shootingSound;
         private SoundEffect hurtSound;
@@ -44,6 +44,9 @@ namespace Heavenly_vigil_Project
         private bool manadecrease = false;
         private static bool hitCooldown = false;
         private static bool healthModified = false;
+
+        //Bool to decide which draw method to use depending on which way the player moves
+        private bool isFacingRight = true;
 
         //These floats contain the value of the timer that is counting up, they are used as a stopwatch.
         private float cooldownTimer;
@@ -169,7 +172,14 @@ namespace Heavenly_vigil_Project
         public override void Draw(SpriteBatch spriteBatch)
         {
             //A Draw Method with different overloads, this particular one has 10 variables which can be defined
-            spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.None, 0);
+            if (isFacingRight)
+            {
+                spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.None, 0);
+            }
+            else if (!isFacingRight)
+            {
+                spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.FlipHorizontally, 0);
+            }
         }
 
         /// <summary>
@@ -190,16 +200,18 @@ namespace Heavenly_vigil_Project
             {
                 velocity += new Vector2(0, -1);
             }
-            
-            //Moves the player left when pressing A by removing X position value 
+
+            //Moves the player left when pressing A by removing X position value, and sets the the bool to false
             if (keyState.IsKeyDown(Keys.A))
             {
                 velocity += new Vector2(-1, 0);
+                isFacingRight = false;
             }
-            //Moves the player right when pressing D by adding X position value 
+            //Moves the player right when pressing D by adding X position value, and sets the bool to true
             if (keyState.IsKeyDown(Keys.D))
             {
                 velocity += new Vector2(+1, 0);
+                isFacingRight = true;
             }
             //Moves the player down when pressing S by adding Y position value 
             if (keyState.IsKeyDown(Keys.S))
@@ -213,7 +225,7 @@ namespace Heavenly_vigil_Project
                 velocity.Normalize();
             }
 
-           
+
         }
 
         /// <summary>
@@ -267,11 +279,11 @@ namespace Heavenly_vigil_Project
                 //Disables the use of space bar by setting manaCooldownn to true and activates the manaDrain effect in the if statement below
                 manadecrease = true;
                 manaCooldown = true;
-                
+
                 //Disables the players ability to choose upgrades if any are available, as they would give unintended results when PowerState is over
                 UpgradeInterface.IsInteractive = false;
             }
-           
+
             //Starts draining mana one at a time as long as its above 0
             if (mana > 0 && manadecrease == true)
             {
@@ -304,7 +316,7 @@ namespace Heavenly_vigil_Project
                 //Enables the players ability to choose upgrades again
                 UpgradeInterface.IsInteractive = true;
             }
-            
+
             //Starts refilling mana over time (this rate is slower than the drain effect)
             if (manaRegen == true && mana < 100)
             {
@@ -321,7 +333,7 @@ namespace Heavenly_vigil_Project
             {
                 manaRegen = false;
                 manaCooldown = false;
-            }          
+            }
         }
 
         /// <summary>
@@ -395,7 +407,7 @@ namespace Heavenly_vigil_Project
                     color = Color.White;
                     hitCooldownTimer = 0;
                     healthModified = false;
-                }                
+                }
             }
         }
 
