@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -61,7 +62,6 @@ namespace Heavenly_vigil_Project
         /// <param name="gameTime"></param>
         public static void ChooseUpgrade(GameTime gameTime)
         {
-
             GameWorld.InstantiateGameObject(new UpgradeInterface());            
             GameWorld.InstantiateUpgrade(new DamageUp(new Vector2(830, 925), 2));
             GameWorld.InstantiateUpgrade(new AttackSpeedUp(new Vector2(960, 925), 1.1f));

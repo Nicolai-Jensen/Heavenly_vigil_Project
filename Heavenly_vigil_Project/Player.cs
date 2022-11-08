@@ -22,6 +22,9 @@ namespace Heavenly_vigil_Project
         private Texture2D[] katanaSlash;
         private SoundEffect shootingSound;
         private SoundEffect hurtSound;
+        private SoundEffect swordSound;
+        private SoundEffect gameOverSound;
+        private SoundEffect levelupSound;
         private Color color;
         private static int health;
         private static int mana;
@@ -110,6 +113,9 @@ namespace Heavenly_vigil_Project
             position.Y = GameWorld.ScreenSize.Y / 2;
 
             hurtSound = content.Load<SoundEffect>("hurt");
+            swordSound = content.Load<SoundEffect>("Sword_swoosh");
+            gameOverSound = content.Load<SoundEffect>("game_over_sound");
+            levelupSound = content.Load<SoundEffect>("levelup_sound");
 
             katanaSlash = new Texture2D[1];
             katanaSlash[0] = content.Load<Texture2D>("HeavenlyVigilSwordSlash");
@@ -117,7 +123,7 @@ namespace Heavenly_vigil_Project
 
             magnumShot = new Texture2D[1];
             magnumShot[0] = content.Load<Texture2D>("BulletSprite");
-            shootingSound = content.Load<SoundEffect>("energy_gun2");
+            shootingSound = content.Load<SoundEffect>("plst00");
         }
 
         /// <summary>
@@ -205,6 +211,9 @@ namespace Heavenly_vigil_Project
                     health = 100;
                 }
                 Levelup = ExperiencePoints.PlayerLevel;
+                SoundEffectInstance newSoundIntance = levelupSound.CreateInstance();
+                newSoundIntance.Volume = 0.3f;
+                newSoundIntance.Play();
             }
         }
 
@@ -350,6 +359,9 @@ namespace Heavenly_vigil_Project
                 ToBeRemoved = true;
                 GameOverScreen gameover = new GameOverScreen();
                 GameWorld.InstantiateGameObject(gameover);
+                SoundEffectInstance newSoundIntance = gameOverSound.CreateInstance();
+                newSoundIntance.Volume = 0.5f;
+                newSoundIntance.Play();
             }
         }
 
@@ -365,7 +377,7 @@ namespace Heavenly_vigil_Project
                     Magnum shot = new Magnum(magnumShot[0], new Vector2(position.X, position.Y));
                     GameWorld.InstantiateGameObject(shot);
                     SoundEffectInstance shootingSoundIntance = shootingSound.CreateInstance();
-                    shootingSoundIntance.Volume = 0.1f;
+                    shootingSoundIntance.Volume = 0.04f;
                     shootingSoundIntance.Play();
                 }
                 cooldown = false;
@@ -383,6 +395,9 @@ namespace Heavenly_vigil_Project
                 {
                     Katana slash = new Katana(katanaSlash[0], new Vector2(position.X, position.Y), gameTime);
                     GameWorld.InstantiateGameObject(slash);
+                    SoundEffectInstance newSoundIntance = swordSound.CreateInstance();
+                    newSoundIntance.Volume = 0.08f;
+                    newSoundIntance.Play();
                     if (Katana.AttackAnimation == true)
                     {
                         Katana.AttackAnimation = false;

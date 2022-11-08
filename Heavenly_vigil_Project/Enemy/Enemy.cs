@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX;
@@ -15,7 +16,7 @@ namespace Heavenly_vigil_Project
     {
 
         //Fields
-
+        private SoundEffect defeatedSound;
         private int health;
         protected static Random rnd = new Random();
         private bool katanahit = false;
@@ -47,6 +48,7 @@ namespace Heavenly_vigil_Project
             int i = rnd.Next(1, 4);
             objectSprites = new Texture2D[1];
             objectSprites[0] = content.Load<Texture2D>($"enemy_{i}");
+            defeatedSound = content.Load<SoundEffect>("enemy_defeat");
         }
 
         public override void Update(GameTime gameTime)
@@ -202,6 +204,9 @@ namespace Heavenly_vigil_Project
             {
                 toBeRemoved = true;
                 ExperiencePoints.PlayerExp += 100;
+                SoundEffectInstance newSoundIntance = defeatedSound.CreateInstance();
+                newSoundIntance.Volume = 0.2f;
+                newSoundIntance.Play();
             }
         }
     }
