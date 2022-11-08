@@ -294,6 +294,11 @@ namespace Heavenly_vigil_Project
                     go.ToBeRemoved = true;
                 }
                 this.Initialize();
+                ExperiencePoints.MaxEXP = 100;
+                ExperiencePoints.PlayerLevel = 1;
+                ExperiencePoints.PlayerExp = 0;
+                TimeManager.timerSeconds = 0;
+                TimeManager.timerMinutes = 0;
             }
 
 

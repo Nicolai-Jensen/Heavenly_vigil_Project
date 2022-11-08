@@ -13,8 +13,8 @@ namespace Heavenly_vigil_Project
         private Rectangle textureRectangle;
         private bool canBeChosen = false;
         private SpriteFont upgradeCount;
-        private bool cooldown = true;
-        private float cooldownTimer;
+        KeyboardState currentKey;
+        KeyboardState previousKey;
 
         public bool CanBeChosen
         {
@@ -64,40 +64,30 @@ namespace Heavenly_vigil_Project
         /// <param name="gameTime"></param>
         public void HandleUpgradeInput(GameTime gameTime)
         {
-            KeyboardState keyState = Keyboard.GetState();
+            previousKey = currentKey;
+            currentKey = Keyboard.GetState();
 
-            if (cooldown == true)
+            if (currentKey.IsKeyDown(Keys.D1) && previousKey.IsKeyUp(Keys.D1) && canBeChosen)
             {
+                GameWorld.UpgradeInterfaces.ElementAt(2).AddValue();
 
-                if (keyState.IsKeyDown(Keys.D1) && canBeChosen)
-                {
-                    GameWorld.UpgradeInterfaces.ElementAt(2).AddValue();
+                RemoveUpgradeInterface();
+                toBeRemoved = true;
 
-                    RemoveUpgradeInterface();
-                    toBeRemoved = true;
-                }
-                else if (keyState.IsKeyDown(Keys.D2) && canBeChosen)
-                {
-                    GameWorld.UpgradeInterfaces.ElementAt(1).AddValue();
-
-                    RemoveUpgradeInterface();
-                    toBeRemoved = true;
-                }
-                else if (keyState.IsKeyDown(Keys.D3) && canBeChosen)
-                {
-                    GameWorld.UpgradeInterfaces.ElementAt(0).AddValue();
-
-                    RemoveUpgradeInterface();
-                    toBeRemoved = true;
-                }
-
-                cooldown = false;
             }
-            cooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (cooldownTimer >= 0.2f)
+            else if (currentKey.IsKeyDown(Keys.D2) && previousKey.IsKeyUp(Keys.D2) && canBeChosen)
             {
-                cooldown = true;
-                cooldownTimer = 0;
+                GameWorld.UpgradeInterfaces.ElementAt(1).AddValue();
+
+                RemoveUpgradeInterface();
+                toBeRemoved = true;
+            }
+            else if (currentKey.IsKeyDown(Keys.D3) && previousKey.IsKeyUp(Keys.D3) && canBeChosen)
+            {
+                GameWorld.UpgradeInterfaces.ElementAt(0).AddValue();
+
+                RemoveUpgradeInterface();
+                toBeRemoved = true;
             }
         }
         public Player ReturnPlayer()
