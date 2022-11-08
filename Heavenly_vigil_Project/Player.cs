@@ -18,17 +18,25 @@ namespace Heavenly_vigil_Project
     public class Player : GameObject
     {
         // -----FIELDS-----
+
+        //The extra Texture2D[] are here so that the weappons can be loaded and instantiated from the player itself
         private Texture2D[] magnumShot;
         private Texture2D[] katanaSlash;
+        
+        //SoundEffect variables for the sounds loaded by the player object
         private SoundEffect shootingSound;
         private SoundEffect hurtSound;
         private SoundEffect swordSound;
         private SoundEffect gameOverSound;
         private SoundEffect levelupSound;
+
+        //Fields that contain player stat data
         private Color color;
         private static int health;
         private static int mana;
         private int Levelup;
+
+        //all of these bools are used to start and stop the various timers attached to the player object
         private bool cooldown = true;
         private bool cooldown2 = true;
         private bool manaCooldown = false;
@@ -36,6 +44,8 @@ namespace Heavenly_vigil_Project
         private bool manadecrease = false;
         private static bool hitCooldown = false;
         private static bool healthModified = false;
+
+        //These floats contain the value of the timer that is counting up, they are used as a stopwatch.
         private float cooldownTimer;
         private float cooldownTimer2;
         private float cooldownTimerNumber;
@@ -45,7 +55,6 @@ namespace Heavenly_vigil_Project
         private float manadecreasing = 0;
 
         // -----PROPERTIES-----
-
         public static int Health
         {
             get { return health; }
@@ -56,7 +65,6 @@ namespace Heavenly_vigil_Project
             get { return mana; }
             set { mana = value; }
         }
-
         public float CooldownTimerNumber
         {
             get { return cooldownTimerNumber; }
@@ -79,8 +87,13 @@ namespace Heavenly_vigil_Project
 
 
         // -----CONSTRUCTORS-----
+        /// <summary>
+        /// The only constructor under player class, it is used when instantiating the player character
+        /// </summary>
+        /// <param name="vector2">This parameter is used to place the player in the middle of the screen at startup</param>
         public Player(Vector2 vector2)
         {
+            //base stats and the sprites state
             position = vector2;
             Levelup = ExperiencePoints.PlayerLevel;
             scale = 2f;
@@ -88,48 +101,54 @@ namespace Heavenly_vigil_Project
             mana = 100;
             speed = 300f;
             color = Color.White;
+
+            //Base attackspeed variable used in the Attack method, no number is the magnum and 2 is the sword
             cooldownTimerNumber = 0.6f;
             cooldownTimerNumber2 = 0.4f;
         }
+
         // -----METHODS-----
 
         /// <summary>
         /// This Method loads in information and code needed for the game
         /// </summary>
-        /// <param name="content"></param>
+        /// <param name="content">Parameter given by the monogame framework for our use</param>
         public override void LoadContent(ContentManager content)
         {
             //instantiates a new Texture2D in an Array
             objectSprites = new Texture2D[3];
+
             //The Array is then looped with this for loop where it cycles through a list of sprites with the array numbers
             for (int i = 0; i < objectSprites.Length; i++)
             {
                 objectSprites[i] = content.Load<Texture2D>($"tile_arara_azul");
             }
+
             //This line of code places the objects origin within the middle of the sprite assuming all sprites in the array share the same size
             origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
+
             //Places the Object in the middle of the game screen upon startup
             position.X = GameWorld.ScreenSize.X / 2;
             position.Y = GameWorld.ScreenSize.Y / 2;
 
+            //Loads all of the soundeffects for use in other methods
             hurtSound = content.Load<SoundEffect>("hurt");
             swordSound = content.Load<SoundEffect>("Sword_swoosh");
             gameOverSound = content.Load<SoundEffect>("game_over_sound");
             levelupSound = content.Load<SoundEffect>("levelup_sound");
+            shootingSound = content.Load<SoundEffect>("plst00");
 
+            //Loads the textures for the weapons
             katanaSlash = new Texture2D[1];
             katanaSlash[0] = content.Load<Texture2D>("HeavenlyVigilSwordSlash");
-
-
             magnumShot = new Texture2D[1];
             magnumShot[0] = content.Load<Texture2D>("BulletSprite");
-            shootingSound = content.Load<SoundEffect>("plst00");
         }
 
         /// <summary>
         /// This Update Method constantly loops throughout the program aslong as it is running, other methods we want to be looped are called inside this one
         /// </summary>
-        /// <param name="gameTime"></param>
+        /// <param name="gameTime">Parameter given by the Monogame framework to simulate time</param>
         public override void Update(GameTime gameTime)
         {
             HandleInput(gameTime);
@@ -212,7 +231,7 @@ namespace Heavenly_vigil_Project
                 }
                 Levelup = ExperiencePoints.PlayerLevel;
                 SoundEffectInstance newSoundIntance = levelupSound.CreateInstance();
-                newSoundIntance.Volume = 0.3f;
+                newSoundIntance.Volume = 0.2f;
                 newSoundIntance.Play();
             }
         }
