@@ -233,13 +233,23 @@ namespace Heavenly_vigil_Project
             upgradeIToAdd.Add(gameObject);
         }
         /// <summary>
-        /// After a set amount of time, it instantiates an enemy, and adds it to the gameObjects list.
+        /// After a set amount of time, it instantiates an enemy, and adds it to the gameObjects list as long as the amount of total enemies is below 100.
         /// </summary>
         /// <param name="gameTime"></param>
         private void SpawnEnemy(GameTime gameTime)
         {
+            int enemyCount = 0;
+
+            //Loops through the list "gameObjects" to count the amount of enemies currently instantiated.
+            foreach (GameObject go in gameObjects)
+            {
+                if (go is Enemy)
+                    enemyCount++;
+            }
+
+            //If the timer is above a value that scales with minutes survived in the game and the amount of enemies is below 100, instantiates an enemy.
             spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (spawnTimer > 1 - Math.Max((TimeManager.timerMinutes * 0.1) * 0.9, 0.1f))
+            if (spawnTimer > 1 - Math.Min((TimeManager.timerMinutes * 0.1) * 0.9, 0.8f) && enemyCount < 100)
             {
                 Enemy spawnedEnemy = new Enemy();
                 spawnedEnemy.LoadContent(Content);
