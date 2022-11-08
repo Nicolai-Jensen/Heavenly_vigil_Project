@@ -24,7 +24,7 @@ namespace Heavenly_vigil_Project
         public override void LoadContent(ContentManager content)
         {
             objectSprites = new Texture2D[1];
-            objectSprites[0] = content.Load<Texture2D>("Baggrund");
+            objectSprites[0] = content.Load<Texture2D>("NyBaggrund3");
         }
         public override void Update(GameTime gameTime)
         {
