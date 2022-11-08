@@ -20,8 +20,8 @@ namespace Heavenly_vigil_Project
             speed = 250;
             position = SpawnPosition();
             scale = 2f;
-            health = 50 + ExperiencePoints.PlayerLevel * 4;
-            damage = 10;
+            health = 75 + ExperiencePoints.PlayerLevel * 4;
+            damage = 15;
             color = Color.White;
 
 

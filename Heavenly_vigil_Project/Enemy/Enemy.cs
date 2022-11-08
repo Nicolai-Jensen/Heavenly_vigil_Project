@@ -16,18 +16,19 @@ namespace Heavenly_vigil_Project
     {
 
         //Fields
-        protected SoundEffect defeatedSound;
-        protected int health;
         protected static Random rnd = new Random();
+        protected Color color;
+        protected SoundEffect defeatedSound;
+
+        protected int health;
+ 
+        protected float hitCooldownTimer;
+        protected float feedbackTimer;
+
         protected bool katanahit = false;
         protected bool hitCooldown = false;
-        protected float hitCooldownTimer;
         protected bool hitFeedback = false;
         protected bool gotHit = false;
-        protected float feedbackTimer;
-        protected Color color;
- 
-
 
         //Properties
 
@@ -37,11 +38,9 @@ namespace Heavenly_vigil_Project
             speed = 150;
             position = SpawnPosition();
             scale = 1;
-            health = 15 + ExperiencePoints.PlayerLevel * 4;
+            health = 10 + ExperiencePoints.PlayerLevel * 4;
             damage = 5;
             color = Color.White;
-            
- 
         }
         //Method
         public override void LoadContent(ContentManager content)
@@ -66,8 +65,10 @@ namespace Heavenly_vigil_Project
         public override void Draw(SpriteBatch spriteBatch)
         {
             Vector2 origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
+
             if(ReturnPlayerPosition().X < position.X)
             spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.FlipHorizontally, 1f);
+
             else
             spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.None, 1f);
         }
