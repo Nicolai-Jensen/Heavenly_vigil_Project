@@ -165,7 +165,7 @@ namespace Heavenly_vigil_Project
         /// <summary>
         /// The Method for Drawing out a sprite to the screen, this method is an override for the vitual one in GameObject and is called in GameWorld
         /// </summary>
-        /// <param name="spriteBatch"></param>
+        /// <param name="spriteBatch">Parameter given by the Monogame framework for the use of sprites</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             //A Draw Method with different overloads, this particular one has 10 variables which can be defined
@@ -173,9 +173,9 @@ namespace Heavenly_vigil_Project
         }
 
         /// <summary>
-        /// The Player Input is controlled in this Method
+        /// The Player movement Input is controlled in this Method
         /// </summary>
-        /// <param name="gameTime"></param>
+        /// <param name="gameTime">Parameter given by the Monogame framework to simulate time</param>
         private void HandleInput(GameTime gameTime)
         {
             //velocity determines the direction the object is moving, this code sets the vector values to 0
@@ -207,10 +207,6 @@ namespace Heavenly_vigil_Project
                 velocity += new Vector2(0, +1);
             }
 
-
-
-
-
             //Code needed so that the objects speed isn't increased when moving diagonally
             if (velocity != Vector2.Zero)
             {
@@ -220,30 +216,45 @@ namespace Heavenly_vigil_Project
            
         }
 
+        /// <summary>
+        /// This method is used to Restore a small portion of hp every levelup
+        /// </summary>
+        /// <param name="levelup">A variable set to be 1 at the start of the game</param>
+        /// <param name="ExperiencePoints.Playerlevel">The players actual level</param>
         public void Restorehealth()
         {
+            //Checks if the players level has gone over the levelup variable, essentially checking if the player leveled up
             if (ExperiencePoints.PlayerLevel > Levelup)
             {
+                //adds 3 health to the playerd HP pool while making sure it isn't above 100
                 health += 3;
                 if (health > 100)
                 {
                     health = 100;
                 }
+                //Sets the levelup parameter to be even with the player level
                 Levelup = ExperiencePoints.PlayerLevel;
+
+                //Plays the levelup sound effect
                 SoundEffectInstance newSoundIntance = levelupSound.CreateInstance();
                 newSoundIntance.Volume = 0.2f;
                 newSoundIntance.Play();
             }
         }
 
-
+        /// <summary>
+        /// This method is used for entering the "PowerState", where the players stats are doubled for a short duration indicated by the mana bar
+        /// </summary>
+        /// <param name="gameTime">Parameter given by the Monogame framework to simulate time</param>
         public void PowerState(GameTime gameTime)
         {
             //Keystate reads which key is being used
             KeyboardState keyState2 = Keyboard.GetState();
 
+            //Checks if Space is pressed and if the players mana is available for use (which is 100 mana)
             if (keyState2.IsKeyDown(Keys.Space) && manaCooldown == false)
             {
+                //Doubles all stats
                 color = Color.Blue;
                 scale *= 2;
                 speed *= 2;
@@ -252,11 +263,16 @@ namespace Heavenly_vigil_Project
                 Katana.ScaleValue *= 1.5f;
                 Katana.SpeedValue *= 3f;
                 Katana.TravelDistance = 0.8f;
+
+                //Disables the use of space bar by setting manaCooldownn to true and activates the manaDrain effect in the if statement below
                 manadecrease = true;
                 manaCooldown = true;
+                
+                //Disables the players ability to choose upgrades if any are available, as they would give unintended results when PowerState is over
                 UpgradeInterface.IsInteractive = false;
             }
            
+            //Starts draining mana one at a time as long as its above 0
             if (mana > 0 && manadecrease == true)
             {
                 manadecreasing += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -268,11 +284,14 @@ namespace Heavenly_vigil_Project
 
             }
 
+            //When mana reaches 0 and the mana drain effect is active it plays these following effects
             if (mana == 0 && manadecrease == true)
             {
+                //disables the mana drain effect while enabling the mana regen effect
                 manaRegen = true;
                 manadecrease = false;
 
+                //resets all stats to what they were before the PowerState
                 color = Color.White;
                 scale /= 2;
                 speed /= 2;
@@ -281,9 +300,12 @@ namespace Heavenly_vigil_Project
                 Katana.ScaleValue /= 1.5f;
                 Katana.SpeedValue /= 3f;
                 Katana.TravelDistance = 0.3f;
+
+                //Enables the players ability to choose upgrades again
                 UpgradeInterface.IsInteractive = true;
             }
             
+            //Starts refilling mana over time (this rate is slower than the drain effect)
             if (manaRegen == true && mana < 100)
             {
                 manaRegenerating += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -294,6 +316,7 @@ namespace Heavenly_vigil_Project
                 }
             }
 
+            //When mana reaches 100 it disables the mana regen effect and enables the spacebar to be used again
             if (mana == 100 && manaRegen == true)
             {
                 manaRegen = false;
