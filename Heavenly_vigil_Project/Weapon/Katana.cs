@@ -15,7 +15,6 @@ namespace Heavenly_vigil_Project
         // -----FIELDS-----
         private float rotation;
         private static int damage;
-        private Vector2 enemyPosition;
         private bool attacked = false;
         private float attackedTimer;
         private static bool attackAnimation = true;
@@ -109,16 +108,6 @@ namespace Heavenly_vigil_Project
 
         }
 
-        /*private void ChooseDirection()
-        {
-            Vector2 enemyPosition = ReturnEnemyPosition();
-
-            velocity += enemyPosition - position;
-            velocity.Normalize();
-            rotation = (float)Math.Atan2(enemyPosition.Y - position.Y, enemyPosition.X - position.X) + 1.4f;
-
-
-        }*/
 
         private void Attacking(GameTime gameTime)
         {
@@ -136,20 +125,6 @@ namespace Heavenly_vigil_Project
             }
         }
 
-        /* private Vector2 ReturnEnemyPosition()
-         {
-             foreach (GameObject go in GameWorld.GameObjects)
-             {
-
-                 if (go is Enemy)
-                 {
-
-                     return go.Position;
-                 }
-             }
-
-             return new Vector2(position.X, -100);
-         } */
 
         private Vector2 ReturnPlayerPosition()
         {

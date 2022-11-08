@@ -12,6 +12,7 @@ namespace Heavenly_vigil_Project
         //Rectangle for the Power-up background
         private Rectangle textureRectangle;
         private bool canBeChosen = false;
+        private static bool isInteractive = true;
         private SpriteFont upgradeCount;
         KeyboardState currentKey;
         KeyboardState previousKey;
@@ -20,6 +21,12 @@ namespace Heavenly_vigil_Project
         {
             get { return canBeChosen; }
             set { canBeChosen = value; }
+        }
+
+        public static bool IsInteractive
+        {
+            get { return isInteractive; }
+            set { isInteractive = value; }
         }
 
         public override void LoadContent(ContentManager content)
@@ -55,7 +62,7 @@ namespace Heavenly_vigil_Project
             GameWorld.InstantiateGameObject(new UpgradeInterface());            
             GameWorld.InstantiateUpgrade(new DamageUp(new Vector2(830, 925), 2));
             GameWorld.InstantiateUpgrade(new AttackSpeedUp(new Vector2(960, 925), 1.1f));
-            GameWorld.InstantiateUpgrade(new SpeedUp(new Vector2(1090, 925), 400f));
+            GameWorld.InstantiateUpgrade(new SpeedUp(new Vector2(1090, 925), 30f));
 
         }
         /// <summary>
@@ -67,7 +74,7 @@ namespace Heavenly_vigil_Project
             previousKey = currentKey;
             currentKey = Keyboard.GetState();
 
-            if (currentKey.IsKeyDown(Keys.D1) && previousKey.IsKeyUp(Keys.D1) && canBeChosen)
+            if (currentKey.IsKeyDown(Keys.D1) && previousKey.IsKeyUp(Keys.D1) && canBeChosen && isInteractive == true)
             {
                 GameWorld.UpgradeInterfaces.ElementAt(2).AddValue();
 
@@ -75,14 +82,14 @@ namespace Heavenly_vigil_Project
                 toBeRemoved = true;
 
             }
-            else if (currentKey.IsKeyDown(Keys.D2) && previousKey.IsKeyUp(Keys.D2) && canBeChosen)
+            else if (currentKey.IsKeyDown(Keys.D2) && previousKey.IsKeyUp(Keys.D2) && canBeChosen && isInteractive == true)
             {
                 GameWorld.UpgradeInterfaces.ElementAt(1).AddValue();
 
                 RemoveUpgradeInterface();
                 toBeRemoved = true;
             }
-            else if (currentKey.IsKeyDown(Keys.D3) && previousKey.IsKeyUp(Keys.D3) && canBeChosen)
+            else if (currentKey.IsKeyDown(Keys.D3) && previousKey.IsKeyUp(Keys.D3) && canBeChosen && isInteractive == true)
             {
                 GameWorld.UpgradeInterfaces.ElementAt(0).AddValue();
 

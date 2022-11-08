@@ -49,6 +49,7 @@ namespace Heavenly_vigil_Project
         {
             Player player = ReturnPlayer();
             player.CooldownTimerNumber /= attackSpdAmp;
+            player.CooldownTimerNumber2 /= attackSpdAmp;
         }
 
 

@@ -17,23 +17,26 @@ namespace Heavenly_vigil_Project
         // -----FIELDS-----
         private Texture2D[] magnumShot;
         private Texture2D[] katanaSlash;
-        private static int health;
-        private bool cooldown = true;
-        private float cooldownTimer;
-        private static bool hitCooldown = false;
-        private float hitCooldownTimer;
+        private SoundEffect shootingSound;
+        private SoundEffect hurtSound;
         private Color color;
-        private static bool healthModified = false;
-        private static bool hasKatana = true;
-        private static bool hasMagnum = false;
-        private float cooldownTimerNumber;
+        private static int health;
         private static int mana;
+        private int Levelup;
+        private bool cooldown = true;
+        private bool cooldown2 = true;
         private bool manaCooldown = false;
         private bool manaRegen = false;
-        private float manaRegenerating = 0;
         private bool manadecrease = false;
+        private static bool hitCooldown = false;
+        private static bool healthModified = false;
+        private float cooldownTimer;
+        private float cooldownTimer2;
+        private float cooldownTimerNumber;
+        private float cooldownTimerNumber2;
+        private float hitCooldownTimer;
+        private float manaRegenerating = 0;
         private float manadecreasing = 0;
-        private int Levelup;
 
         // -----PROPERTIES-----
 
@@ -53,11 +56,10 @@ namespace Heavenly_vigil_Project
             get { return cooldownTimerNumber; }
             set { cooldownTimerNumber = value; }
         }
-
-        public static bool HasMagnum
+        public float CooldownTimerNumber2
         {
-            get { return hasMagnum; }
-            set { hasMagnum = value; }
+            get { return cooldownTimerNumber2; }
+            set { cooldownTimerNumber2 = value; }
         }
         public static bool HealthModified
         {
@@ -81,6 +83,7 @@ namespace Heavenly_vigil_Project
             speed = 300f;
             color = Color.White;
             cooldownTimerNumber = 0.6f;
+            cooldownTimerNumber2 = 0.4f;
         }
         // -----METHODS-----
 
@@ -103,12 +106,15 @@ namespace Heavenly_vigil_Project
             position.X = GameWorld.ScreenSize.X / 2;
             position.Y = GameWorld.ScreenSize.Y / 2;
 
+            hurtSound = content.Load<SoundEffect>("hurt");
+
             katanaSlash = new Texture2D[1];
             katanaSlash[0] = content.Load<Texture2D>("HeavenlyVigilSwordSlash");
 
 
             magnumShot = new Texture2D[1];
             magnumShot[0] = content.Load<Texture2D>("BulletSprite");
+            shootingSound = content.Load<SoundEffect>("energy_gun2");
         }
 
         /// <summary>
@@ -195,7 +201,6 @@ namespace Heavenly_vigil_Project
                 {
                     health = 100;
                 }
-
                 Levelup = ExperiencePoints.PlayerLevel;
             }
         }
@@ -203,8 +208,6 @@ namespace Heavenly_vigil_Project
 
         public void PowerState(GameTime gameTime)
         {
-
-
             //Keystate reads which key is being used
             KeyboardState keyState2 = Keyboard.GetState();
 
@@ -214,15 +217,15 @@ namespace Heavenly_vigil_Project
                 scale *= 2;
                 speed *= 2;
                 cooldownTimerNumber /= 2f;
+                cooldownTimerNumber2 /= 2f;
                 Katana.ScaleValue *= 1.5f;
                 Katana.SpeedValue *= 3f;
                 Katana.TravelDistance = 0.8f;
                 manadecrease = true;
                 manaCooldown = true;
+                UpgradeInterface.IsInteractive = false;
             }
-
-
-            
+           
             if (mana > 0 && manadecrease == true)
             {
                 manadecreasing += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -243,14 +246,15 @@ namespace Heavenly_vigil_Project
                 scale /= 2;
                 speed /= 2;
                 cooldownTimerNumber *= 2f;
+                cooldownTimerNumber2 *= 2f;
                 Katana.ScaleValue /= 1.5f;
                 Katana.SpeedValue /= 3f;
                 Katana.TravelDistance = 0.3f;
+                UpgradeInterface.IsInteractive = true;
             }
             
             if (manaRegen == true && mana < 100)
             {
-
                 manaRegenerating += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (manaRegenerating >= 0.25f)
                 {
@@ -263,9 +267,7 @@ namespace Heavenly_vigil_Project
             {
                 manaRegen = false;
                 manaCooldown = false;
-            }
-
-            
+            }          
         }
 
         /// <summary>
@@ -317,14 +319,20 @@ namespace Heavenly_vigil_Project
                     color = Color.Red;
                 }
                 hitCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (hitCooldownTimer <= 0.05f)
+                {
+                    SoundEffectInstance hurtSoundIntance = hurtSound.CreateInstance();
+                    hurtSoundIntance.Volume = 0.5f;
+                    hurtSoundIntance.Play();
+                }
+
                 if (hitCooldownTimer >= 0.4f)
                 {
                     hitCooldown = false;
                     color = Color.White;
                     hitCooldownTimer = 0;
                     healthModified = false;
-                }
-                
+                }                
             }
         }
 
@@ -344,14 +352,30 @@ namespace Heavenly_vigil_Project
 
         public void Attack(GameTime gameTime)
         {
-            hasMagnum = true;
+            bool hasKatana = true;
+            bool hasMagnum = true;
+
             if (cooldown == true)
             {
                 if (hasMagnum == true)
                 {
                     Magnum shot = new Magnum(magnumShot[0], new Vector2(position.X, position.Y));
                     GameWorld.InstantiateGameObject(shot);
+                    SoundEffectInstance shootingSoundIntance = shootingSound.CreateInstance();
+                    shootingSoundIntance.Volume = 0.1f;
+                    shootingSoundIntance.Play();
                 }
+                cooldown = false;
+            }
+            cooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (cooldownTimer >= CooldownTimerNumber)
+            {
+                cooldown = true;
+                cooldownTimer = 0;
+            }
+
+            if (cooldown2 == true)
+            {
                 if (hasKatana == true)
                 {
                     Katana slash = new Katana(katanaSlash[0], new Vector2(position.X, position.Y), gameTime);
@@ -362,13 +386,13 @@ namespace Heavenly_vigil_Project
                     }
                     else { Katana.AttackAnimation = true; }
                 }
-                cooldown = false;
+                cooldown2 = false;
             }
-            cooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (cooldownTimer >= CooldownTimerNumber)
+            cooldownTimer2 += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (cooldownTimer2 >= cooldownTimerNumber2)
             {
-                cooldown = true;
-                cooldownTimer = 0;
+                cooldown2 = true;
+                cooldownTimer2 = 0;
             }
 
         }

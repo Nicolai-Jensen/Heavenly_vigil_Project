@@ -61,6 +61,12 @@
 /processorParam:TextureFormat=Color
 /build:BulletSprite.png
 
+#begin cymbal.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:cymbal.mp3
+
 #begin enemy_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -96,6 +102,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:enemy_3.png
+
+#begin energy_gun.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:energy_gun.mp3
+
+#begin energy_gun2.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:energy_gun2.mp3
 
 #begin Game_Over.png
 /importer:TextureImporter
@@ -139,6 +157,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:HeavenlyVigilSwordSlash.png
+
+#begin hurt.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:hurt.mp3
 
 #begin laser.png
 /importer:TextureImporter
