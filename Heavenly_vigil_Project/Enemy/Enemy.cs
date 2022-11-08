@@ -210,7 +210,7 @@ namespace Heavenly_vigil_Project
             if (health <= 0)
             {
                 toBeRemoved = true;
-                ExperiencePoints.PlayerExp += 10;
+                ExperiencePoints.PlayerExp += 100;
                 SoundEffectInstance newSoundIntance = defeatedSound.CreateInstance();
                 newSoundIntance.Volume = 0.2f;
                 newSoundIntance.Play();
