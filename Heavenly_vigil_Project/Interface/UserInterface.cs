@@ -34,15 +34,15 @@ namespace Heavenly_vigil_Project
 
         public override void LoadContent(ContentManager content)
         {
-            objectSprites = new Texture2D[3];
+            objectSprites = new Texture2D[4];
             objectSprites[0] = content.Load<Texture2D>("GreenHealth");
             objectSprites[1] = content.Load<Texture2D>("BlackHealth");
             objectSprites[2] = content.Load<Texture2D>("BlueEXP");
+            objectSprites[3] = content.Load<Texture2D>("UIEXPBase");
             greenRectangle = new Rectangle(10, 10, Player.Health * 2, 20);
             blackRectangle = new Rectangle(0, 0, 220, 40);
             blueRectangle = new Rectangle(0, 0, ExperiencePoints.ExpPercentage, 20);
             manaRectangle = new Rectangle(0, 0, Player.Mana, 20);
-            xpBlackrectangle = new Rectangle(0, 0, 1900, 40);
             gameFont = content.Load<SpriteFont>("GameFont");
             timerFont = content.Load<SpriteFont>("TimerFont");
 
@@ -63,7 +63,7 @@ namespace Heavenly_vigil_Project
         {
             spriteBatch.Draw(objectSprites[1], new Vector2(10, 10), blackRectangle, Color.White);
             spriteBatch.Draw(objectSprites[0], new Vector2(20, 20), greenRectangle, Color.White);
-            spriteBatch.Draw(objectSprites[1], new Vector2(10, 1000), xpBlackrectangle, Color.White);
+            spriteBatch.Draw(objectSprites[3], new Vector2(10, 1000), Color.White);
             spriteBatch.Draw(objectSprites[2], new Vector2(20, 1010), blueRectangle, Color.White);
             spriteBatch.Draw(objectSprites[1], new Vector2(10, 55), blackRectangle, Color.White);
             spriteBatch.Draw(objectSprites[2], new Vector2(20, 65), manaRectangle, Color.White);
