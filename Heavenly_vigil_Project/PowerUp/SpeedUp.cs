@@ -20,11 +20,6 @@ namespace Heavenly_vigil_Project
         //Properties
         //Constructors
 
-        /// <summary>
-        /// Sets the specified variables when the object is instantiated.
-        /// </summary>
-        /// <param name="position">Position of the PowerUp</param>
-        /// <param name="speedAmp">The Amount of speed the PowerUp should give the player</param>
         public SpeedUp(Vector2 position, float speedAmp)
         {
             this.position = position;
