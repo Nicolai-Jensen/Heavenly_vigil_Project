@@ -34,11 +34,13 @@ namespace Heavenly_vigil_Project
 
         public override void LoadContent(ContentManager content)
         {
-            objectSprites = new Texture2D[4];
+            objectSprites = new Texture2D[6];
             objectSprites[0] = content.Load<Texture2D>("GreenHealth");
             objectSprites[1] = content.Load<Texture2D>("BlackHealth");
             objectSprites[2] = content.Load<Texture2D>("BlueEXP");
             objectSprites[3] = content.Load<Texture2D>("UIEXPBase");
+            objectSprites[4] = content.Load<Texture2D>("Tutorial");
+            objectSprites[5] = content.Load<Texture2D>("UIBlock");
             greenRectangle = new Rectangle(10, 10, Player.Health * 2, 20);
             blackRectangle = new Rectangle(0, 0, 220, 40);
             blueRectangle = new Rectangle(0, 0, ExperiencePoints.ExpPercentage, 20);
@@ -67,6 +69,8 @@ namespace Heavenly_vigil_Project
             spriteBatch.Draw(objectSprites[2], new Vector2(20, 1010), blueRectangle, Color.White);
             spriteBatch.Draw(objectSprites[1], new Vector2(10, 55), blackRectangle, Color.White);
             spriteBatch.Draw(objectSprites[2], new Vector2(20, 65), manaRectangle, Color.White);
+            spriteBatch.Draw(objectSprites[4], new Vector2(1650, 20), null, Color.White, 0f, origin, 0.5f, SpriteEffects.None, 1f);
+            spriteBatch.Draw(objectSprites[5], new Vector2(886, 2), null, Color.White, 0f, origin, 2f, SpriteEffects.None, 1f);
             spriteBatch.End();
             spriteBatch.Begin();
             spriteBatch.DrawString(gameFont, $"Lvl. {ExperiencePoints.PlayerLevel}", new Vector2(950, 1009), Color.White);
