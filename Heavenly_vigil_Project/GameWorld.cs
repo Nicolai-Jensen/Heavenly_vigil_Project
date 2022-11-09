@@ -24,6 +24,7 @@ namespace Heavenly_vigil_Project
         private List<PowerUp> upgradeIToRemove = new List<PowerUp>();
         private Texture2D pixel;
         private float spawnTimer;
+        private float mushroomSpawnTimer;
         private float bossSpawnTimer;
 
         private static Vector2 screenSize;
@@ -256,10 +257,18 @@ namespace Heavenly_vigil_Project
                 gameObjects.Add(spawnedEnemy);
                 spawnTimer = 0;
             }
+            mushroomSpawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (mushroomSpawnTimer >= 5)
+            {
+                Mushroom mush = new Mushroom();
+                mush.LoadContent(Content);
+                gameObjects.Add(mush);
+                mushroomSpawnTimer = 0;
+            }
             bossSpawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (bossSpawnTimer >= 30)
             {
-                EnemyBoss boss = new EnemyBoss();
+                Boss boss = new Boss();
                 boss.LoadContent(Content);
                 gameObjects.Add(boss);
                 bossSpawnTimer = 0;

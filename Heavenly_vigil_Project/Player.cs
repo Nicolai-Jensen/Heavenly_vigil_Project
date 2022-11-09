@@ -398,7 +398,7 @@ namespace Heavenly_vigil_Project
                 {
                     //plays a Sound effect that indicates the player has been hit
                     SoundEffectInstance hurtSoundIntance = hurtSound.CreateInstance();
-                    hurtSoundIntance.Volume = 0.5f;
+                    hurtSoundIntance.Volume = 0.3f;
                     hurtSoundIntance.Play();
                 }
 

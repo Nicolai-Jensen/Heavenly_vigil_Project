@@ -30,11 +30,12 @@ namespace Heavenly_vigil_Project
             MediaPlayer.Volume = 0.5f;
             MediaPlayer.Play(backGroundMusic);
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.1f;
+            MediaPlayer.Volume = 0.2f;
         }
         public override void Update(GameTime gameTime)
         {
-            
+            if (Player.Health < 0)
+                MediaPlayer.Stop();
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
