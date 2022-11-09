@@ -165,12 +165,12 @@ namespace Heavenly_vigil_Project
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(_spriteBatch);
-                DrawCollisionBox(go);
+                //DrawCollisionBox(go);
             }
             foreach (PowerUp go in upgradeInterfaces)
             {
                 go.Draw(_spriteBatch);
-                DrawCollisionBox(go);
+                //DrawCollisionBox(go);
             }
 
 
