@@ -22,6 +22,7 @@ namespace Heavenly_vigil_Project
         //The extra Texture2D[] are here so that the weappons can be loaded and instantiated from the player itself
         private Texture2D[] magnumShot;
         private Texture2D[] katanaSlash;
+        private Texture2D[] idleAnimation;
 
         //SoundEffect variables for the sounds loaded by the player object
         private SoundEffect shootingSound;
@@ -172,6 +173,10 @@ namespace Heavenly_vigil_Project
         public override void Draw(SpriteBatch spriteBatch)
         {
             //A Draw Method with different overloads, this particular one has 10 variables which can be defined
+            if (velocity.X == 0 && velocity.Y == 0)
+            {
+                spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.None, 0);
+            }
             //If the player has last pressed "D" to move right, it calls the first draw method, which doesn't flip the sprites
             if (isFacingRight)
             {
