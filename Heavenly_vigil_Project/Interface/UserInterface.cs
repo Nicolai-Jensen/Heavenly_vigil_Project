@@ -14,14 +14,11 @@ namespace Heavenly_vigil_Project
         //Fields
         //Rectangle for the health bar.
         private Rectangle greenRectangle;
-        //Rectangle for the health background
-        private Rectangle blackRectangle;
         //Rectangle for the xp bar.
         private Rectangle blueRectangle;
-        //Rectangle for the xp bar background
-        private Rectangle xpBlackrectangle;
         //Rectangle for the mana bar
         private Rectangle manaRectangle;
+
         private SpriteFont gameFont;
         private SpriteFont timerFont;
 

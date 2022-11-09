@@ -332,7 +332,11 @@ namespace Heavenly_vigil_Project
                 TimeManager.timerSeconds = 0;
                 TimeManager.timerMinutes = 0;
                 GameObject.DamageMultiplyer = 0;
+                mushroomSpawnTimer = 0;
                 bossSpawnTimer = 0;
+                Katana.ScaleValue = 1;
+                Katana.TravelDistance = 0.3f;
+                Katana.SpeedValue = 120f;
             }
 
 
