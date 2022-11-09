@@ -17,14 +17,13 @@ namespace Heavenly_vigil_Project
         //Fields
         public int damageAmp;
         private SpriteFont titleFont;
-        //Properties
+
         //Constructors
 
         public DamageUp(Vector2 position, int damageAmp)
         {
             this.position = position;
             this.damageAmp = damageAmp;
-            powerUpDescription = "increases the players damage";
             powerUpTitle = "Damage";
             scale = 1f;
         }

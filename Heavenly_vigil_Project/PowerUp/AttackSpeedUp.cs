@@ -18,14 +18,13 @@ namespace Heavenly_vigil_Project
         //Fields
         public float attackSpdAmp;
         private SpriteFont titleFont;
-        //Properties
-        //Constructors
 
+
+        //Constructors
         public AttackSpeedUp(Vector2 position, float attackSpdAmp)
         {
             this.position = position;
             this.attackSpdAmp = attackSpdAmp;
-            powerUpDescription = "Increases the players attackspeed.";
             powerUpTitle = "Attackspeed";
             scale = 1f;
             

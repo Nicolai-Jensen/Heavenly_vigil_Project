@@ -119,7 +119,11 @@ namespace Heavenly_vigil_Project
             spriteBatch.Draw(objectSprites[(int)animationTime], position, null, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
         }
 
-
+        /// <summary>
+        /// Checks if gameobjects is colliding with another object.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool IsColliding(GameObject other)
         {
             if (this == other)
@@ -128,7 +132,6 @@ namespace Heavenly_vigil_Project
             }
             return CollisionBox.Intersects(other.CollisionBox);
         }
-
         public virtual void OnCollision(GameObject other)
         {
 

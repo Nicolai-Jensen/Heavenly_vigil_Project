@@ -16,10 +16,8 @@ namespace Heavenly_vigil_Project
     {
         //Fields
         protected int valueAmp;
-        protected string powerUpDescription;
         protected string powerUpTitle;
-        //Properties
-        //Constructors
+
         //Methods
         public override void LoadContent(ContentManager content)
         {
@@ -31,7 +29,11 @@ namespace Heavenly_vigil_Project
             
         }
         public abstract void AddValue();
-
+        /// <summary>
+        /// Goes through the GameObjects list to find the Player, and returns the Player.
+        ///  If no Player is found, return new Player(0, 0).
+        /// </summary>
+        /// <returns></returns>
         public Player ReturnPlayer()
         {
             foreach (GameObject go in GameWorld.GameObjects)

@@ -17,14 +17,13 @@ namespace Heavenly_vigil_Project
         //Fields
         public float speedAmp;
         private SpriteFont titleFont;
-        //Properties
+
         //Constructors
 
         public SpeedUp(Vector2 position, float speedAmp)
         {
             this.position = position;
             this.speedAmp = speedAmp;
-            powerUpDescription = "Increases the players speed.";
             powerUpTitle = "Speed";
             scale = 1f;
         }
