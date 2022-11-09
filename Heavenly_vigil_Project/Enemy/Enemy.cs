@@ -10,21 +10,27 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 namespace Heavenly_vigil_Project
 {
     /// <summary>
-    /// loads and draws the enemy with all the Fields and Methods, the enemy should have.
+    /// The super class for all other enemies, all the Fields and Methods is stored here. also loads and draws the skeleton.
     /// </summary>
     internal class Enemy : GameObject
     {
 
         //Fields
         protected static Random rnd = new Random();
-        protected Color color;
         protected SoundEffect defeatedSound;
         protected int expPoints;
         protected int health;
- 
+
+        //Color variabel so we can control the color.
+        protected Color color;
+
+        // Timer so enemies only can take a hit every 0.2 seconds, and turn the Color.Red.
         protected float hitCooldownTimer;
+
+        // Timer for enemies to turn Color.White again after 0.1 second after a hit has been made.
         protected float feedbackTimer;
 
+        //Different bools to check if the Enemy got hit, and can be hit again after a set amount of time.
         protected bool katanahit = false;
         protected bool hitCooldown = false;
         protected bool hitFeedback = false;
@@ -116,7 +122,10 @@ namespace Heavenly_vigil_Project
             velocity = playerPosition - position;
             velocity.Normalize();
         }
-
+        /// <summary>
+        /// Goes through our gameObjects List to find the Player, and return the players position.
+        /// </summary>
+        /// <returns></returns>
         protected Vector2 ReturnPlayerPosition()
         {
             foreach (GameObject go in GameWorld.GameObjects)

@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// The Boss a stronger version of the Enemy class.
+    /// </summary>
     internal class Boss : Enemy
     {
         //Fields

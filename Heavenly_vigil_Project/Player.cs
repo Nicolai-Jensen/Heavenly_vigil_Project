@@ -22,6 +22,8 @@ namespace Heavenly_vigil_Project
         //The extra Texture2D[] are here so that the weappons can be loaded and instantiated from the player itself
         private Texture2D[] magnumShot;
         private Texture2D[] katanaSlash;
+        private Texture2D[] idleAnimation;
+        private Texture2D[] runAnimation;
 
         //SoundEffect variables for the sounds loaded by the player object
         private SoundEffect shootingSound;
@@ -119,12 +121,19 @@ namespace Heavenly_vigil_Project
         public override void LoadContent(ContentManager content)
         {
             //instantiates a new Texture2D in an Array
-            objectSprites = new Texture2D[8];
+            runAnimation = new Texture2D[8];
+
 
             //The Array is then looped with this for loop where it cycles through a list of sprites with the array numbers
-            for (int i = 0; i < objectSprites.Length; i++)
+            for (int i = 0; i < runAnimation.Length; i++)
             {
-                objectSprites[i] = content.Load<Texture2D>($"hero_{i}");
+                runAnimation[i] = content.Load<Texture2D>($"hero_{i}");
+            }
+
+            //The Array is then looped with this for loop where it cycles through a list of sprites with the array numbers
+            for (int i = 0; i < idleAnimation.Length; i++)
+            {
+                idleAnimation[i] = content.Load<Texture2D>($"hero_{i}");
             }
 
             //This line of code places the objects origin within the middle of the sprite assuming all sprites in the array share the same size
@@ -172,6 +181,10 @@ namespace Heavenly_vigil_Project
         public override void Draw(SpriteBatch spriteBatch)
         {
             //A Draw Method with different overloads, this particular one has 10 variables which can be defined
+            if (velocity.X == 0 && velocity.Y == 0)
+            {
+                spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.None, 0);
+            }
             //If the player has last pressed "D" to move right, it calls the first draw method, which doesn't flip the sprites
             if (isFacingRight)
             {
@@ -201,24 +214,33 @@ namespace Heavenly_vigil_Project
             if (keyState.IsKeyDown(Keys.W))
             {
                 velocity += new Vector2(0, -1);
+                objectSprites = runAnimation;
             }
 
             //Moves the player left when pressing A by removing X position value, and sets the the bool to false to determine which draw method to use
             if (keyState.IsKeyDown(Keys.A))
             {
                 velocity += new Vector2(-1, 0);
+                objectSprites = runAnimation;
                 isFacingRight = false;
             }
             //Moves the player right when pressing D by adding X position value, and sets the bool to true to determine which draw method to use
             if (keyState.IsKeyDown(Keys.D))
             {
                 velocity += new Vector2(+1, 0);
+                objectSprites = runAnimation;
                 isFacingRight = true;
             }
             //Moves the player down when pressing S by adding Y position value 
             if (keyState.IsKeyDown(Keys.S))
             {
                 velocity += new Vector2(0, +1);
+                objectSprites = runAnimation;
+            }
+
+            if (!keyState.IsKeyDown(Keys.S) && !keyState.IsKeyDown(Keys.W) && !keyState.IsKeyDown(Keys.A) && !keyState.IsKeyDown(Keys.D))
+            {
+                objectSprites = idleAnimation;
             }
 
             //Code needed so that the objects speed isn't increased when moving diagonally
