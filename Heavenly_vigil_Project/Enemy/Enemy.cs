@@ -19,7 +19,7 @@ namespace Heavenly_vigil_Project
         protected static Random rnd = new Random();
         protected Color color;
         protected SoundEffect defeatedSound;
-
+        protected int expPoints;
         protected int health;
  
         protected float hitCooldownTimer;
@@ -40,6 +40,7 @@ namespace Heavenly_vigil_Project
             scale = 1;
             health = 10 + ExperiencePoints.PlayerLevel * 4;
             damage = 5;
+            expPoints = 10;
             color = Color.White;
         }
         //Method
@@ -211,7 +212,7 @@ namespace Heavenly_vigil_Project
             if (health <= 0)
             {
                 toBeRemoved = true;
-                ExperiencePoints.PlayerExp += 100;
+                ExperiencePoints.PlayerExp += expPoints;
                 SoundEffectInstance newSoundIntance = defeatedSound.CreateInstance();
                 newSoundIntance.Volume = 0.2f;
                 newSoundIntance.Play();
