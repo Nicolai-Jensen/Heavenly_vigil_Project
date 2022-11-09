@@ -14,7 +14,6 @@ namespace Heavenly_vigil_Project
     public abstract class Weapon : GameObject
     {
 
-        public abstract void Attack(GameTime gameTime);
         public override void LoadContent(ContentManager content)
         {
             throw new NotImplementedException();

@@ -102,13 +102,7 @@ namespace Heavenly_vigil_Project
         public override void Update(GameTime gameTime)
         {
             Move(gameTime);
-            Attack(gameTime);
             Attacking(gameTime);
-        }
-
-        public override void Attack(GameTime gameTime)
-        {
-
         }
 
 

@@ -26,6 +26,7 @@ namespace Heavenly_vigil_Project
             health = 75 + ExperiencePoints.PlayerLevel * 4;
             damage = 15;
             color = Color.White;
+            expPoints = 40;
         }
         //Methods
         public override void LoadContent(ContentManager content)

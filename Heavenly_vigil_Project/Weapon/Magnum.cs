@@ -104,13 +104,9 @@ namespace Heavenly_vigil_Project
         public override void Update(GameTime gameTime)
         {
             Move(gameTime);
-            Attack(gameTime);
         }
 
-        public override void Attack(GameTime gameTime)
-        {
 
-        }
 
         /// <summary>
         /// This Method scouts the gameobjects list for the player object and returns the position of it

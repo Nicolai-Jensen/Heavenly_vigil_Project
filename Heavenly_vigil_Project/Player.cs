@@ -425,7 +425,7 @@ namespace Heavenly_vigil_Project
                 }
 
                 //When the timer hits over this value it makes the player normal colored and enables them to be hit again
-                if (hitCooldownTimer >= 0.4f)
+                if (hitCooldownTimer >= 0.5f)
                 {
                     hitCooldown = false;
                     color = Color.White;

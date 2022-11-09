@@ -59,9 +59,21 @@ namespace Heavenly_vigil_Project
         /// </summary>
         public override void AddValue()
         {
-
-            Katana.DamageMultiplyer += 2;
-            Magnum.DamageMultiplyer += 1;
+            if (ExperiencePoints.PlayerLevel < 10)
+            {
+                Katana.DamageMultiplyer += 2;
+                Magnum.DamageMultiplyer += 1;
+            }
+            else if (ExperiencePoints.PlayerLevel >= 10 || ExperiencePoints.PlayerLevel < 30)
+            {
+                Katana.DamageMultiplyer += 3;
+                Magnum.DamageMultiplyer += 2;
+            }
+            else
+            {
+                Katana.DamageMultiplyer += 3;
+                Magnum.DamageMultiplyer += 3;
+            }
         }
 
     }
