@@ -20,6 +20,12 @@ namespace Heavenly_vigil_Project
         private SpriteFont titleFont;
         //Properties
         //Constructors
+
+        /// <summary>
+        /// Sets the specified variables when the object is instantiated.
+        /// </summary>
+        /// <param name="position">Position of the PowerUp</param>
+        /// <param name="attackSpdAmp">Value the the current attackspeed should be divided by</param>
         public AttackSpeedUp(Vector2 position, float attackSpdAmp)
         {
             this.position = position;
@@ -49,6 +55,10 @@ namespace Heavenly_vigil_Project
             spriteBatch.DrawString(titleFont, "2.", new Vector2(position.X - objectSprites[0].Width / 2 - 30, position.Y - objectSprites[0].Height / 2 + 15), Color.White);
         }
 
+
+        /// <summary>
+        /// Divides the current cooldownTimer of both the weapons by the value of attackSpdAmp.
+        /// </summary>
         public override void AddValue()
         {
             Player player = ReturnPlayer();

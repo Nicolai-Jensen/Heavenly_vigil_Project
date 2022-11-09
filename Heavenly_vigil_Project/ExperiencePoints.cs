@@ -51,16 +51,25 @@ namespace Heavenly_vigil_Project
 
         //-----METHODS-----
 
+        /// <summary>
+        /// Checks to see if the player has enough experience points to level up.
+        /// If so, the player gains a level and the eperience resets.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public static void CheckForLevelUp(GameTime gameTime)
         {
+            //Calculates the amount of experience the player has in percentage of the value required for the next level.
             expPercentage = playerExp * 100 / maxEXP;
 
+            //If the player has the same amount or more experience than required to level up, the player gains a level, and the experience resets.
+            //The amount of experience required for the next level is also increased by 10% of the current value.
             if (playerExp >= maxEXP)
             {
                 playerLevel++;
                 maxEXP += maxEXP / 10;
                 playerExp = 0;
 
+                //Calls the ChooseUpgrade method in the UpgradeInterface class.
                 UpgradeInterface.ChooseUpgrade(gameTime);
             }
         }

@@ -140,7 +140,9 @@ namespace Heavenly_vigil_Project
             //Instantiates a few variables we need in our method
             Vector2 direction;
             Vector2 enemyPosition = new Vector2(0, 0);
+            //Distance between the player and an enemy.
             float distance = 1000f;
+            //The shortest distance found between the player and an enemy.
             float shortestDistance = 2000f;
 
             //Cycles through the gameobjects list. This loop is constantly updating the enemyPosition Vector2

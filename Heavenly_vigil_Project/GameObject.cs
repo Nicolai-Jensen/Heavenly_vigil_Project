@@ -134,6 +134,10 @@ namespace Heavenly_vigil_Project
 
         }
 
+        /// <summary>
+        /// Moves an object on the screen basen on the objects current speed and velocity.
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected void Move(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -141,6 +145,12 @@ namespace Heavenly_vigil_Project
             position += ((velocity * speed) * deltaTime);
         }
 
+
+        /// <summary>
+        /// Starts a timer that cycles through numbers equivalent to the number of sprites in the objectSprites array.
+        /// This is used to animate through the sprites.
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected void Animate(GameTime gameTime)
         {
             animationTime += (float)gameTime.ElapsedGameTime.TotalSeconds * animationSpeed;
@@ -151,6 +161,7 @@ namespace Heavenly_vigil_Project
             }
         }
 
+        //Checks to see if an objects position is outside the screen. If so, the method returns true.
         public bool IsOutOfBounds()
         {
             return (position.Y > GameWorld.ScreenSize.Y || position.X > GameWorld.ScreenSize.X || position.Y < -50 || position.X < -50);

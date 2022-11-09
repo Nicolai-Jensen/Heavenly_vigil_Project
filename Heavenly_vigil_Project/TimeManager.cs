@@ -15,10 +15,14 @@ namespace Heavenly_vigil_Project
         public static int timerSeconds;
         public static int timerMinutes;
 
+        /// <summary>
+        /// Updates the clock by adding value to to timerSeconds every second and timerMinutes every 60 seconds.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public static void UpdateClock(GameTime gameTime)
         {
             currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(Player.Health > 0)
+            if (Player.Health > 0)
             {
                 if (currentTime > 1)
                 {

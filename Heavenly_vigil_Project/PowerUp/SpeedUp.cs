@@ -19,6 +19,12 @@ namespace Heavenly_vigil_Project
         private SpriteFont titleFont;
         //Properties
         //Constructors
+
+        /// <summary>
+        /// Sets the specified variables when the object is instantiated.
+        /// </summary>
+        /// <param name="position">Position of the PowerUp</param>
+        /// <param name="speedAmp">The Amount of speed the PowerUp should give the player</param>
         public SpeedUp(Vector2 position, float speedAmp)
         {
             this.position = position;
@@ -49,6 +55,10 @@ namespace Heavenly_vigil_Project
             spriteBatch.DrawString(titleFont, powerUpTitle, new Vector2(position.X - objectSprites[0].Width / 2, position.Y - objectSprites[0].Height / 2 - 25), Color.White);
             spriteBatch.DrawString(titleFont, "3.", new Vector2(position.X - objectSprites[0].Width / 2 - 30, position.Y - objectSprites[0].Height / 2 + 15), Color.White);
         }
+
+        /// <summary>
+        /// Finds the player and adds the value of speedAmp to the players speed.
+        /// </summary>
         public override void AddValue()
         {
             Player player = ReturnPlayer();
