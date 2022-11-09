@@ -285,6 +285,10 @@ namespace Heavenly_vigil_Project
 
         }
 
+        /// <summary>
+        /// Loops through objects in the list gameObjects untill it encounters the first UpgradeInterface,
+        /// it then sets its CanBeChosen bool to true and breaks out of the loop.
+        /// </summary>
         private void SetUpgradeCanBeChosen()
         {
             for (int i = 0; i < gameObjects.Count; i++)

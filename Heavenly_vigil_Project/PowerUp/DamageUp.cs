@@ -19,6 +19,12 @@ namespace Heavenly_vigil_Project
         private SpriteFont titleFont;
         //Properties
         //Constructors
+
+        /// <summary>
+        /// Sets the specified variables when the object is instantiated.
+        /// </summary>
+        /// <param name="position">Position of the PowerUp</param>
+        /// <param name="damageAmp"></param>
         public DamageUp(Vector2 position, int damageAmp)
         {
             this.position = position;
@@ -48,6 +54,9 @@ namespace Heavenly_vigil_Project
             spriteBatch.DrawString(titleFont, "1.", new Vector2(position.X - objectSprites[0].Width / 2 - 30, position.Y - objectSprites[0].Height / 2 + 15), Color.White);
         }
 
+        /// <summary>
+        /// Adds value to the damageMultiplier of both the Magnum and Katana classes.
+        /// </summary>
         public override void AddValue()
         {
 
