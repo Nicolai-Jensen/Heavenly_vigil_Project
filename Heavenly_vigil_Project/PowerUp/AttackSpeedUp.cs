@@ -19,12 +19,8 @@ namespace Heavenly_vigil_Project
         public float attackSpdAmp;
         private SpriteFont titleFont;
 
+
         //Constructors
-        /// <summary>
-        /// Sets the specified variables when the object is instantiated.
-        /// </summary>
-        /// <param name="position">Position of the PowerUp</param>
-        /// <param name="attackSpdAmp">Value the the current attackspeed should be divided by</param>
         public AttackSpeedUp(Vector2 position, float attackSpdAmp)
         {
             this.position = position;

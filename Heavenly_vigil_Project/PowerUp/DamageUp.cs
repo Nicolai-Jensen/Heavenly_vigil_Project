@@ -20,11 +20,6 @@ namespace Heavenly_vigil_Project
 
         //Constructors
 
-        /// <summary>
-        /// Sets the specified variables when the object is instantiated.
-        /// </summary>
-        /// <param name="position">Position of the PowerUp</param>
-        /// <param name="damageAmp"></param>
         public DamageUp(Vector2 position, int damageAmp)
         {
             this.position = position;
