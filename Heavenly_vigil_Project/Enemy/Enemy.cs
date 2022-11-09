@@ -41,10 +41,10 @@ namespace Heavenly_vigil_Project
         //Constructors
         public Enemy()
         {
-            speed = 150;
+            speed = 100;
             position = SpawnPosition();
             scale = 1;
-            health = 10 + ExperiencePoints.PlayerLevel * 4;
+            health = 6 + ExperiencePoints.PlayerLevel * 4;
             damage = 5;
             expPoints = 10;
             color = Color.White;

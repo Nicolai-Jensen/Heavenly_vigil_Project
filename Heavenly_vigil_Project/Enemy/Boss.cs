@@ -23,7 +23,7 @@ namespace Heavenly_vigil_Project
         /// </summary>
         public Boss()
         {
-            speed = 250;
+            speed = 275;
             position = SpawnPosition();
             scale = 2f;
             health = 75 + ExperiencePoints.PlayerLevel * 4;

@@ -53,7 +53,7 @@ namespace Heavenly_vigil_Project
             this.position = position;
 
             //General stats used in the Draw() method
-            scale = 2f;
+            scale = 1.5f;
             rotation = 0f;
             speed = 1500f;
 

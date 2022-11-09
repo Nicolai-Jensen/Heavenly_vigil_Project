@@ -263,7 +263,7 @@ namespace Heavenly_vigil_Project
             if (ExperiencePoints.PlayerLevel > Levelup)
             {
                 //adds 3 health to the playerd HP pool while making sure it isn't above 100
-                health += 3;
+                health += 5;
                 if (health > 100)
                 {
                     health = 100;
@@ -292,7 +292,7 @@ namespace Heavenly_vigil_Project
             {
                 //Doubles all stats
                 color = Color.Blue;
-                scale *= 2;
+                scale *= 1.5f;
                 speed *= 2;
                 cooldownTimerNumber /= 2f;
                 cooldownTimerNumber2 /= 2f;
@@ -329,7 +329,7 @@ namespace Heavenly_vigil_Project
 
                 //resets all stats to what they were before the PowerState
                 color = Color.White;
-                scale /= 2;
+                scale /= 1.5f;
                 speed /= 2;
                 cooldownTimerNumber *= 2f;
                 cooldownTimerNumber2 *= 2f;
