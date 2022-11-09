@@ -324,6 +324,7 @@ namespace Heavenly_vigil_Project
                 {
                     go.ToBeRemoved = true;
                 }
+                upgradeInterfaces.Clear();
                 this.Initialize();
                 ExperiencePoints.MaxEXP = 100;
                 ExperiencePoints.PlayerLevel = 1;
