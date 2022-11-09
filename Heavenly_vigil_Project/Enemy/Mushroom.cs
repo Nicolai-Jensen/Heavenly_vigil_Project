@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Heavenly_vigil_Project
 {
+    /// <summary>
+    /// The Mushroom, A common enemy, but a little stronger than skeletons.
+    /// </summary>
     internal class Mushroom : Enemy
     {
         //Fields
