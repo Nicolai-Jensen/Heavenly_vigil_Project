@@ -19,10 +19,15 @@ namespace Heavenly_vigil_Project
         private static List<GameObject> gameObjects = new List<GameObject>();
         private static List<GameObject> gameObjectsToAdd = new List<GameObject>();
         private List<GameObject> gameObjectsToRemove = new List<GameObject>();
+
+
         private static Stack<PowerUp> upgradeInterfaces = new Stack<PowerUp>();
         private static List<PowerUp> upgradeIToAdd = new List<PowerUp>();
         private List<PowerUp> upgradeIToRemove = new List<PowerUp>();
+
+
         private Texture2D pixel;
+
         private float spawnTimer;
         private float mushroomSpawnTimer;
         private float bossSpawnTimer;
@@ -276,7 +281,7 @@ namespace Heavenly_vigil_Project
 
         }
         /// <summary>
-        /// Draws a CollisionBoxto all gameObjects on screen.
+        /// Draws a CollisionBox to all gameObjects on screen.
         /// </summary>
         /// <param name="go"></param>
         private void DrawCollisionBox(GameObject go)
@@ -312,6 +317,9 @@ namespace Heavenly_vigil_Project
                 }
             }
         }
+        /// <summary>
+        /// Resets the Players variables, Sets all GameObjects to be removed, and Re-Initializes the GameWorld.
+        /// </summary>
         public void ResetInitialize()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.R))
@@ -326,6 +334,7 @@ namespace Heavenly_vigil_Project
                 }
                 upgradeInterfaces.Clear();
                 this.Initialize();
+
                 ExperiencePoints.MaxEXP = 100;
                 ExperiencePoints.PlayerLevel = 1;
                 ExperiencePoints.PlayerExp = 0;

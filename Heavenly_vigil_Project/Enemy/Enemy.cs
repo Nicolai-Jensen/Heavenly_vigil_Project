@@ -46,7 +46,7 @@ namespace Heavenly_vigil_Project
             scale = 1;
             health = 6 + ExperiencePoints.PlayerLevel * 4;
             damage = 5;
-            expPoints = 10;
+            expPoints = 20;
             color = Color.White;
         }
         //Method
@@ -79,6 +79,10 @@ namespace Heavenly_vigil_Project
             else
             spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.None, 1f);
         }
+        /// <summary>
+        /// A methods that chooses what to do when different gameobjects collide with each other.
+        /// </summary>
+        /// <param name="other"></param>
         public override void OnCollision(GameObject other)
         {
             if (Player.HitCooldown == false)
@@ -171,7 +175,10 @@ namespace Heavenly_vigil_Project
 
             }
         }
-
+        /// <summary>
+        /// Makes sure that the enemy, only can get hit once by the Katana.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void KatanaDamaged(GameTime gameTime)
         {
             if (katanahit == true)
@@ -190,7 +197,10 @@ namespace Heavenly_vigil_Project
 
             }
         }
-
+        /// <summary>
+        /// Visualizes damage by changing the color to red. and back to white after 0.1 second.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void DamagedFeedBack(GameTime gameTime)
         {
             if (gotHit == true)

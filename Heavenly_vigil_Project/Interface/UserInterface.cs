@@ -7,7 +7,7 @@ using System;
 namespace Heavenly_vigil_Project
 {
     /// <summary>
-    /// Controls the UI of the game.
+    /// Loads, Draws and Updates the UI of the game.
     /// </summary>
     internal class UserInterface : GameObject
     {
@@ -22,11 +22,6 @@ namespace Heavenly_vigil_Project
         private SpriteFont gameFont;
         private SpriteFont timerFont;
 
-
-
-        //Properties
-
-        //Constructors
         //Methods
 
         public override void LoadContent(ContentManager content)

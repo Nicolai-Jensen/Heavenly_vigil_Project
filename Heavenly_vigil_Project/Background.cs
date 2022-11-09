@@ -17,9 +17,7 @@ namespace Heavenly_vigil_Project
     {
         //Fields
         private Song backGroundMusic;
-        //Properties
 
-        //Constructors
 
         //Methods
         public override void LoadContent(ContentManager content)

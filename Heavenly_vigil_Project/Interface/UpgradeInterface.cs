@@ -13,20 +13,26 @@ namespace Heavenly_vigil_Project
     internal class UpgradeInterface : UserInterface
     {
         private Vector2 pos;
-        //Rectangle for the Power-up background
-        private Rectangle textureRectangle;
         private bool canBeChosen = false;
         private static bool isInteractive = true;
         private SpriteFont upgradeCount;
+
+        //Keyboarstates to make a Single Input solution.
         KeyboardState currentKey;
         KeyboardState previousKey;
 
+        /// <summary>
+        /// Is used in HandleInput, to make sure that you can only choose 1 upgrade, each buttons press.
+        ///  Is set in GameWorld.
+        /// </summary>
         public bool CanBeChosen
         {
             get { return canBeChosen; }
             set { canBeChosen = value; }
         }
-
+        /// <summary>
+        /// To make sure that you cannot choose and upgrade while in Powerstate.
+        /// </summary>
         public static bool IsInteractive
         {
             get { return isInteractive; }
@@ -36,7 +42,6 @@ namespace Heavenly_vigil_Project
         public override void LoadContent(ContentManager content)
         {
             scale = 1; 
-            textureRectangle = new Rectangle(0, 0, 400, 100);
             objectSprites = new Texture2D[1];
             pos.X = GameWorld.ScreenSize.X / 2;
             pos.Y = 910;
@@ -100,6 +105,11 @@ namespace Heavenly_vigil_Project
                 toBeRemoved = true;
             }
         }
+        /// <summary>
+        /// Goes through the GameObjects list to find the Player, and returns the Player.
+        ///  If no Player is found, return new Player(0, 0).
+        /// </summary>
+        /// <returns></returns>
         public Player ReturnPlayer()
         {
             foreach (GameObject go in GameWorld.GameObjects)

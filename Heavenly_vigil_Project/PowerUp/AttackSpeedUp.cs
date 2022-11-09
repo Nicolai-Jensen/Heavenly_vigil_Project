@@ -18,9 +18,8 @@ namespace Heavenly_vigil_Project
         //Fields
         public float attackSpdAmp;
         private SpriteFont titleFont;
-        //Properties
-        //Constructors
 
+        //Constructors
         /// <summary>
         /// Sets the specified variables when the object is instantiated.
         /// </summary>
@@ -30,7 +29,6 @@ namespace Heavenly_vigil_Project
         {
             this.position = position;
             this.attackSpdAmp = attackSpdAmp;
-            powerUpDescription = "Increases the players attackspeed.";
             powerUpTitle = "Attackspeed";
             scale = 1f;
             

@@ -17,7 +17,7 @@ namespace Heavenly_vigil_Project
         //Fields
         public float speedAmp;
         private SpriteFont titleFont;
-        //Properties
+
         //Constructors
 
         /// <summary>
@@ -29,7 +29,6 @@ namespace Heavenly_vigil_Project
         {
             this.position = position;
             this.speedAmp = speedAmp;
-            powerUpDescription = "Increases the players speed.";
             powerUpTitle = "Speed";
             scale = 1f;
         }
