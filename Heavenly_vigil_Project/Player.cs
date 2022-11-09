@@ -122,6 +122,7 @@ namespace Heavenly_vigil_Project
         {
             //instantiates a new Texture2D in an Array
             runAnimation = new Texture2D[8];
+            idleAnimation = new Texture2D[8];
 
 
             //The Array is then looped with this for loop where it cycles through a list of sprites with the array numbers
@@ -133,8 +134,10 @@ namespace Heavenly_vigil_Project
             //The Array is then looped with this for loop where it cycles through a list of sprites with the array numbers
             for (int i = 0; i < idleAnimation.Length; i++)
             {
-                idleAnimation[i] = content.Load<Texture2D>($"hero_{i}");
+                idleAnimation[i] = content.Load<Texture2D>($"Heroidle_{i}");
             }
+
+            objectSprites = idleAnimation;
 
             //This line of code places the objects origin within the middle of the sprite assuming all sprites in the array share the same size
             origin = new Vector2(objectSprites[0].Width / 2, objectSprites[0].Height / 2);
@@ -181,10 +184,7 @@ namespace Heavenly_vigil_Project
         public override void Draw(SpriteBatch spriteBatch)
         {
             //A Draw Method with different overloads, this particular one has 10 variables which can be defined
-            if (velocity.X == 0 && velocity.Y == 0)
-            {
-                spriteBatch.Draw(objectSprites[(int)animationTime], position, null, color, 0, origin, scale, SpriteEffects.None, 0);
-            }
+
             //If the player has last pressed "D" to move right, it calls the first draw method, which doesn't flip the sprites
             if (isFacingRight)
             {
