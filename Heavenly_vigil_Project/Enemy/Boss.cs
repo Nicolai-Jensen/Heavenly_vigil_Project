@@ -18,6 +18,9 @@ namespace Heavenly_vigil_Project
         //Fields
         //Properties
         //Constructors
+        /// <summary>
+        /// 
+        /// </summary>
         public Boss()
         {
             speed = 250;
