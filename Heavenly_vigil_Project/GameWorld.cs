@@ -263,7 +263,7 @@ namespace Heavenly_vigil_Project
                 spawnTimer = 0;
             }
             mushroomSpawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (mushroomSpawnTimer >= 5)
+            if (mushroomSpawnTimer > 5 - Math.Min((TimeManager.timerMinutes * 0.1) * 0.9, 0.8f) && enemyCount < 100)
             {
                 Mushroom mush = new Mushroom();
                 mush.LoadContent(Content);
@@ -271,7 +271,7 @@ namespace Heavenly_vigil_Project
                 mushroomSpawnTimer = 0;
             }
             bossSpawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (bossSpawnTimer >= 30)
+            if (bossSpawnTimer > 30 - Math.Min((TimeManager.timerMinutes * 0.1) * 0.9, 0.8f) && enemyCount < 100)
             {
                 Boss boss = new Boss();
                 boss.LoadContent(Content);
