@@ -8,8 +8,8 @@ namespace Heavenly_vigil_Project
     /// </summary>
     internal class GameOverScreen : GameObject
     {
-        Rectangle gameOverRectangle;
-        SpriteFont gameOver;
+        private Rectangle gameOverRectangle;
+        private SpriteFont gameOver;
         public override void LoadContent(ContentManager content)
         {
             objectSprites = new Texture2D[1];

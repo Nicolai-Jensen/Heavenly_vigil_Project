@@ -15,7 +15,6 @@ namespace Heavenly_vigil_Project
     public abstract class PowerUp : GameObject
     {
         //Fields
-        protected int valueAmp;
         protected string powerUpTitle;
 
         //Methods
