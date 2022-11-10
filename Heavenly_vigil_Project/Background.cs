@@ -32,7 +32,7 @@ namespace Heavenly_vigil_Project
         }
         public override void Update(GameTime gameTime)
         {
-            if (Player.Health < 0)
+            if (Player.Health <= 0)
                 MediaPlayer.Stop();
         }
         public override void Draw(SpriteBatch spriteBatch)
